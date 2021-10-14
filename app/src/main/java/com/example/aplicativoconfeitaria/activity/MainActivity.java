@@ -1,4 +1,4 @@
-package com.example.aplicativoconfeitaria;
+package com.example.aplicativoconfeitaria.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,8 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.example.aplicativoconfeitaria.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void goToCadastro(View view){
 
-        Intent i = new Intent(this, activity_cadastro.class);
+        Intent i = new Intent(this, CadastroUsuarioActivity.class);
         startActivity(i);
     }
     public void goToPerfil(View view){
