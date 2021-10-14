@@ -15,15 +15,16 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="115dp"
+        android:onClick="cadUser"
         android:text="@string/btn_cad"
         app:backgroundTint="@color/btn_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />
 
     <EditText
-        android:id="@+id/editTextLogin"
+        android:id="@+id/edtLogin"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -36,13 +37,13 @@
         android:ems="10"
         android:hint="@string/place_login"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editTextPassword"
+        app:layout_constraintBottom_toTopOf="@+id/edtSenhaLog"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/editTextPassword"
+        android:id="@+id/edtSenhaLog"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -55,10 +56,10 @@
         android:ems="10"
         android:hint="@string/place_pass"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/btnEntrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/edtLogin" />
 
     <TextView
         android:id="@+id/textView"
@@ -69,12 +70,12 @@
         android:layout_marginBottom="55dp"
         android:text="Acesse sua conta"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextLogin"
+        app:layout_constraintBottom_toTopOf="@+id/edtLogin"
         app:layout_constraintStart_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnEntrar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -87,7 +88,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/edtSenhaLog" />
 
     <ImageView
         android:id="@+id/imageView6"
