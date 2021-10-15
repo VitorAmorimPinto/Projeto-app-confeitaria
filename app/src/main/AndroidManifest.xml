@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AplicativoConfeitaria">
-        <activity android:name=".activity_perfil"></activity>
+        <activity
+            android:name=".activity_detalhes_item"
+            android:exported="true" />
+        <activity android:name=".activity_perfil" />
         <activity android:name=".activity_cadastro" />
         <activity android:name=".activity_login" />
         <activity
