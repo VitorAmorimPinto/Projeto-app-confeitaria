@@ -1,15 +1,33 @@
 package com.example.aplicativoconfeitaria.model;
 
+import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
+
 public class Usuario {
-    private String nome,email,senha;
+    private String idUsuario,nome,email,senha;
 
     public Usuario() {
     }
 
-    public Usuario(String nome, String email, String senha) {
+    public Usuario(String idUsuario, String nome, String email, String senha) {
+        this.idUsuario = idUsuario;
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+    }
+    public void salvarUser(){
+        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase();
+        firebase.child("usuarios").child(this.idUsuario).setValue(this);
+    }
+
+    @Exclude
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public String getNome() {
@@ -28,6 +46,7 @@ public class Usuario {
         this.email = email;
     }
 
+    @Exclude
     public String getSenha() {
         return senha;
     }
