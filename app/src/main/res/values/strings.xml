@@ -19,4 +19,18 @@
     <string name="place_pass">Digite sua senha</string>
     <string name="txt_titulo">Aplicativo do Bolo</string>
 
+    <!--Tela Cadastro Bolos-->
+    <!--Caixas de texto-->
+    <string name="cxtNome">Digite aqui o nome do bolo</string>
+    <string name="cxtIngredientes">Digite aqui os ingredientes</string>
+    <string name="cxtDescricao">Digite aqui uma breve descrição para ser exibida na vitrine</string>
+    <string name="cxtPreco">Digite aqui o preço</string>
+    <!--Textos-->
+    <string name="txtNome">Nome</string>
+    <string name="txtIngredientes">Ingredientes</string>
+    <string name="txtDescricao">Descrição</string>
+    <string name="txtPreco">Preço</string>
+    <string name="txtFoto">Foto</string>
+    <string name="txtTitulo">Cadastre seu bolo</string>
+
 </resources>
