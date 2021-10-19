@@ -72,6 +72,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     Toast.makeText(CadastroUsuarioActivity.this,
                             "Sucesso ao cadastrar usuário!",
                             Toast.LENGTH_SHORT).show();
+                    finish();
+
                 }else{
                     String execao = "";
                     try {

@@ -62,6 +62,7 @@ public class activity_login extends AppCompatActivity {
                             Toast.makeText(activity_login.this,
                                     "Usuário logado",
                                     Toast.LENGTH_SHORT).show();
+                            finish();
                         }else{
                             Toast.makeText(activity_login.this,
                                     "Usuário inválido!",

@@ -35,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, activity_perfil.class);
         startActivity(i);
     }
+    public void goToMinhaConta(View view){
+
+        Intent i = new Intent(this, MinhaContaActivity.class);
+        startActivity(i);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
