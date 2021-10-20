@@ -62,10 +62,10 @@
                 android:layout_marginTop="15dp"
                 android:text="@string/txtFoto"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine2" />
+                app:layout_constraintTop_toBottomOf="@+id/edtDescricao" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine2"
+                android:id="@+id/edtDescricao"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="30dp"
@@ -92,10 +92,10 @@
                 android:layout_marginTop="15dp"
                 android:text="@string/txtDescricao"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
+                app:layout_constraintTop_toBottomOf="@+id/edtIngredientes" />
 
             <EditText
-                android:id="@+id/editTextTextMultiLine"
+                android:id="@+id/edtIngredientes"
                 android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="30dp"
@@ -122,10 +122,10 @@
                 android:layout_marginTop="15dp"
                 android:text="@string/txtIngredientes"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName2" />
+                app:layout_constraintTop_toBottomOf="@+id/edtPreco" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/edtPreco"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="30dp"
@@ -151,10 +151,10 @@
                 android:layout_marginTop="15dp"
                 android:text="@string/txtPreco"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+                app:layout_constraintTop_toBottomOf="@+id/edtNomeBolo" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName"
+                android:id="@+id/edtNomeBolo"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="30dp"
@@ -183,7 +183,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnCadastraBolo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
