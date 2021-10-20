@@ -1,8 +1,15 @@
 package com.example.aplicativoconfeitaria.model;
 
+import androidx.annotation.NonNull;
+
+import com.example.aplicativoconfeitaria.auxiliar.Base64Custom;
 import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.ValueEventListener;
 
 public class Usuario {
     private String idUsuario,nome,email,senha;
