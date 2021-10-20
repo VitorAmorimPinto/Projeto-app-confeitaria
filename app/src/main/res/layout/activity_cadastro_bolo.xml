@@ -9,8 +9,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="205dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="-16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -18,8 +18,8 @@
 
             <ImageView
                 android:id="@+id/imageView3"
-                android:layout_width="72dp"
-                android:layout_height="61dp"
+                android:layout_width="78dp"
+                android:layout_height="65dp"
                 android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -66,15 +66,20 @@
 
             <EditText
                 android:id="@+id/editTextTextMultiLine2"
-                android:layout_width="344dp"
+                android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/caixa_texto_customizada"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="@string/cxtDescricao"
                 android:inputType="textMultiLine"
+                android:paddingLeft="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
@@ -91,15 +96,20 @@
 
             <EditText
                 android:id="@+id/editTextTextMultiLine"
-                android:layout_width="344dp"
+                android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/caixa_texto_customizada"
                 android:ems="10"
                 android:gravity="start|top"
                 android:hint="@string/cxtIngredientes"
                 android:inputType="textMultiLine"
+                android:paddingLeft="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
@@ -116,14 +126,19 @@
 
             <EditText
                 android:id="@+id/editTextTextPersonName2"
-                android:layout_width="344dp"
+                android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/caixa_texto_customizada"
                 android:ems="10"
                 android:hint="@string/cxtPreco"
                 android:inputType="textPersonName"
+                android:paddingLeft="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
@@ -140,14 +155,19 @@
 
             <EditText
                 android:id="@+id/editTextTextPersonName"
-                android:layout_width="344dp"
+                android:layout_width="0dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="15dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/caixa_texto_customizada"
                 android:ems="10"
                 android:hint="@string/cxtNome"
                 android:inputType="textPersonName"
+                android:paddingLeft="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
@@ -167,7 +187,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Button"
+                android:text="@string/txtBtnCadastrar"
                 app:backgroundTint="@color/btn_login"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -181,6 +201,7 @@
                 android:layout_marginTop="90dp"
                 android:text="@string/txtTitulo"
                 android:textSize="24sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

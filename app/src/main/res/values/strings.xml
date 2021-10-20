@@ -32,5 +32,7 @@
     <string name="txtPreco">Preço</string>
     <string name="txtFoto">Foto</string>
     <string name="txtTitulo">Cadastre seu bolo</string>
+    <string name="txtBtnCadastrar">Cadastrar</string>
+
 
 </resources>
