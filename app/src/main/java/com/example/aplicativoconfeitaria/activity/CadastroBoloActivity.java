@@ -1,5 +1,6 @@
 package com.example.aplicativoconfeitaria.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -7,8 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
 
 import com.example.aplicativoconfeitaria.R;
+import com.example.aplicativoconfeitaria.model.Bolo;
 import com.google.firebase.database.DatabaseReference;
 
 public class CadastroBoloActivity extends AppCompatActivity {
@@ -40,36 +43,49 @@ public class CadastroBoloActivity extends AppCompatActivity {
                 String Descricao = txtDescricao.getText().toString();
 
                 //Validar se os campos foram preenchidos
-                if ( !NomeBolo.isEmpty() ) {
-                    if (!Preco.isEmpty()) {
-                        if (!Ingredientes.isEmpty()) {
-                            if (!Ingredientes.isEmpty()) {
+                if (!NomeBolo.isEmpty() && !Ingredientes.isEmpty() && !Descricao.isEmpty() && !Preco.isEmpty()) {
+                    bolo = new Bolo();
+                    bolo.setNome(NomeBolo);
+                    bolo.setPreco(Double.parseDouble(Preco));
+                    bolo.setIngredientes(Ingredientes);
+                    bolo.setDescricao(Descricao);
+                    cadastrarBolo();
+                    limpaInformacoes();
 
-                                bolo = new Bolo();
-                                bolo.setNome(NomeBolo);
-                                bolo.setPreco(Preco);
-                                bolo.setIngredientes(Ingredientes);
-                                bolo.setDescricao(Descricao);
-                                cadastrarBolo();
-
-                            } else {
-                                Toast.makeText(CadastroBoloActivity.this,
-                                        "Preencha Todos os campos!",
-                                        Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
+                } else {
+                    Toast.makeText(CadastroBoloActivity.this,
+                            "Preencha Todos os campos!",
+                            Toast.LENGTH_SHORT).show();
                 }
-
-
             }
+
         });
 
     }
     public void cadastrarBolo(){
+        String mensagem = "";
+        try {
+            DatabaseReference bolos = referencia.child("bolos");
+            bolos.push().setValue(bolo);
 
+            mensagem = "Bolo cadastrado com sucesso!";
+        }catch (Exception ex){
+            mensagem = "Erro ao cadastrar bolo Tente novamente mais tarde.";
+        }
+        new AlertDialog.Builder(this)
+                .setMessage(mensagem)
+                .setTitle("Mensagem")
+                .setPositiveButton("Ok", null)
+                .show();
 
+    }
 
+    private void limpaInformacoes() {
+        txtNomeBolo.setText("");
+        txtDescricao.setText("");
+        txtIngredientes.setText("");
+        txtPreco.setText("");
+        bolo = new Bolo();
     }
 
 
