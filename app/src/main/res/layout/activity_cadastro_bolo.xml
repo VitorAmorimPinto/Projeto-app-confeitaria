@@ -7,14 +7,54 @@
     tools:context=".activity.CadastroBoloActivity">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="-16dp">
+        android:id="@+id/scrollView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/btnGaleria"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="58dp"
+                android:layout_marginRight="58dp"
+                android:background="@color/teal_200"
+                app:layout_constraintBottom_toBottomOf="@+id/btnCamera"
+                app:layout_constraintEnd_toStartOf="@+id/imgBoloPreview"
+                app:layout_constraintStart_toEndOf="@+id/btnCamera"
+                app:layout_constraintTop_toTopOf="@+id/btnCamera"
+                app:srcCompat="@drawable/round_add_button" />
+
+            <ImageButton
+                android:id="@+id/btnCamera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="92dp"
+                android:layout_marginLeft="92dp"
+                android:layout_marginEnd="34dp"
+                android:layout_marginRight="34dp"
+                app:layout_constraintEnd_toStartOf="@+id/btnGaleria"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView20"
+                app:srcCompat="@drawable/round_add_button" />
+
+            <ImageView
+                android:id="@+id/imgBoloPreview"
+                android:layout_width="100dp"
+                android:layout_height="70dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintBottom_toTopOf="@+id/btnCadastraBolo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/placeholdervisivel" />
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -39,19 +79,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView15" />
-
-            <EditText
-                android:id="@+id/editTextTextPersonName3"
-                android:layout_width="344dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="15dp"
-                android:ems="10"
-                android:hint="Adicionar Imagem"
-                android:inputType="textPersonName"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
             <TextView
                 android:id="@+id/textView20"
@@ -186,13 +213,14 @@
                 android:id="@+id/btnCadastraBolo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="120dp"
                 android:text="@string/txtBtnCadastrar"
                 app:backgroundTint="@color/btn_login"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
+                app:layout_constraintTop_toBottomOf="@+id/edtDescricao"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
                 android:id="@+id/textView15"
