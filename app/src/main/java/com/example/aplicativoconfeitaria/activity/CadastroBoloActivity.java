@@ -251,8 +251,8 @@ public class CadastroBoloActivity extends AppCompatActivity {
         String mensagem = "";
         try {
             // Converte o nome do bolo para base 64
-             pegaBolo = txtNomeBolo.getText().toString();
-             identificaBolo = Base64Custom.codificarBase64(pegaBolo);
+//             pegaBolo = txtNomeBolo.getText().toString();
+//             identificaBolo = Base64Custom.codificarBase64(pegaBolo);
              bolo.setFoto(url);
 
             DatabaseReference bolos = referencia.child("bolos");
