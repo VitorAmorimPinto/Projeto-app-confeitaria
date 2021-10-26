@@ -124,7 +124,7 @@ public class CadastroBoloActivity extends AppCompatActivity {
                     bolo.setDescricao(Descricao);
                     bolo.setIdBolo(identificaBolo);
                     uploadImagem();
-                    cadastrarBolo();
+//                    cadastrarBolo();
                     limpaInformacoes();
 
 
@@ -232,9 +232,9 @@ public class CadastroBoloActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
                         Uri url = task.getResult();
-                        bolo.setFoto( url.toString() );
-                        bolo.atualizar();
-
+//                        bolo.setFoto( url.toString());
+//                        bolo.atualizar();
+                        cadastrarBolo(url.toString());
                     }
 
                 });
@@ -247,13 +247,13 @@ public class CadastroBoloActivity extends AppCompatActivity {
 
 
     //Cadastra os bolos no banco de dados
-    public void cadastrarBolo(){
+    public void cadastrarBolo(String url){
         String mensagem = "";
         try {
             // Converte o nome do bolo para base 64
              pegaBolo = txtNomeBolo.getText().toString();
              identificaBolo = Base64Custom.codificarBase64(pegaBolo);
-
+             bolo.setFoto(url);
 
             DatabaseReference bolos = referencia.child("bolos");
             bolos.child(identificaBolo).setValue(bolo);
@@ -275,7 +275,7 @@ public class CadastroBoloActivity extends AppCompatActivity {
         txtDescricao.setText("");
         txtIngredientes.setText("");
         txtPreco.setText("");
-        bolo = new Bolo();
+//        bolo = new Bolo();
     }
     //Configura a ação que deve ser tomada caso o usuario negue as permissões necessarias
     @Override
