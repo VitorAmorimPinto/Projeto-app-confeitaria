@@ -15,6 +15,7 @@
         <activity android:name=".activity.activity_perfil" />
         <activity android:name=".activity.activity_cadastro" />
         <activity android:name=".activity.activity_login" />
+        <activity android:name=".activity.activity_detalhes_item" />
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/app_name"
