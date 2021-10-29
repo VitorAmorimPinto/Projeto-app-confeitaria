@@ -28,7 +28,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.example.aplicativoconfeitaria.auxiliar.Base64Custom;
 import com.google.firebase.storage.UploadTask;
@@ -114,28 +118,57 @@ public class CadastroBoloActivity extends AppCompatActivity {
                 String Ingredientes = txtIngredientes.getText().toString();
                 String Descricao = txtDescricao.getText().toString();
 
+                //Verifica se o nome do bolo já existe no banco
+                DatabaseReference bolino = referencia.child("bolos");
+                bolino.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot data : snapshot.getChildren()) {
+                            if (snapshot.child(identificaBolo).exists()) {
+                                //do ur stuff
+                                Toast.makeText(CadastroBoloActivity.this,
+                                        "O nome de bolo escolhido já existe" +
+                                                " por favor digite um nome diferente",
+                                        Toast.LENGTH_SHORT).show();
+                                txtNomeBolo.setText("");
+                                break;
+                            } else {
+                                //do something if not exists
+                                //Validar se os campos foram preenchidos
+                                if (!NomeBolo.isEmpty() && !Ingredientes.isEmpty() && !Descricao.isEmpty() && !Preco.isEmpty()) {
 
-                //Validar se os campos foram preenchidos
-                if (!NomeBolo.isEmpty() && !Ingredientes.isEmpty() && !Descricao.isEmpty() && !Preco.isEmpty()) {
-                    bolo = new Bolo();
-                    bolo.setNome(NomeBolo);
-                    bolo.setPreco(Double.parseDouble(Preco));
-                    bolo.setIngredientes(Ingredientes);
-                    bolo.setDescricao(Descricao);
-                    bolo.setIdBolo(identificaBolo);
-                    uploadImagem();
-//                    cadastrarBolo();
-                    limpaInformacoes();
+                                    bolo = new Bolo();
+                                    bolo.setNome(NomeBolo);
+                                    bolo.setPreco(Double.parseDouble(Preco));
+                                    bolo.setIngredientes(Ingredientes);
+                                    bolo.setDescricao(Descricao);
+                                    bolo.setIdBolo(identificaBolo);
+                                    uploadImagem();
+//                                  cadastrarBolo();
+                                   // limpaInformacoes();
 
 
+                                } else {
+                                    Toast.makeText(CadastroBoloActivity.this,
+                                            "Preencha Todos os campos!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                                break;
+                            }
 
-                } else {
-                    Toast.makeText(CadastroBoloActivity.this,
-                            "Preencha Todos os campos!",
-                            Toast.LENGTH_SHORT).show();
-                }
+
+                        }
+                    }
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
             }
-
         });
 
     }
@@ -200,49 +233,58 @@ public class CadastroBoloActivity extends AppCompatActivity {
         }
     }
 
-    public void uploadImagem(){
-        //Recuperar dados da imagem para o firebase
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        imagem.compress(Bitmap.CompressFormat.JPEG, 70, baos );
-        byte[] dadosImagem = baos.toByteArray();
+    public void uploadImagem() {
+        if (imagem != null) {
 
-        //Salvar imagem no firebase
-        final StorageReference imagemRef = storageReference
-                .child("imagens")
-                .child("bolos")
-                .child(identificaBolo)
-                .child("bolo.jpeg");
+            //Recuperar dados da imagem para o firebase
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            imagem.compress(Bitmap.CompressFormat.JPEG, 70, baos);
+            byte[] dadosImagem = baos.toByteArray();
 
-        UploadTask uploadTask = imagemRef.putBytes( dadosImagem );
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(CadastroBoloActivity.this,
-                        "Erro ao fazer upload da imagem",
-                        Toast.LENGTH_SHORT).show();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Toast.makeText(CadastroBoloActivity.this,
-                        "Sucesso ao fazer upload da imagem",
-                        Toast.LENGTH_SHORT).show();
+            //Salvar imagem no firebase
+            final StorageReference imagemRef = storageReference
+                    .child("imagens")
+                    .child("bolos")
+                    .child(identificaBolo)
+                    .child("bolo.jpeg");
 
-                imagemRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        Uri url = task.getResult();
-//                        bolo.setFoto( url.toString());
-//                        bolo.atualizar();
-                        cadastrarBolo(url.toString());
-                    }
+            UploadTask uploadTask = imagemRef.putBytes(dadosImagem);
+            uploadTask.addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(CadastroBoloActivity.this,
+                            "Erro ao fazer upload da imagem",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Toast.makeText(CadastroBoloActivity.this,
+                            "Sucesso ao fazer upload da imagem",
+                            Toast.LENGTH_SHORT).show();
 
-                });
+                    imagemRef.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            Uri url = task.getResult();
+                            //bolo.setFoto( url.toString());
+                            //bolo.atualizar();
+
+                                cadastrarBolo(url.toString());
+                        }
+
+                    });
 
 
-            }
-        });
+                }
+            });
 
+        }
+        else {
+            Toast.makeText(CadastroBoloActivity.this,
+                    "Preencha Todos os campos!",
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 
 
@@ -267,7 +309,7 @@ public class CadastroBoloActivity extends AppCompatActivity {
                 .setTitle("Mensagem")
                 .setPositiveButton("Ok", null)
                 .show();
-
+        limpaInformacoes();
     }
     //Limpa os campos de texto da tela
     private void limpaInformacoes() {
