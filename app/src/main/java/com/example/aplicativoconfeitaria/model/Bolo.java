@@ -9,14 +9,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Bolo {
-    private String nome, descricao, ingredientes;
+    private String nome, descricao, ingredientes, foto;
     private Double preco;
-    private String foto;
     private String idBolo;
 
 
     public Bolo() {
     }
+
 
     public void atualizar(){
 

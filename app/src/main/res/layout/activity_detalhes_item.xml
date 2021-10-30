@@ -24,7 +24,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:background="#FFFFFF"
                 android:elevation="4dp"
@@ -34,6 +34,8 @@
                     android:id="@+id/imageViewImagemDetalheItem"
                     android:layout_width="wrap_content"
                     android:layout_height="184dp"
+                    android:layout_gravity="center"
+                    android:foregroundGravity="center"
                     app:srcCompat="@drawable/bolinho_fofinho" />
 
                 <TextView
@@ -43,7 +45,6 @@
                     android:layout_marginTop="10dp"
                     android:fontFamily="serif"
                     android:gravity="center"
-                    android:text="Bolo de Cenoura"
                     android:textColor="#000000"
                     android:textSize="20sp" />
 
@@ -52,10 +53,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="R$ 25"
+                    android:text="R$"
                     android:textColor="#FF6368"
                     android:textSize="20sp"
-                    tools:text="R$ 25" />
+                    tools:text="R$" />
             </LinearLayout>
 
             <LinearLayout
@@ -96,7 +97,6 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginRight="20dp"
                     android:paddingLeft="10dp"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vehicula vel diam et luctus. Donec quis est rutrum, vehicula augue et, hendrerit eros. Proin condimentum condimentum nunc, in euismod leo condimentum eget. Ut suscipit dui vel consectetur ullamcorper. Praesent vel nunc at risus tincidunt placerat"
                     android:textSize="16sp" />
 
                 <TextView
@@ -124,7 +124,6 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginRight="20dp"
                     android:paddingLeft="10dp"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas ex nec nisi venenatis, in.  "
                     android:textSize="16sp" />
 
             </LinearLayout>
@@ -143,49 +142,12 @@
                 android:orientation="vertical"
                 android:padding="5dp">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginRight="20dp"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/imageButtonRmvDetalheItem"
-                        android:layout_width="33dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="#ffffff"
-                        app:srcCompat="@drawable/remove" />
-
-                    <TextView
-                        android:id="@+id/textViewQtdDetalheItem"
-                        android:layout_width="33dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center|center_horizontal|center_vertical"
-                        android:text="1"
-                        android:textColor="#000000"
-                        android:textSize="24sp" />
-
-                    <ImageButton
-                        android:id="@+id/imageButtonAddDetalheItem"
-                        android:layout_width="33dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="#ffffff"
-                        app:srcCompat="@drawable/round_add_button" />
-                </LinearLayout>
-
                 <Button
-                    android:id="@+id/btnCadastraBolo"
+                    android:id="@+id/buttonComprarBoloDetalhesItem"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:text="Adicionar ao carrinho"
+                    android:text="Comprar"
                     app:backgroundTint="#E4696D" />
             </LinearLayout>
 
