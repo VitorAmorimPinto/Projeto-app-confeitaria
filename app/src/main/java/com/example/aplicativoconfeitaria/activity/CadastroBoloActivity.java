@@ -28,6 +28,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -62,6 +63,7 @@ public class CadastroBoloActivity extends AppCompatActivity {
     private String identificaBolo;
     private String pegaBolo;
     private Uri urlBolo;
+    private FirebaseAuth autenticacao;
 
 
     @Override
@@ -107,7 +109,7 @@ public class CadastroBoloActivity extends AppCompatActivity {
         btnCadastrarBolo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
                 // Converte o nome do bolo para base 64
                 pegaBolo = txtNomeBolo.getText().toString();
                 identificaBolo = Base64Custom.codificarBase64(pegaBolo);
@@ -195,37 +197,7 @@ public class CadastroBoloActivity extends AppCompatActivity {
                 if (imagem != null) {
 
                     imgbolopreview.setImageBitmap(imagem);
-                    /*
-                    //Recuperar dados da imagem para o firebase
-                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    imagem.compress(Bitmap.CompressFormat.JPEG, 70, baos );
-                    byte[] dadosImagem = baos.toByteArray();
 
-                    //Salvar imagem no firebase
-                    StorageReference imagemRef = storageReference
-                            .child("imagens")
-                            .child("bolos")
-                            .child("-MmZGDAaQ1cIQ-3y-cu")
-                            .child("bolo.jpeg");
-
-                    UploadTask uploadTask = imagemRef.putBytes( dadosImagem );
-                    uploadTask.addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(CadastroBoloActivity.this,
-                                    "Erro ao fazer upload da imagem",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Toast.makeText(CadastroBoloActivity.this,
-                                    "Sucesso ao fazer upload da imagem",
-                                    Toast.LENGTH_SHORT).show();
-
-
-                            }
-                });*/
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -278,11 +250,10 @@ public class CadastroBoloActivity extends AppCompatActivity {
 
                 }
             });
-
         }
         else {
             Toast.makeText(CadastroBoloActivity.this,
-                    "Preencha Todos os campos!",
+                    "Por favor escolha uma imagem",
                     Toast.LENGTH_SHORT).show();
         }
     }
@@ -296,7 +267,7 @@ public class CadastroBoloActivity extends AppCompatActivity {
 //             pegaBolo = txtNomeBolo.getText().toString();
 //             identificaBolo = Base64Custom.codificarBase64(pegaBolo);
              bolo.setFoto(url);
-
+            //Adicionando objetos no banco de dados
             DatabaseReference bolos = referencia.child("bolos");
             bolos.child(identificaBolo).setValue(bolo);
 
