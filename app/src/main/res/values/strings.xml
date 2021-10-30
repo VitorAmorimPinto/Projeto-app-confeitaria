@@ -18,6 +18,8 @@
     <string name="place_login">Digite seu login</string>
     <string name="place_pass">Digite sua senha</string>
     <string name="txt_titulo">Aplicativo do Bolo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--Tela Cadastro Bolos-->
     <!--Caixas de texto-->
