@@ -1,10 +1,18 @@
 package com.example.aplicativoconfeitaria.model;
 
 public class Bolo {
-    private String nome, descricao, ingredientes;
+    private String nome, descricao, ingredientes, foto;
     private Double preco;
 
     public Bolo() {
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public String getNome() {
