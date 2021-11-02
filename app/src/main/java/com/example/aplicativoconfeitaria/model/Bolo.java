@@ -1,7 +1,7 @@
 package com.example.aplicativoconfeitaria.model;
 
 public class Bolo {
-    private String nome, descricao, ingredientes;
+    private String nome, descricao, ingredientes, foto;
     private Double preco;
 
     public Bolo() {
@@ -31,11 +31,14 @@ public class Bolo {
         this.ingredientes = ingredientes;
     }
 
-    public Double getPreco() {
-        return preco;
-    }
+    public Double getPreco() { return preco; }
 
     public void setPreco(Double preco) {
         this.preco = preco;
     }
+
+    public String getFoto() { return foto;}
+
+    public void setFot(String foto) { this.foto = foto; }
+
 }
