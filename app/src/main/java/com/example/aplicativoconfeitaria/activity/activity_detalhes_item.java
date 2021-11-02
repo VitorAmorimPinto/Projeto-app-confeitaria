@@ -3,8 +3,10 @@ package com.example.aplicativoconfeitaria.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,6 +28,7 @@ public class activity_detalhes_item extends AppCompatActivity {
     public String nomeBolo, descricaoBolo, ingredientesBolo, precoBolo;
     public ImageView ivImagemBolo;
     private DatabaseReference firebaseref = ConfiguracaoFirebase.getFirebaseDataBase();
+    public Bolo boloEnviar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +44,15 @@ public class activity_detalhes_item extends AppCompatActivity {
         recuperarBolo();
     }
 
+
     public void recuperarBolo(){
-        DatabaseReference boloref = firebaseref.child("bolos").child("U2VudGlkbw==");
+        DatabaseReference boloref = firebaseref.child("bolos").child("Y2FkYXN0cm8gdGVzdGU=");
 
         boloref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Bolo bolo = snapshot.getValue(Bolo.class);
+                boloEnviar = bolo;
                 DecimalFormat decimalFormat = new DecimalFormat("0.##");
 
                 nomeBolo = bolo.getNome();
@@ -66,7 +71,7 @@ public class activity_detalhes_item extends AppCompatActivity {
                             .load(url)
                             .into(ivImagemBolo);
                 }else{
-                    ivImagemBolo.setImageResource(R.drawable.bolinho_fofinho);
+                    ivImagemBolo.setImageResource(R.drawable.imagem_default);
                 }
             }
 
@@ -75,5 +80,11 @@ public class activity_detalhes_item extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void goToFinalizarPedido(View view){
+        Intent i = new Intent(this, ActivityFinalizarPedido.class);
+        i.putExtra("objeto", boloEnviar);
+        startActivity(i);
     }
 }

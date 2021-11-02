@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AplicativoConfeitaria">
+        <activity android:name=".activity.ActivityFinalizarPedido"/>
         <activity android:name=".activity.CadastroUsuarioActivity" />
         <activity android:name=".activity.activity_perfil" />
         <activity android:name=".activity.activity_cadastro" />

@@ -1,6 +1,8 @@
 package com.example.aplicativoconfeitaria.model;
 
-public class Bolo {
+import java.io.Serializable;
+
+public class Bolo implements Serializable {
     private String nome, descricao, ingredientes, foto;
     private Double preco;
 
