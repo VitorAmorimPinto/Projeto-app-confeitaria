@@ -46,11 +46,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void goToListagem(View view){
-        Intent i = new Intent(this, BolosFragment.class);
-        startActivity(i);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

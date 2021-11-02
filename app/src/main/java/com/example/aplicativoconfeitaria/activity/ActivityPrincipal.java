@@ -23,17 +23,20 @@ public class ActivityPrincipal extends AppCompatActivity {
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_menu);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.viewPager, new BolosFragment()).commit();
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragment = null;
+                    Fragment selectedFragment = new BolosFragment();
 
                     switch(item.getItemId()){
                         case R.id.ic_home:
-                            selectedFragment = new FragmentHome();
+                            selectedFragment = new BolosFragment();
                             break;
                         case R.id.ic_carrinho:
                             selectedFragment = new FragmentCarrinho();
