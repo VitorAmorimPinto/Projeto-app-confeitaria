@@ -52,7 +52,8 @@
                     <ImageView
                         android:id="@+id/imageViewFinalizarPedido"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="184dp"
+                        android:layout_gravity="center"
                         android:layout_marginBottom="5dp"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/imagem_default" />
@@ -62,8 +63,11 @@
                     android:id="@+id/textViewNomeBoloFinalizarPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Bolo qualquer"
                     android:textColor="#252525"
                     android:textSize="16sp" />
 
@@ -71,14 +75,21 @@
                     android:id="@+id/textViewDescricaoBoloFinalizarPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Descrição do bolo qualquer"
                     android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textViewPrecoFinalizarPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:text="Preço:"
                     android:textColor="#252525"
                     android:textSize="16sp" />
@@ -111,6 +122,10 @@
                     android:id="@+id/textViewRuaNumeroFinalizarPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
                     android:text="Rua tal, nº 5"
                     android:textColor="#252525"
@@ -120,7 +135,11 @@
                     android:id="@+id/textView10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="15dp"
                     android:text="Bairro Qualquer, Cariacica"
                     android:textColor="#252525"
                     android:textSize="16sp" />
@@ -129,6 +148,10 @@
                     android:id="@+id/textViewHorarioEntregaFinalizarPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:text="Horário de entrega:"
                     android:textColor="#252525"
                     android:textSize="16sp" />
@@ -137,6 +160,10 @@
                     android:id="@+id/spinnerHorarioEntregaFinalizarPedidio"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
                     android:entries="@array/horarios"
                     android:spinnerMode="dropdown" />
@@ -175,6 +202,10 @@
                     android:id="@+id/editTextTextMultiLine"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:ems="10"
                     android:gravity="start|top"
                     android:inputType="textMultiLine" />

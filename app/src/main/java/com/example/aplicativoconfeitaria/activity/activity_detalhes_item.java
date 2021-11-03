@@ -46,7 +46,7 @@ public class activity_detalhes_item extends AppCompatActivity {
 
 
     public void recuperarBolo(){
-        DatabaseReference boloref = firebaseref.child("bolos").child("Y2FkYXN0cm8gdGVzdGU=");
+        DatabaseReference boloref = firebaseref.child("bolos").child("Qm9sbyBGb3JtaWd1ZWlybw==");
 
         boloref.addValueEventListener(new ValueEventListener() {
             @Override

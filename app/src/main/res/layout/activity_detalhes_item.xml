@@ -36,7 +36,7 @@
                     android:layout_height="184dp"
                     android:layout_gravity="center"
                     android:foregroundGravity="center"
-                    app:srcCompat="@drawable/bolinho_fofinho" />
+                    app:srcCompat="@drawable/imagem_default" />
 
                 <TextView
                     android:id="@+id/textViewNomeDetalheItem"
