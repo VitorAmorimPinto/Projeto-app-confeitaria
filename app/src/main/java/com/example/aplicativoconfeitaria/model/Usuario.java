@@ -13,6 +13,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Usuario {
     private String idUsuario,nome,email,senha;
+    private Integer nivel;
 
     public Usuario() {
     }
@@ -26,6 +27,14 @@ public class Usuario {
     public void salvarUser(){
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase();
         firebase.child("usuarios").child(this.idUsuario).setValue(this);
+    }
+
+    public Integer getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(Integer nivel) {
+        this.nivel = nivel;
     }
 
     @Exclude
