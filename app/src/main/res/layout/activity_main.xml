@@ -9,12 +9,12 @@
 
     <Button
         android:id="@+id/button3"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:layout_marginLeft="18dp"
         android:layout_marginBottom="22dp"
-        android:onClick="goToLogin"
         android:text="Tela Login"
         app:layout_constraintBottom_toTopOf="@+id/button4"
         app:layout_constraintStart_toStartOf="@+id/button4" />
@@ -75,4 +75,5 @@
         android:text="Tela principal"
         app:layout_constraintBottom_toTopOf="@+id/button3"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

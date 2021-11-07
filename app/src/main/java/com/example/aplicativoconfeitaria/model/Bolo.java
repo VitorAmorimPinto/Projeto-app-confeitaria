@@ -84,11 +84,14 @@ public class Bolo implements Serializable {
         this.ingredientes = ingredientes;
     }
 
-    public Double getPreco() {
-        return preco;
-    }
+    public Double getPreco() { return preco; }
 
     public void setPreco(Double preco) {
         this.preco = preco;
     }
+
+    public String getFoto() { return foto;}
+
+    public void setFot(String foto) { this.foto = foto; }
+
 }
