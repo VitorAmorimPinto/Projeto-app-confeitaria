@@ -90,7 +90,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:text="Preço:"
                     android:textColor="#252525"
                     android:textSize="16sp" />
 
@@ -132,7 +131,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/textViewBairroCidadeFinalizarPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -143,6 +142,43 @@
                     android:text="Bairro Qualquer, Cariacica"
                     android:textColor="#252525"
                     android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textViewTituloDataFinalizarPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Data de entrega:"
+                    android:textColor="#252525"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/textViewDataEntregaFinalizarPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center"
+                    android:textColor="#252525"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/buttonEscolherDataFinalizarPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:onClick="escolherData"
+                    android:text="Escolher Data" />
 
                 <TextView
                     android:id="@+id/textViewHorarioEntregaFinalizarPedido"
@@ -199,7 +235,7 @@
                     android:textSize="18sp" />
 
                 <EditText
-                    android:id="@+id/editTextTextMultiLine"
+                    android:id="@+id/editTextTextMultiLineObservacoesFinalizarPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -244,6 +280,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
+                        android:onClick="cadastraPedido"
                         android:text="Finalizar pedido"
                         app:backgroundTint="#E4696D" />
 
