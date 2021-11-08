@@ -9,6 +9,11 @@
         <entry key="..\:/Users/Breno/Desktop/Projeto-app-confeitaria/app/src/main/res/layout/activity_main.xml" value="0.22" />
         <entry key="..\:/Users/Breno/Documents/Dev-AndroidStudio/Projeto-app-confeitaria/app/src/main/res/layout/activity_cadastro_bolo.xml" value="0.25" />
         <entry key="..\:/Users/Breno/Documents/Dev-AndroidStudio/Projeto-app-confeitaria/app/src/main/res/layout/activity_main.xml" value="0.1764102564102564" />
+        <entry key="..\:/Users/Breno/Documents/Dev-AndroidStudio/Projeto-app-confeitaria/app/src/main/res/layout/activity_principal.xml" value="0.16" />
+        <entry key="..\:/Users/Breno/Documents/Dev-AndroidStudio/Projeto-app-confeitaria/app/src/main/res/layout/adapter_bolos.xml" value="0.22" />
+        <entry key="..\:/Users/Breno/Documents/Dev-AndroidStudio/Projeto-app-confeitaria/app/src/main/res/layout/fragment_home.xml" value="0.18" />
+        <entry key="..\:/Users/Breno/Documents/Dev-AndroidStudio/Projeto-app-confeitaria/app/src/main/res/layout/fragment_listagens.xml" value="0.18" />
+        <entry key="..\:/Users/Breno/Documents/Dev-AndroidStudio/Projeto-app-confeitaria/app/src/main/res/layout/fragment_meus_pedidos.xml" value="0.16" />
         <entry key="..\:/Users/pri_f/AndroidStudioProjects/Projeto-app-confeitaria/app/src/main/res/drawable/cantos_redondos.xml" value="0.3974358974358974" />
         <entry key="..\:/Users/pri_f/AndroidStudioProjects/Projeto-app-confeitaria/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3974358974358974" />
         <entry key="..\:/Users/pri_f/AndroidStudioProjects/Projeto-app-confeitaria/app/src/main/res/layout/activity_detalhes_item.xml" value="0.3875" />
@@ -27,7 +32,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
