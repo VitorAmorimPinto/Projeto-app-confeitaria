@@ -111,11 +111,11 @@ public class FragmentPerfil extends Fragment {
         i = new ItensMenu("Endereço",
                 "Altere suas informações de localidade", R.drawable.ic_baseline_location_on_24);
         itens.add(i);
-        if (this.ehAdmim){
-            i = new ItensMenu("Cadastro de bolos",
-                    "Cadastre seus bolos", R.drawable.ic_baseline_location_on_24);
-            itens.add(i);
-        }
+//        if (this.ehAdmim){
+//            i = new ItensMenu("Cadastro de bolos",
+//                    "Cadastre seus bolos", R.drawable.ic_baseline_location_on_24);
+//            itens.add(i);
+//        }
         i = new ItensMenu("Sair da conta",
                 "Acesse outra conta", R.drawable.ic_baseline_exit_to_app_24);
         itens.add(i);
@@ -163,7 +163,7 @@ public class FragmentPerfil extends Fragment {
         if( autenticacao.getCurrentUser() == null ){
             abrirLogin();
         }else{
-            pegarUsuario();
+//            pegarUsuario();
 
 
         }
@@ -183,11 +183,11 @@ public class FragmentPerfil extends Fragment {
                 Usuario dadosUsuario = snapshot.getValue(Usuario.class);
                 nome = dadosUsuario.getNome();
                 email = dadosUsuario.getEmail();
-                Integer nivel;
-                nivel = dadosUsuario.getNivel();
-                if (nivel == 10){
-                    ehAdmim = true;
-                }
+//                Integer nivel;
+//                nivel = dadosUsuario.getNivel();
+//                if (nivel == 10){
+//                    ehAdmim = true;
+//                }
             }
 
             @Override

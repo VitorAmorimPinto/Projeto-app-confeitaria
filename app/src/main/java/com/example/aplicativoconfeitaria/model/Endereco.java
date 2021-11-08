@@ -1,11 +1,23 @@
 package com.example.aplicativoconfeitaria.model;
 
+import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
+import com.google.firebase.database.DatabaseReference;
+
 public class Endereco {
     private String idUsuario;
-    private String cep,descricao,endereco,bairro,cidade,referencia,complemento;
     private Integer numero;
+    private String bairro;
+    private String cep;
+    private String logradouro;
+    private String localidade;
+    private String uf;
+    private String complemento;
 
     public Endereco() {
+    }
+    public void salvarEndereco(){
+        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase();
+        firebase.child("enderecos").child(this.idUsuario).setValue(this);
     }
 
     public String getIdUsuario() {
@@ -16,28 +28,12 @@ public class Endereco {
         this.idUsuario = idUsuario;
     }
 
-    public String getCep() {
-        return cep;
+    public Integer getNumero() {
+        return numero;
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setNumero(Integer numero) {
+        this.numero = numero;
     }
 
     public String getBairro() {
@@ -48,20 +44,36 @@ public class Endereco {
         this.bairro = bairro;
     }
 
-    public String getCidade() {
-        return cidade;
+    public String getCep() {
+        return cep;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
-    public String getReferencia() {
-        return referencia;
+    public String getLogradouro() {
+        return logradouro;
     }
 
-    public void setReferencia(String referencia) {
-        this.referencia = referencia;
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public String getLocalidade() {
+        return localidade;
+    }
+
+    public void setLocalidade(String localidade) {
+        this.localidade = localidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 
     public String getComplemento() {
@@ -72,11 +84,17 @@ public class Endereco {
         this.complemento = complemento;
     }
 
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
+    @Override
+    public String toString() {
+        return "Endereco{" +
+                "idUsuario='" + idUsuario + '\'' +
+                ", numero=" + numero +
+                ", bairro='" + bairro + '\'' +
+                ", cep='" + cep + '\'' +
+                ", logradouro='" + logradouro + '\'' +
+                ", localidade='" + localidade + '\'' +
+                ", uf='" + uf + '\'' +
+                ", complemento='" + complemento + '\'' +
+                '}';
     }
 }
