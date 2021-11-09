@@ -2,10 +2,11 @@ package com.example.aplicativoconfeitaria.model;
 
 import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Exclude;
 
 public class Endereco {
     private String idUsuario;
-    private Integer numero;
+    private String numero;
     private String bairro;
     private String cep;
     private String logradouro;
@@ -15,11 +16,17 @@ public class Endereco {
 
     public Endereco() {
     }
-    public void salvarEndereco(){
-        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase();
-        firebase.child("enderecos").child(this.idUsuario).setValue(this);
-    }
+    public Boolean salvarEndereco(){
+        try {
 
+            DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase();
+            firebase.child("enderecos").child(this.idUsuario).setValue(this);
+            return true;
+        }catch (Exception ex){
+            return false;
+        }
+    }
+    @Exclude
     public String getIdUsuario() {
         return idUsuario;
     }
@@ -28,11 +35,11 @@ public class Endereco {
         this.idUsuario = idUsuario;
     }
 
-    public Integer getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
