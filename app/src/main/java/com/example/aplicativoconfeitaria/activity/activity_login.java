@@ -28,9 +28,9 @@ public class activity_login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_login);
-        txtEmail = findViewById(R.id.edtLogin);
-        txtSenha = findViewById(R.id.edtSenhaLog);
-        btnEntrar = findViewById(R.id.btnEntrar);
+        txtEmail = findViewById(R.id.edtLoginFrag);
+        txtSenha = findViewById(R.id.edtSenhaLogFrag);
+        btnEntrar = findViewById(R.id.btnEntrarFrag);
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,9 +59,6 @@ public class activity_login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
-                            Toast.makeText(activity_login.this,
-                                    "Usuário logado",
-                                    Toast.LENGTH_SHORT).show();
                             finish();
                         }else{
                             Toast.makeText(activity_login.this,

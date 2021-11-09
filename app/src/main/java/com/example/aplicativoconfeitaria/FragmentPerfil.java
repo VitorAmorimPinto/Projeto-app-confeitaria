@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.aplicativoconfeitaria.activity.ActivityPrincipal;
 import com.example.aplicativoconfeitaria.activity.EnderecoActivity;
 import com.example.aplicativoconfeitaria.activity.activity_login;
 import com.example.aplicativoconfeitaria.adapter.MinhaContaAdapter;
@@ -93,16 +94,10 @@ public class FragmentPerfil extends Fragment {
         listOpcoes = v.findViewById(R.id.listOp);
         verificarUsuarioLogado();
 
-        ArrayAdapter adapter = new MinhaContaAdapter(this.context, adicionarItens());
-        listOpcoes.setAdapter(adapter);
-        listOpcoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                opcoesLista(position);
-            }
-        });
+
         return  v;
     }
+
     private ArrayList<ItensMenu> adicionarItens() {
         ArrayList<ItensMenu> itens = new ArrayList<ItensMenu>();
         ItensMenu i = new ItensMenu("Dados pessoais",
@@ -122,6 +117,12 @@ public class FragmentPerfil extends Fragment {
 
         return itens;
     }
+    private ArrayList<ItensMenu> esvaziarItens() {
+        ArrayList<ItensMenu> itens = new ArrayList<ItensMenu>();
+
+
+        return itens;
+    }
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -132,7 +133,11 @@ public class FragmentPerfil extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
+        if( autenticacao.getCurrentUser() != null ){
+            preecherAdapter();
+        }
     }
 
     public void opcoesLista(int i){
@@ -145,6 +150,7 @@ public class FragmentPerfil extends Fragment {
                 break;
             case 2 :
                 this.deslogarUsuario();
+
                 break;
             default:
 
@@ -152,9 +158,15 @@ public class FragmentPerfil extends Fragment {
         }
 
     }
+    public void inicio(){
+        Intent i = new Intent(this.context, ActivityPrincipal.class);
+        startActivity(i);
+    }
     public void deslogarUsuario(){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.signOut();
+        getActivity().finish();
+        inicio();
 
     }
     public void verificarUsuarioLogado(){
@@ -162,13 +174,24 @@ public class FragmentPerfil extends Fragment {
 
         if( autenticacao.getCurrentUser() == null ){
             abrirLogin();
+
         }else{
-//            pegarUsuario();
-
-
+            pegarUsuario();
+           preecherAdapter();
         }
 
     }
+    public void preecherAdapter(){
+        ArrayAdapter adapter = new MinhaContaAdapter(this.context, adicionarItens());
+        listOpcoes.setAdapter(adapter);
+        listOpcoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                opcoesLista(position);
+            }
+        });
+    }
+
     public void abrirLogin(){
         startActivity(new Intent(this.context, activity_login.class));
     }

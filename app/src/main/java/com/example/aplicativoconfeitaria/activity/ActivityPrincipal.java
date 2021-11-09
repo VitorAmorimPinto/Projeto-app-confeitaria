@@ -11,10 +11,14 @@ import com.example.aplicativoconfeitaria.FragmentCarrinho;
 import com.example.aplicativoconfeitaria.FragmentHome;
 import com.example.aplicativoconfeitaria.FragmentMeusPedidos;
 import com.example.aplicativoconfeitaria.FragmentPerfil;
+import com.example.aplicativoconfeitaria.LoginFragment;
 import com.example.aplicativoconfeitaria.R;
+import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ActivityPrincipal extends AppCompatActivity {
+    private FirebaseAuth autenticacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class ActivityPrincipal extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment selectedFragment = null;
-
+                    Boolean logado;
                     switch(item.getItemId()){
                         case R.id.ic_home:
                             selectedFragment = new FragmentHome();
@@ -42,7 +46,12 @@ public class ActivityPrincipal extends AppCompatActivity {
                             selectedFragment = new FragmentMeusPedidos();
                             break;
                         case R.id.ic_perfil:
-                            selectedFragment = new FragmentPerfil();
+                           logado = UsuarioLogado();
+                           if(logado){
+                              selectedFragment = new FragmentPerfil();
+                           }else{
+                               selectedFragment = new LoginFragment();
+                           }
                         default:
                             break;
 
@@ -52,4 +61,18 @@ public class ActivityPrincipal extends AppCompatActivity {
                 }
 
             };
+    public Boolean UsuarioLogado(){
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+
+        if( autenticacao.getCurrentUser() == null ){
+
+           return false;
+
+        }else{
+
+            return true;
+        }
+
+    }
+
 }

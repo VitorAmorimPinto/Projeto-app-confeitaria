@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.example.aplicativoconfeitaria.R;
 import com.example.aplicativoconfeitaria.api.CEPService;
-import com.example.aplicativoconfeitaria.domain.AddressRequest;
 import com.example.aplicativoconfeitaria.model.Endereco;
 
 import org.json.JSONObject;
@@ -40,6 +39,9 @@ public class EnderecoActivity extends AppCompatActivity {
         edtNumero = findViewById((R.id.edtNumero));
         edtComplemento = findViewById((R.id.edtComplemento));
         edtRua.setEnabled(false);
+        edtBairro.setEnabled(false);
+        edtCidade.setEnabled(false);
+
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://viacep.com.br/ws/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
