@@ -15,6 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AplicativoConfeitaria">
+        <activity android:name=".activity.ActivityFinalizarPedido"/>
         <activity
             android:name=".activity.CadastroBoloActivity"
             android:exported="true" />
