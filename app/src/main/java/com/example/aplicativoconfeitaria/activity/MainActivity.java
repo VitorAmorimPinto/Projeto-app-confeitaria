@@ -35,8 +35,14 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, activity_perfil.class);
         startActivity(i);
     }
+
+    public void goToMinhaConta(View view) {
+
+        Intent i = new Intent(this, MinhaContaActivity.class);
+    }
     public void goToCadastroBolo(View view){
         Intent i = new Intent(this, CadastroBoloActivity.class);
+
         startActivity(i);
     }
 

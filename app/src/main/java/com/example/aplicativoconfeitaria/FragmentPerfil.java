@@ -1,12 +1,37 @@
 package com.example.aplicativoconfeitaria;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.example.aplicativoconfeitaria.activity.ActivityPrincipal;
+import com.example.aplicativoconfeitaria.activity.CadastroBoloActivity;
+import com.example.aplicativoconfeitaria.activity.EnderecoActivity;
+import com.example.aplicativoconfeitaria.activity.activity_login;
+import com.example.aplicativoconfeitaria.adapter.MinhaContaAdapter;
+import com.example.aplicativoconfeitaria.auxiliar.Base64Custom;
+import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
+import com.example.aplicativoconfeitaria.model.ItensMenu;
+import com.example.aplicativoconfeitaria.model.Usuario;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +39,13 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class FragmentPerfil extends Fragment {
+    private ListView listOpcoes;
+    private FirebaseAuth autenticacao;
+    private Usuario usuario;
+    public String nome,email;
+    public TextView textViewNome, textViewEmail;
+    private Context context;
+    private Boolean ehAdmin = false;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +91,167 @@ public class FragmentPerfil extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perfil, container, false);
+        View v = inflater.inflate(R.layout.fragment_perfil, container, false);
+        listOpcoes = v.findViewById(R.id.listOp);
+        verificarUsuarioLogado();
+
+
+        return  v;
+    }
+
+    private ArrayList<ItensMenu> adicionarItens() {
+        ArrayList<ItensMenu> itens = new ArrayList<ItensMenu>();
+        ItensMenu i;
+        if (this.ehAdmin){
+            i = new ItensMenu("Dados da Confeitaria",
+                    "Altere informações da confeitaria", R.drawable.ic_baseline_person_24);
+            itens.add(i);
+            i = new ItensMenu("Endereço da Confeitaria",
+                    "Altere suas informações de localidade", R.drawable.ic_baseline_location_on_24);
+            itens.add(i);
+            i = new ItensMenu("Cadastro de bolos",
+                    "Cadastre seus bolos", R.drawable.ic_baseline_cake_24);
+            itens.add(i);
+            i = new ItensMenu("Edição de bolos",
+                    "Edite seus bolos", R.drawable.ic_baseline_edit_24);
+            itens.add(i);
+        }else{
+            i = new ItensMenu("Dados pessoais",
+                    "Altere senha e informações pessoais", R.drawable.ic_baseline_person_24);
+            itens.add(i);
+            i = new ItensMenu("Endereço",
+                    "Altere suas informações de localidade", R.drawable.ic_baseline_location_on_24);
+            itens.add(i);
+        }
+        i = new ItensMenu("Sair da conta",
+                "Acesse outra conta", R.drawable.ic_baseline_exit_to_app_24);
+        itens.add(i);
+
+        return itens;
+    }
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        this.context = context;
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+
+        if( autenticacao.getCurrentUser() != null ){
+            pegarUsuario();
+        }
+    }
+
+    public void opcoesLista(int i){
+      if (this.ehAdmin){
+          switch (i){
+              case 0 :
+//                startActivity(new Intent(this, activity_login.class));
+                  break;
+              case 1 :
+                  startActivity(new Intent(this.context, EnderecoActivity.class));
+                  break;
+              case 2 :
+                  startActivity(new Intent(this.context, CadastroBoloActivity.class));
+
+                  break;
+              case 3 :
+//                  this.deslogarUsuario();
+
+                  break;
+              case 4 :
+                  this.deslogarUsuario();
+
+                  break;
+              default:
+
+                  break;
+          }
+      }else{
+          switch (i){
+              case 0 :
+//                startActivity(new Intent(this, activity_login.class));
+                  break;
+              case 1 :
+                  startActivity(new Intent(this.context, EnderecoActivity.class));
+                  break;
+              case 2 :
+                  this.deslogarUsuario();
+
+                  break;
+              default:
+
+                  break;
+          }
+      }
+
+
+    }
+    public void inicio(){
+        Intent i = new Intent(this.context, ActivityPrincipal.class);
+        startActivity(i);
+    }
+    public void deslogarUsuario(){
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        autenticacao.signOut();
+        getActivity().finish();
+        inicio();
+
+    }
+    public void verificarUsuarioLogado(){
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+
+        if( autenticacao.getCurrentUser() == null ){
+            abrirLogin();
+
+        }else{
+            pegarUsuario();
+        }
+
+    }
+    public void preecherAdapter(){
+        ArrayAdapter adapter = new MinhaContaAdapter(this.context, adicionarItens());
+        listOpcoes.setAdapter(adapter);
+        listOpcoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                opcoesLista(position);
+            }
+        });
+    }
+
+    public void abrirLogin(){
+        startActivity(new Intent(this.context, activity_login.class));
+    }
+    public void pegarUsuario(){
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        String idUsuario = Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail());
+        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("usuarios").child(idUsuario);
+
+        firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Usuario dadosUsuario = snapshot.getValue(Usuario.class);
+                nome = dadosUsuario.getNome();
+                email = dadosUsuario.getEmail();
+                Integer nivel;
+                nivel = dadosUsuario.getNivel();
+                if (nivel == 10){
+                    ehAdmin = true;
+                }
+                preecherAdapter();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

@@ -110,7 +110,7 @@
         android:layout_marginBottom="286dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/btnEntrar"
+        app:layout_constraintBottom_toTopOf="@+id/btnEntrarFrag"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText5" />
 
@@ -154,7 +154,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editText4" />
 
     <Button
-        android:id="@+id/btnEntrar"
+        android:id="@+id/btnEntrarFrag"
         android:layout_width="315dp"
         android:layout_height="0dp"
         android:layout_marginBottom="68dp"

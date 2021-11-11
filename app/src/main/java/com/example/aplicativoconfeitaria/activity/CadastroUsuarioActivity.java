@@ -49,6 +49,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                    usuario.setNome(nome);
                    usuario.setEmail(email);
                    usuario.setSenha(senha);
+                   usuario.setNivel(0);
                    cadastrarUsuario();
                 }else{
                     Toast.makeText(CadastroUsuarioActivity.this,
@@ -72,6 +73,8 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                     Toast.makeText(CadastroUsuarioActivity.this,
                             "Sucesso ao cadastrar usuário!",
                             Toast.LENGTH_SHORT).show();
+                    finish();
+
                 }else{
                     String execao = "";
                     try {
