@@ -49,6 +49,7 @@ public class CadastroUsuarioActivity extends AppCompatActivity {
                    usuario.setNome(nome);
                    usuario.setEmail(email);
                    usuario.setSenha(senha);
+                   usuario.setNivel(0);
                    cadastrarUsuario();
                 }else{
                     Toast.makeText(CadastroUsuarioActivity.this,

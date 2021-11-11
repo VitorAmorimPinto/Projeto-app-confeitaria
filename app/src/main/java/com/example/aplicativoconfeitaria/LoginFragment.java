@@ -120,6 +120,7 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
+                            getActivity().finish();
                             inicio();
                         }else{
                             Toast.makeText(getContext(),

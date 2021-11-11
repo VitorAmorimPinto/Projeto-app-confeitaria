@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.aplicativoconfeitaria.activity.ActivityPrincipal;
+import com.example.aplicativoconfeitaria.activity.CadastroBoloActivity;
 import com.example.aplicativoconfeitaria.activity.EnderecoActivity;
 import com.example.aplicativoconfeitaria.activity.activity_login;
 import com.example.aplicativoconfeitaria.adapter.MinhaContaAdapter;
@@ -100,18 +101,26 @@ public class FragmentPerfil extends Fragment {
 
     private ArrayList<ItensMenu> adicionarItens() {
         ArrayList<ItensMenu> itens = new ArrayList<ItensMenu>();
-        ItensMenu i = new ItensMenu("Dados pessoais",
-                "Altere senha e informações pessoais", R.drawable.ic_baseline_person_24);
-        itens.add(i);
-        i = new ItensMenu("Endereço",
-                "Altere suas informações de localidade", R.drawable.ic_baseline_location_on_24);
-        itens.add(i);
+        ItensMenu i;
         if (this.ehAdmin){
+            i = new ItensMenu("Dados da Confeitaria",
+                    "Altere informações da confeitaria", R.drawable.ic_baseline_person_24);
+            itens.add(i);
+            i = new ItensMenu("Endereço da Confeitaria",
+                    "Altere suas informações de localidade", R.drawable.ic_baseline_location_on_24);
+            itens.add(i);
             i = new ItensMenu("Cadastro de bolos",
                     "Cadastre seus bolos", R.drawable.ic_baseline_cake_24);
             itens.add(i);
             i = new ItensMenu("Edição de bolos",
                     "Edite seus bolos", R.drawable.ic_baseline_edit_24);
+            itens.add(i);
+        }else{
+            i = new ItensMenu("Dados pessoais",
+                    "Altere senha e informações pessoais", R.drawable.ic_baseline_person_24);
+            itens.add(i);
+            i = new ItensMenu("Endereço",
+                    "Altere suas informações de localidade", R.drawable.ic_baseline_location_on_24);
             itens.add(i);
         }
         i = new ItensMenu("Sair da conta",
@@ -120,12 +129,7 @@ public class FragmentPerfil extends Fragment {
 
         return itens;
     }
-    private ArrayList<ItensMenu> esvaziarItens() {
-        ArrayList<ItensMenu> itens = new ArrayList<ItensMenu>();
 
-
-        return itens;
-    }
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -153,7 +157,7 @@ public class FragmentPerfil extends Fragment {
                   startActivity(new Intent(this.context, EnderecoActivity.class));
                   break;
               case 2 :
-//                  startActivity(new Intent(this.context, cads.class));
+                  startActivity(new Intent(this.context, CadastroBoloActivity.class));
 
                   break;
               case 3 :
