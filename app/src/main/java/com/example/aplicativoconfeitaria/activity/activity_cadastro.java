@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.aplicativoconfeitaria.R;
+import com.google.firebase.database.DatabaseReference;
 
 public class activity_cadastro extends AppCompatActivity {
 

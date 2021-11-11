@@ -21,4 +21,20 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--Tela Cadastro Bolos-->
+    <!--Caixas de texto-->
+    <string name="cxtNome">Digite aqui o nome do bolo</string>
+    <string name="cxtIngredientes">Digite aqui os ingredientes</string>
+    <string name="cxtDescricao">Digite aqui uma breve descrição para ser exibida na vitrine</string>
+    <string name="cxtPreco">Digite aqui o preço</string>
+    <!--Textos-->
+    <string name="txtNome">Nome</string>
+    <string name="txtIngredientes">Ingredientes</string>
+    <string name="txtDescricao">Descrição</string>
+    <string name="txtPreco">Preço</string>
+    <string name="txtFoto">Foto</string>
+    <string name="txtTitulo">Cadastre seu bolo</string>
+    <string name="txtBtnCadastrar">Cadastrar</string>
+
+
 </resources>
