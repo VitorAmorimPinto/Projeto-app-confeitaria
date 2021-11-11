@@ -91,21 +91,15 @@ public class EnderecoActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot data : snapshot.getChildren()) {
-                        if (snapshot.child(idUsuario).exists()) {
+                        String t = data.getKey();
+                        if (t.equals(idUsuario)) {
                             //do ur stuff
                             Endereco dados = data.getValue(Endereco.class);
                             edtCep.setText(dados.getCep());
                             edtNumero.setText(dados.getNumero());
                             edtComplemento.setText(dados.getComplemento());
                             break;
-                        } else {
-
-                            Toast.makeText(EnderecoActivity.this,
-                                    "Sem endereço",
-                                    Toast.LENGTH_SHORT).show();
-
-                            }
-                            break;
+                        }
                     }
 
                 }
