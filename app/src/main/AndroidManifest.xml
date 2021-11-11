@@ -20,8 +20,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AplicativoConfeitaria">
 
+
         <activity android:name=".activity.EnderecoActivity"></activity>
         <activity android:name=".activity.MinhaContaActivity" />
+
+
+        <activity android:name=".activity.ActivityFinalizarPedido"/>
 
         <activity
             android:name=".activity.CadastroBoloActivity"
