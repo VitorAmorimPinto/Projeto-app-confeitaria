@@ -23,6 +23,8 @@
             android:id="@+id/textTituloBolo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="Título"
             android:textColor="@color/black" />
 
@@ -38,6 +40,8 @@
             android:id="@+id/textPrecoBolo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:text="Preço"
             android:textColor="@color/black" />
     </LinearLayout>
