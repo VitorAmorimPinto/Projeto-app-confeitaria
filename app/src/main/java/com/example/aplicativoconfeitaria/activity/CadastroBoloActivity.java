@@ -146,6 +146,7 @@ public class CadastroBoloActivity extends AppCompatActivity {
                                     bolo.setDescricao(Descricao);
                                     bolo.setIdBolo(identificaBolo);
                                     bolo.setNomePesquisa(NomeBolo);
+                                    bolo.setNomePesquisa(NomeBolo);
                                     uploadImagem();
 //                                  cadastrarBolo();
                                    // limpaInformacoes();
