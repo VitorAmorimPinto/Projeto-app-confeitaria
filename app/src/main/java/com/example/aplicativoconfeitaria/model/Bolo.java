@@ -92,13 +92,10 @@ public class Bolo implements Serializable {
         this.preco = preco;
     }
 
-<<<<<<< HEAD
 
-    public void setFot(String foto) { this.foto = foto; }
+    public void setFoto(String foto) { this.foto = foto; }
 
 }
-=======
     public String getNomePesquisa() { return nomePesquisa; }
     public void setNomePesquisa(String nomePesquisa) { this.nomePesquisa = nomePesquisa.toUpperCase(); }
 }
->>>>>>> remotes/origin/vanderson

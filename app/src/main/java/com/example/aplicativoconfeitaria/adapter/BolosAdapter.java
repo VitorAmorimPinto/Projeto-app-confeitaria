@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide;
 import com.example.aplicativoconfeitaria.R;
 import com.example.aplicativoconfeitaria.model.Bolo;
 
-import java.time.Instant;
 import java.util.List;
 
 public class BolosAdapter extends RecyclerView.Adapter <BolosAdapter.MyViewHolder> {
@@ -66,7 +65,7 @@ public class BolosAdapter extends RecyclerView.Adapter <BolosAdapter.MyViewHolde
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            foto = itemView.findViewById(R.id.imageViewFotoBolo);
+            foto = itemView.findViewById(R.id.imageViewBoloPedidosAdmin);
             nome = itemView.findViewById(R.id.textTituloBolo);
             descricao = itemView.findViewById(R.id.textDescricaoBolo);
             preco = itemView.findViewById(R.id.textPrecoBolo);
