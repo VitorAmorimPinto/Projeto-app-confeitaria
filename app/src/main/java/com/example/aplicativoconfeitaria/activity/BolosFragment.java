@@ -1,9 +1,11 @@
 package com.example.aplicativoconfeitaria.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,9 +19,11 @@ import com.example.aplicativoconfeitaria.model.Bolo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class BolosFragment extends Fragment {
 
@@ -28,6 +32,7 @@ public class BolosFragment extends Fragment {
     private ArrayList<Bolo> listaBolos = new ArrayList<>();
     private DatabaseReference bolosRef;
     private ValueEventListener valueEventListenerBolos;
+    private SearchView pesquisaView;
 
     public BolosFragment(){
     }
@@ -40,6 +45,23 @@ public class BolosFragment extends Fragment {
         // Configurações iniciais
         recyclerViewListaBolos = view.findViewById(R.id.recyclerViewListaBolos);
         bolosRef = ConfiguracaoFirebase.getFirebaseDataBase().child("bolos");
+
+        //Configura o SearchView
+        pesquisaView = view.findViewById(R.id.pesquisaView);
+        pesquisaView.setQueryHint("Pesquisar bolos");
+        pesquisaView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                String textoDigitado = s.toUpperCase();
+                pesquisarBolos( textoDigitado );
+                return true;
+            }
+        });
 
 
         //Configurar adapter
@@ -89,6 +111,38 @@ public class BolosFragment extends Fragment {
             }
         });
 
+    }
+    private void pesquisarBolos(String texto){
+        listaBolos.clear();
+        if (texto.length() > 0){
+
+            Query query = bolosRef.orderByChild("nomePesquisa")
+                    /*.equalTo(texto + "\uf8ff");*/
+                    .startAt(texto)
+                    .endAt(texto + "\uf8ff");
+
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot ds: snapshot.getChildren()){
+
+                        listaBolos.add( ds.getValue(Bolo.class));
+                    }
+
+                    adapter.notifyDataSetChanged();
+                    /*int total = listaBolos.size();
+                    Log.i("totalbolos","total: " + total);*/
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+        else {
+            recuperarBolos();
+        }
     }
 
 }

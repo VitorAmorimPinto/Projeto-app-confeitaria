@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="..\:/Users/Breno/Desktop/Projeto-app-confeitaria/app/src/main/res/drawable/camera_icone.xml" value="0.13055555555555556" />
         <entry key="..\:/Users/Breno/Desktop/Projeto-app-confeitaria/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.13055555555555556" />
         <entry key="..\:/Users/Breno/Desktop/Projeto-app-confeitaria/app/src/main/res/layout/activity_cadastro_bolo.xml" value="0.18" />
@@ -29,6 +30,15 @@
         <entry key="..\:/Users/pri_f/AndroidStudioProjects/Projeto-app-confeitaria/app/src/main/res/layout/fragment_teste.xml" value="0.3875" />
         <entry key="..\:/Users/pri_f/AndroidStudioProjects/Projeto-app-confeitaria/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.3676923076923077" />
         <entry key="..\:/Users/vande/Desktop/Projeto-app-confeitaria/app/src/main/res/layout/activity_cadastro_usuario.xml" value="0.1" />
+=======
+        <entry key="..\:/Users/Administrador/Desktop/Projeto-app-confeitaria/app/src/main/res/layout/adapter_bolos.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Administrador/Desktop/Projeto-app-confeitaria/app/src/main/res/layout/fragment_listagens.xml" value="0.33" />
+        <entry key="..\:/Users/vande/Desktop/Projeto-app-confeitaria/app/src/main/res/layout/activity_cadastro_bolo.xml" value="0.1527777777777778" />
+        <entry key="..\:/Users/vande/Desktop/Projeto-app-confeitaria/app/src/main/res/layout/activity_detalhes_item.xml" value="0.1527777777777778" />
+        <entry key="..\:/Users/vande/Desktop/Projeto-app-confeitaria/app/src/main/res/layout/adapter_bolos.xml" value="0.5" />
+        <entry key="..\:/Users/vande/Desktop/Projeto-app-confeitaria/app/src/main/res/layout/fragment_listagens.xml" value="0.25" />
+        <entry key="..\:/Users/vande/Desktop/Projeto-app-confeitaria/app/src/main/res/layout/fragment_meus_pedidos.xml" value="0.1527777777777778" />
+>>>>>>> remotes/origin/vanderson
       </map>
     </option>
   </component>

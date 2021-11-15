@@ -139,12 +139,15 @@ public class CadastroBoloActivity extends AppCompatActivity {
                                 //Validar se os campos foram preenchidos
                                 if (!NomeBolo.isEmpty() && !Ingredientes.isEmpty() && !Descricao.isEmpty() && !Preco.isEmpty()) {
 
+                                    
                                     bolo = new Bolo();
                                     bolo.setNome(NomeBolo);
                                     bolo.setPreco(Double.parseDouble(Preco));
                                     bolo.setIngredientes(Ingredientes);
                                     bolo.setDescricao(Descricao);
                                     bolo.setIdBolo(identificaBolo);
+                                    bolo.setNomePesquisa(NomeBolo);
+                                    bolo.setNomePesquisa(NomeBolo);
                                     uploadImagem();
 //                                  cadastrarBolo();
                                    // limpaInformacoes();
