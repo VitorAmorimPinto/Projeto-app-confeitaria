@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -76,7 +77,7 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Usuario usuario = snapshot.getValue(Usuario.class);
-                holder.nomeCliente.setText("Cliente: " + usuario.getNome());
+                holder.nomeCliente.setText(usuario.getNome());
             }
 
             @Override
@@ -86,8 +87,8 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
         });
 
         //Define os demais holders
-        holder.horaEntrega.setText("Data de entrega: " + pedido.getDataEntrega());
-        holder.localEntrega.setText("Local de entrega: " + pedido.getLocalEntrega());
+        holder.horaEntrega.setText(pedido.getDataEntrega());
+        holder.localEntrega.setText(pedido.getLocalEntrega());
 
     }
 
@@ -99,6 +100,7 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
     public class ViewHolderPedidosAdmin extends RecyclerView.ViewHolder{
         ImageView foto;
         TextView nomeBolo, nomeCliente, localEntrega, horaEntrega;
+        LinearLayout parentLayout;
         public ViewHolderPedidosAdmin(@NonNull View itemView) {
             super(itemView);
             foto = itemView.findViewById(R.id.imageViewBoloPedidosAdmin);
@@ -106,6 +108,7 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
             nomeCliente = itemView.findViewById(R.id.textViewNomeClientePedidosAdmin);
             localEntrega = itemView.findViewById(R.id.textViewLocalEntregaPedidosAdmin);
             horaEntrega = itemView.findViewById(R.id.textViewHoraEntregaEntregaPedidosAdmin);
+            parentLayout = itemView.findViewById(R.id.linearLayoutPedidosAdmin);
         }
     }
 }

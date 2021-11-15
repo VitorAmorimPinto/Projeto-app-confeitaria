@@ -1,4 +1,4 @@
-package com.example.aplicativoconfeitaria;
+package com.example.aplicativoconfeitaria.fragment;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.aplicativoconfeitaria.R;
 import com.example.aplicativoconfeitaria.activity.ActivityPrincipal;
 import com.example.aplicativoconfeitaria.activity.CadastroBoloActivity;
 import com.example.aplicativoconfeitaria.activity.EnderecoActivity;
