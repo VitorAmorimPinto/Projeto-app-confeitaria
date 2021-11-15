@@ -90,8 +90,6 @@ public class Bolo implements Serializable {
         this.preco = preco;
     }
 
-    public String getFoto() { return foto;}
-
     public void setFot(String foto) { this.foto = foto; }
 
 }

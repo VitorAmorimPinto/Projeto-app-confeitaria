@@ -12,6 +12,7 @@ import com.example.aplicativoconfeitaria.FragmentHome;
 import com.example.aplicativoconfeitaria.FragmentMeusPedidos;
 import com.example.aplicativoconfeitaria.FragmentPerfil;
 import com.example.aplicativoconfeitaria.R;
+import com.example.aplicativoconfeitaria.fragment_pedidos_admin;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ActivityPrincipal extends AppCompatActivity {
@@ -42,7 +43,7 @@ public class ActivityPrincipal extends AppCompatActivity {
                             selectedFragment = new FragmentCarrinho();
                             break;
                         case R.id.ic_pedidos:
-                            selectedFragment = new FragmentMeusPedidos();
+                            selectedFragment = new fragment_pedidos_admin();
                             break;
                         case R.id.ic_perfil:
                             selectedFragment = new FragmentPerfil();

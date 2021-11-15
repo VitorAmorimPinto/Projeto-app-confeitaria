@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     android:orientation="horizontal"
     android:padding="5dp">
 
@@ -10,7 +11,7 @@
         android:id="@+id/imageViewBoloPedidosAdmin"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        app:srcCompat="@drawable/boloqq" />
+        app:srcCompat="@drawable/imagem_default" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,23 +21,31 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/textTituloBolo"
+            android:id="@+id/textViewNomeBoloPedidosAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Título"
+            android:text="Nome do bolo"
             android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/textDescricaoBolo"
+            android:id="@+id/textViewNomeClientePedidosAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descição" />
+            android:text="Nome cliente"
+            android:textColor="@color/black" />
 
         <TextView
-            android:id="@+id/textPrecoBolo"
+            android:id="@+id/textViewLocalEntregaPedidosAdmin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Preço"
+            android:text="Local de entrga"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/textViewHoraEntregaEntregaPedidosAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Data e hora de entrega"
             android:textColor="@color/black" />
     </LinearLayout>
 </LinearLayout>
