@@ -1,4 +1,4 @@
-package com.example.aplicativoconfeitaria;
+package com.example.aplicativoconfeitaria.fragment;
 
 import android.os.Bundle;
 
@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.aplicativoconfeitaria.R;
 import com.example.aplicativoconfeitaria.adapter.BolosAdapter;
 import com.example.aplicativoconfeitaria.adapter.PedidosAdminAdapter;
 import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
@@ -52,15 +53,10 @@ public class fragment_pedidos_admin extends Fragment {
         recyclerView.setLayoutManager( layoutManager );
         recyclerView.setHasFixedSize( true );
         recyclerView.setAdapter( adapter );
-
+        recuperarPedidos();
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        recuperarPedidos();
-    }
 
     @Override
     public void onStop() {

@@ -1,11 +1,13 @@
 package com.example.aplicativoconfeitaria.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.aplicativoconfeitaria.R;
+import com.example.aplicativoconfeitaria.activity.activity_detalhes_item;
 import com.example.aplicativoconfeitaria.model.Bolo;
 
 import java.util.List;
@@ -50,6 +53,12 @@ public class BolosAdapter extends RecyclerView.Adapter <BolosAdapter.MyViewHolde
             holder.foto.setImageResource( R.drawable.bolopadrao );
         }
 
+        holder.parentLayout.setOnClickListener((view) -> {
+            Intent intent = new Intent(context, activity_detalhes_item.class);
+            intent.putExtra("objetoBolo", bolo);
+            context.startActivity(intent);
+        });
+
     }
 
     @Override
@@ -61,6 +70,7 @@ public class BolosAdapter extends RecyclerView.Adapter <BolosAdapter.MyViewHolde
 
         ImageView foto;
         TextView nome, descricao, preco;
+        LinearLayout parentLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -69,7 +79,7 @@ public class BolosAdapter extends RecyclerView.Adapter <BolosAdapter.MyViewHolde
             nome = itemView.findViewById(R.id.textTituloBolo);
             descricao = itemView.findViewById(R.id.textDescricaoBolo);
             preco = itemView.findViewById(R.id.textPrecoBolo);
-
+            parentLayout = itemView.findViewById(R.id.linearLayoutListaBolos);
         }
     }
 

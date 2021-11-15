@@ -1,4 +1,4 @@
-package com.example.aplicativoconfeitaria.activity;
+package com.example.aplicativoconfeitaria.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -73,14 +73,11 @@ public class BolosFragment extends Fragment {
         recyclerViewListaBolos.setHasFixedSize( true );
         recyclerViewListaBolos.setAdapter( adapter );
 
+        recuperarBolos();
+
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        recuperarBolos();
-    }
 
     @Override
     public void onStop() {
