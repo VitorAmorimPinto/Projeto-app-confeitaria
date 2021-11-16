@@ -7,12 +7,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Bolo implements Serializable {
     private String nome, descricao, ingredientes, foto;
     private Double preco;
     private String idBolo;
+    private String nomePesquisa;
 
     public Bolo() {
     }
@@ -90,8 +92,10 @@ public class Bolo implements Serializable {
         this.preco = preco;
     }
 
-//    public String getFoto() { return foto;}
 
-    public void setFot(String foto) { this.foto = foto; }
+    public void setFoto(String foto) { this.foto = foto; }
 
+}
+    public String getNomePesquisa() { return nomePesquisa; }
+    public void setNomePesquisa(String nomePesquisa) { this.nomePesquisa = nomePesquisa.toUpperCase(); }
 }
