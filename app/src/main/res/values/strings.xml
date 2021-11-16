@@ -9,4 +9,54 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!--Tela Login-->
+    <!--Botões-->
+    <string name="btn_login">Entrar</string>
+    <string name="btn_cad">Fazer Cadastro</string>
+    <!--Textos-->
+    <string name="place_login">Digite seu login</string>
+    <string name="place_pass">Digite sua senha</string>
+    <string name="txt_titulo">Aplicativo do Bolo</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Tela Cadastro Bolos-->
+    <!--Caixas de texto-->
+    <string name="cxtNome">Digite aqui o nome do bolo</string>
+    <string name="cxtIngredientes">Digite aqui os ingredientes</string>
+    <string name="cxtDescricao">Digite aqui uma breve descrição para ser exibida na vitrine</string>
+    <string name="cxtPreco">Digite aqui o preço</string>
+    <!--Textos-->
+    <string name="txtNome">Nome</string>
+    <string name="txtIngredientes">Ingredientes</string>
+    <string name="txtDescricao">Descrição</string>
+    <string name="txtPreco">Preço</string>
+    <string name="txtFoto">Foto</string>
+    <string name="txtTitulo">Cadastre seu bolo</string>
+    <string name="txtBtnCadastrar">Cadastrar</string>
+
+
+    <string-array name="horarios">
+        <item>8:30</item>
+        <item>9:00</item>
+        <item>9:30</item>
+        <item>10:00</item>
+        <item>10:30</item>
+        <item>11:00</item>
+        <item>11:30</item>
+        <item>12:00</item>
+        <item>13:00</item>
+        <item>13:30</item>
+        <item>14:00</item>
+        <item>14:30</item>
+        <item>15:00</item>
+        <item>15:30</item>
+        <item>16:00</item>
+        <item>16:30</item>
+        <item>17:00</item>
+        <item>17:30</item>
+        <item>18:00</item>
+    </string-array>
+
 </resources>

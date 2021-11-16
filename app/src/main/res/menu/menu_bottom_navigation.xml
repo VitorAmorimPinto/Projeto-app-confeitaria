@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/ic_home"
+        android:icon="@drawable/icon_home_menu"
+        android:title="Início"/>
+
+    <item android:id="@+id/ic_pedidos"
+        android:icon="@drawable/icon_pedidos_menu"
+        android:title="Meus Pedidos"/>
+
+    <item android:id="@+id/ic_perfil"
+        android:icon="@drawable/icon_perfil_menu"
+        android:title="Perfil"/>
+</menu>
