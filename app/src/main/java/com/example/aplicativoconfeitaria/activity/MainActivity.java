@@ -55,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, ActivityPrincipal.class);
         startActivity(i);
     }
+    public void goToPedido(View view){
+        Intent i = new Intent(this, ActivityDetalhesPedido.class);
+        startActivity(i);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
