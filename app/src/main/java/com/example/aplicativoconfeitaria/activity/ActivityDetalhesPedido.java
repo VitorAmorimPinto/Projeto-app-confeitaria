@@ -29,6 +29,11 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
     public TextView txtStatusPedido,txtFormaPagamento,txtTotal,txtObs,txtLocalEntrega,txtDataEntrega,txtNomeUser,txtTituloBoloPedido,txtDescricao,txtPreco;
     public String idUser,idBolo;
     public ImageView imgBoloPedido;
+    public Bolo boloObj;
+    public Pedido pedido;
+    public String idPedido;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +50,11 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
         txtDescricao = findViewById(R.id.txtDescricao);
         txtPreco = findViewById(R.id.txtPreco);
         imgBoloPedido = findViewById(R.id.imgBoloPedido);
+
+        Bundle dados = getIntent().getExtras();
+
+        pedido = (Pedido) dados.getSerializable("objetoPedido");
+
         informacoesPedido();
     }
     public void informacoesPedido(){
@@ -106,7 +116,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Bolo bolo = snapshot.getValue(Bolo.class);
                 DecimalFormat decimalFormat = new DecimalFormat("0.##");
-
+                boloObj = bolo;
                 tituloBolo = bolo.getNome();
                 descricaoBolo = bolo.getDescricao();
                 precoBolo = decimalFormat.format(bolo.getPreco());
@@ -134,6 +144,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
     }
     public void goToItem(View view){
         Intent i = new Intent(this, activity_detalhes_item.class);
+        i.putExtra("objetoBolo", boloObj);
         startActivity(i);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.aplicativoconfeitaria;
+package com.example.aplicativoconfeitaria.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,9 +13,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.aplicativoconfeitaria.R;
 import com.example.aplicativoconfeitaria.activity.ActivityPrincipal;
 import com.example.aplicativoconfeitaria.activity.CadastroUsuarioActivity;
-import com.example.aplicativoconfeitaria.activity.activity_login;
 import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
 import com.example.aplicativoconfeitaria.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;

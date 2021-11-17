@@ -28,7 +28,7 @@ public class activity_detalhes_item extends AppCompatActivity {
     public String nomeBolo, descricaoBolo, ingredientesBolo, precoBolo;
     public ImageView ivImagemBolo;
     private DatabaseReference firebaseref = ConfiguracaoFirebase.getFirebaseDataBase();
-    public Bolo boloEnviar;
+    public Bolo bolo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,50 +41,39 @@ public class activity_detalhes_item extends AppCompatActivity {
         tvIngedientesBolo = findViewById(R.id.textViewIngredientesDetalheItem);
         ivImagemBolo = findViewById(R.id.imageViewImagemDetalheItem);
 
+        Bundle dados = getIntent().getExtras();
+        bolo = (Bolo) dados.getSerializable("objetoBolo");
+
         recuperarBolo();
     }
 
 
     public void recuperarBolo(){
-        DatabaseReference boloref = firebaseref.child("bolos").child("Qm9sbyBGb3JtaWd1ZWlybw==");
+        DecimalFormat decimalFormat = new DecimalFormat("0.##");
 
-        boloref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Bolo bolo = snapshot.getValue(Bolo.class);
-                boloEnviar = bolo;
-                DecimalFormat decimalFormat = new DecimalFormat("0.##");
+        nomeBolo = bolo.getNome();
+        descricaoBolo = bolo.getDescricao();
+        ingredientesBolo = bolo.getIngredientes();
+        precoBolo = decimalFormat.format(bolo.getPreco());
+        Uri url = Uri.parse(bolo.getFoto());
 
-                nomeBolo = bolo.getNome();
-                descricaoBolo = bolo.getDescricao();
-                ingredientesBolo = bolo.getIngredientes();
-                precoBolo = decimalFormat.format(bolo.getPreco());
-                Uri url = Uri.parse(bolo.getFoto());
+        tvNomeBolo.setText(nomeBolo);
+        tvPrecoBolo.setText("R$ " + precoBolo);
+        tvDescricaoBolo.setText(descricaoBolo);
+        tvIngedientesBolo.setText(ingredientesBolo);
 
-                tvNomeBolo.setText(nomeBolo);
-                tvPrecoBolo.setText("R$ " + precoBolo);
-                tvDescricaoBolo.setText(descricaoBolo);
-                tvIngedientesBolo.setText(ingredientesBolo);
-
-                if(url != null){
-                    Glide.with(activity_detalhes_item.this)
-                            .load(url)
-                            .into(ivImagemBolo);
-                }else{
-                    ivImagemBolo.setImageResource(R.drawable.imagem_default);
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        if(url != null){
+            Glide.with(activity_detalhes_item.this)
+                    .load(url)
+                    .into(ivImagemBolo);
+        }else{
+            ivImagemBolo.setImageResource(R.drawable.imagem_default);
+        }
     }
 
     public void goToFinalizarPedido(View view){
         Intent i = new Intent(this, ActivityFinalizarPedido.class);
-        i.putExtra("objeto", boloEnviar);
+        i.putExtra("objeto", bolo);
         startActivity(i);
     }
 }

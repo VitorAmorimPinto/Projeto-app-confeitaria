@@ -1,8 +1,9 @@
 package com.example.aplicativoconfeitaria.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Pedido {
+public class Pedido implements Serializable {
     private String id, idUsuario, idBolo, status, localEntrega, observacao, dataEntrega, dataRealizacao;
 
     private Double valorTotal;

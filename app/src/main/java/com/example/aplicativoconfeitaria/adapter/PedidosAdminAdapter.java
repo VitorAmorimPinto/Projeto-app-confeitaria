@@ -1,11 +1,13 @@
 package com.example.aplicativoconfeitaria.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.aplicativoconfeitaria.R;
+import com.example.aplicativoconfeitaria.activity.ActivityDetalhesPedido;
 import com.example.aplicativoconfeitaria.activity.activity_detalhes_item;
 import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
 import com.example.aplicativoconfeitaria.model.Bolo;
@@ -63,6 +66,7 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
                 }else {
                     holder.foto.setImageResource( R.drawable.imagem_default );
                 }
+
             }
 
             @Override
@@ -76,7 +80,7 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Usuario usuario = snapshot.getValue(Usuario.class);
-                holder.nomeCliente.setText("Cliente: " + usuario.getNome());
+                holder.nomeCliente.setText(usuario.getNome());
             }
 
             @Override
@@ -85,9 +89,15 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
             }
         });
 
+
         //Define os demais holders
-        holder.horaEntrega.setText("Data de entrega: " + pedido.getDataEntrega());
-        holder.localEntrega.setText("Local de entrega: " + pedido.getLocalEntrega());
+        holder.parentLayout.setOnClickListener((view) -> {
+            Intent intent = new Intent(context, ActivityDetalhesPedido.class);
+            intent.putExtra("objetoPedido", pedido);
+            context.startActivity(intent);
+        });
+        holder.horaEntrega.setText(pedido.getDataEntrega());
+        holder.localEntrega.setText(pedido.getLocalEntrega());
 
     }
 
@@ -99,6 +109,7 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
     public class ViewHolderPedidosAdmin extends RecyclerView.ViewHolder{
         ImageView foto;
         TextView nomeBolo, nomeCliente, localEntrega, horaEntrega;
+        LinearLayout parentLayout;
         public ViewHolderPedidosAdmin(@NonNull View itemView) {
             super(itemView);
             foto = itemView.findViewById(R.id.imageViewBoloPedidosAdmin);
@@ -106,6 +117,7 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
             nomeCliente = itemView.findViewById(R.id.textViewNomeClientePedidosAdmin);
             localEntrega = itemView.findViewById(R.id.textViewLocalEntregaPedidosAdmin);
             horaEntrega = itemView.findViewById(R.id.textViewHoraEntregaEntregaPedidosAdmin);
+            parentLayout = itemView.findViewById(R.id.linearLayoutPedidosAdmin);
         }
     }
 }
