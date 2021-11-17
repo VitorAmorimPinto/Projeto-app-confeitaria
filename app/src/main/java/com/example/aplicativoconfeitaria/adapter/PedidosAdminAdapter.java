@@ -1,4 +1,4 @@
-package com.example.aplicativoconfeitaria.adapter;
+ package com.example.aplicativoconfeitaria.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -93,7 +93,7 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
         //Define os demais holders
         holder.parentLayout.setOnClickListener((view) -> {
             Intent intent = new Intent(context, ActivityDetalhesPedido.class);
-            intent.putExtra("objetoPedido", pedido);
+            intent.putExtra("idPedido", pedido.getId());
             context.startActivity(intent);
         });
         holder.horaEntrega.setText(pedido.getDataEntrega());

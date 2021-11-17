@@ -73,6 +73,7 @@ public class fragment_pedidos_admin extends Fragment {
                 for ( DataSnapshot dados: dataSnapshot.getChildren() ){
 
                     Pedido pedido = dados.getValue( Pedido.class );
+                    pedido.setId(dados.getKey());
                     listaPedidos.add ( pedido );
 
                 }

@@ -25,8 +25,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DecimalFormat;
 
 public class ActivityDetalhesPedido extends AppCompatActivity {
-    public String status,total,observacaoUsuario,localEntrega,dataEntrega,nomeUser,tituloBolo,descricaoBolo,precoBolo;
-    public TextView txtStatusPedido,txtFormaPagamento,txtTotal,txtObs,txtLocalEntrega,txtDataEntrega,txtNomeUser,txtTituloBoloPedido,txtDescricao,txtPreco;
+    public String status,total,observacaoUsuario,localEntrega,dataEntrega,nomeUser,tituloBolo,descricaoBolo,precoBolo,dataRealizacao;
+    public TextView txtStatusPedido,txtFormaPagamento,txtTotal,txtObs,txtLocalEntrega,txtDataEntrega,txtNomeUser,txtTituloBoloPedido,txtDescricao,txtPreco,txtDataRealizacao;
     public String idUser,idBolo;
     public ImageView imgBoloPedido;
     public Bolo boloObj;
@@ -50,15 +50,16 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
         txtDescricao = findViewById(R.id.txtDescricao);
         txtPreco = findViewById(R.id.txtPreco);
         imgBoloPedido = findViewById(R.id.imgBoloPedido);
+        txtDataRealizacao = findViewById(R.id.txtDataRealizacao);
 
         Bundle dados = getIntent().getExtras();
 
-        pedido = (Pedido) dados.getSerializable("objetoPedido");
+        idPedido = (String) dados.getSerializable("idPedido");
 
         informacoesPedido();
     }
     public void informacoesPedido(){
-        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("pedidos").child("-Moe4iCf2sojy_9cMF6r");
+        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("pedidos").child(idPedido);
 
         firebase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -71,6 +72,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                 observacaoUsuario = p.getObservacao();
                 localEntrega = p.getLocalEntrega();
                 dataEntrega = p.getDataEntrega();
+                dataRealizacao = p.getDataRealizacao();
                 if (observacaoUsuario.equals("")) {
                     txtObs.setText("Sem observações");
                 }else{
@@ -80,6 +82,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                 txtTotal.setText(total);
                 txtLocalEntrega.setText(localEntrega);
                 txtDataEntrega.setText(dataEntrega);
+                txtDataRealizacao.setText (dataRealizacao);
                 informacoesUsuario();
                 InformacoesBolo();
             }

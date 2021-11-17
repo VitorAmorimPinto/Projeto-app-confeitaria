@@ -90,6 +90,29 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Data de Realização"
+                    android:textColor="#252525"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDataRealizacao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <TextView
                     android:id="@+id/textView12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -385,7 +408,7 @@
                     android:backgroundTint="#ffeaea"
                     android:gravity="center"
                     android:paddingLeft="5dp"
-                    android:text="Observações"
+                    android:text="Observação Confeiteiro"
                     android:textColor="#252525"
                     android:textSize="18sp" />
 
