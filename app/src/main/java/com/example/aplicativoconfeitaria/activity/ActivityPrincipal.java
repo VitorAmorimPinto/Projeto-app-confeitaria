@@ -28,7 +28,7 @@ public class ActivityPrincipal extends AppCompatActivity {
     private FirebaseAuth autenticacao;
     private Boolean ehAdmin = false;
 
-    @Overridev
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);

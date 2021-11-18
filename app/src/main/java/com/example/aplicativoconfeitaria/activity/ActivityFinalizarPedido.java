@@ -45,10 +45,10 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
 
     private TextView tvNomeBolo, tvDescricaoBolo, tvPrecoBolo, tvDataEntrega, tvRuaNumero, tvBairroCidade;
     private EditText edtObservacoes;
-    private String nomeBolo, descricaoBolo, ingredientesBolo, precoBolo, pedidoId, horarioEntrega, emailUsuario, idUsuario;
+    private String nomeBolo, descricaoBolo, ingredientesBolo, precoBolo, pedidoId, horarioEntrega, emailUsuario, idUsuario, metodoPagamento;
     private ImageView ivImagemBolo;
     private Button btnFinalizarPedido;
-    private Spinner spnHoraEntrega;
+    private Spinner spnHoraEntrega, spnMetodoPagamento;
     private DatabaseReference dbReference = ConfiguracaoFirebase.getFirebaseDataBase();
     private FirebaseAuth autenticacao;
     private Bolo bolo;
@@ -74,6 +74,12 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnHoraEntrega.setAdapter(adapter);
         spnHoraEntrega.setOnItemSelectedListener(this);
+
+        spnMetodoPagamento = findViewById(R.id.spinnerMetodoPagamentoFinalizarPedidio);
+        ArrayAdapter<CharSequence> adapterPagamento = ArrayAdapter.createFromResource(this, R.array.pagamento, android.R.layout.simple_spinner_item);
+        adapterPagamento.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnMetodoPagamento.setAdapter(adapterPagamento);
+        spnMetodoPagamento.setOnItemSelectedListener(this);
 
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         emailUsuario = autenticacao.getCurrentUser().getEmail();
@@ -103,11 +109,12 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
             pedido.setIdBolo(idBoloPedido);
             pedido.setIdUsuario(idUsuario);
             pedido.setValorTotal(Double.parseDouble(valorTotalPedido.replace(",",".")));
+            pedido.setMetodoPagamento(metodoPagamento);
             pedido.setDataRealizacao(dataPedidoString);
             pedido.setDataEntrega(dataHoraEntregaPedido);
             pedido.setLocalEntrega(localEntregaPedido);
             pedido.setObservacao(observacaoPedido);
-            pedido.setStatus("Em andamento");
+            pedido.setStatus(0);
 
             pedidosReference.push().setValue(pedido);
 
@@ -193,9 +200,20 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        String horario = adapterView.getItemAtPosition(i).toString();
-        horarioEntrega = horario;
+        switch(adapterView.getId()){
+            case R.id.spinnerHorarioEntregaFinalizarPedidio:
+                String horario = adapterView.getItemAtPosition(i).toString();
+                horarioEntrega = horario;
+                break;
+            case R.id.spinnerMetodoPagamentoFinalizarPedidio:
+                String pagamento = adapterView.getItemAtPosition(i).toString();
+                metodoPagamento = pagamento;
+                break;
+            default:
+                break;
+        }
     }
+
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
