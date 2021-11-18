@@ -1,11 +1,10 @@
 package com.example.aplicativoconfeitaria.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Pedido implements Serializable {
-    private String id, idUsuario, idBolo, status, localEntrega, observacao, dataEntrega, dataRealizacao;
-
+public class Pedido {
+    private String id, idUsuario, idBolo, localEntrega, observacao, dataEntrega, dataRealizacao, metodoPagamento;
+    private Integer status;
     private Double valorTotal;
 
     public Pedido() {
@@ -43,11 +42,11 @@ public class Pedido implements Serializable {
         this.idBolo = idBolo;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -81,5 +80,13 @@ public class Pedido implements Serializable {
 
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
+    }
+
+    public String getMetodoPagamento() {
+        return metodoPagamento;
+    }
+
+    public void setMetodoPagamento(String metodoPagamento) {
+        this.metodoPagamento = metodoPagamento;
     }
 }

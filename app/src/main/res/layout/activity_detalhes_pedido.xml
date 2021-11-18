@@ -86,7 +86,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:text="Dinheiro"
                     android:textSize="16sp" />
 
                 <TextView
@@ -445,7 +444,7 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/buttonCancelarPedidoUsuario"
+                        android:id="@+id/btnRecusarPedido"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
@@ -453,11 +452,12 @@
                         app:backgroundTint="#8E8E8E" />
 
                     <Button
-                        android:id="@+id/buttonFinalizarPedidoUsuario"
+                        android:id="@+id/btnAlterarStatus"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
-                        android:text="Aceitar pedido"
+                        android:onClick="alterarStatusPedido"
+                        android:text="Salvar"
                         app:backgroundTint="#E4696D" />
 
                 </LinearLayout>

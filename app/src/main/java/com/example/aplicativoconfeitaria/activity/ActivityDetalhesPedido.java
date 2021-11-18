@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,13 +26,15 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DecimalFormat;
 
 public class ActivityDetalhesPedido extends AppCompatActivity {
-    public String status,total,observacaoUsuario,localEntrega,dataEntrega,nomeUser,tituloBolo,descricaoBolo,precoBolo,dataRealizacao;
+    public String statusText,total,observacaoUsuario,localEntrega,dataEntrega,nomeUser,tituloBolo,descricaoBolo,precoBolo,dataRealizacao,formaPagamento,textoBotao;
     public TextView txtStatusPedido,txtFormaPagamento,txtTotal,txtObs,txtLocalEntrega,txtDataEntrega,txtNomeUser,txtTituloBoloPedido,txtDescricao,txtPreco,txtDataRealizacao;
     public String idUser,idBolo;
     public ImageView imgBoloPedido;
     public Bolo boloObj;
     public Pedido pedido;
     public String idPedido;
+    public Integer status;
+    public Button btnAlterarStatus,btnRecusarPedido;
 
 
     @Override
@@ -51,6 +54,8 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
         txtPreco = findViewById(R.id.txtPreco);
         imgBoloPedido = findViewById(R.id.imgBoloPedido);
         txtDataRealizacao = findViewById(R.id.txtDataRealizacao);
+        btnAlterarStatus = findViewById(R.id.btnAlterarStatus);
+        btnRecusarPedido = findViewById(R.id.btnRecusarPedido);
 
         Bundle dados = getIntent().getExtras();
 
@@ -64,25 +69,50 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
         firebase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Pedido p = snapshot.getValue(Pedido.class);
-                idBolo = p.getIdBolo();
-                idUser = p.getIdUsuario();
-                status = p.getStatus();
-                total = p.getValorTotal().toString();
-                observacaoUsuario = p.getObservacao();
-                localEntrega = p.getLocalEntrega();
-                dataEntrega = p.getDataEntrega();
-                dataRealizacao = p.getDataRealizacao();
+                pedido = snapshot.getValue(Pedido.class);
+                idBolo = pedido.getIdBolo();
+                idUser = pedido.getIdUsuario();
+                status = pedido.getStatus();
+                total = pedido.getValorTotal().toString();
+                observacaoUsuario = pedido.getObservacao();
+                localEntrega = pedido.getLocalEntrega();
+                dataEntrega = pedido.getDataEntrega();
+                dataRealizacao = pedido.getDataRealizacao();
+                formaPagamento = pedido.getMetodoPagamento();
+
+                switch (status){
+                    case 0:
+                        statusText = "Novo";
+                        textoBotao = "Aceitar Pedido";
+                        break;
+                    case 1:
+                        statusText = "Em andamento";
+                        textoBotao = "Finalizar Pedido";
+                        btnRecusarPedido.setEnabled(false);
+                        break;
+                    case 2:
+                        statusText = "Finalizado";
+                        btnRecusarPedido.setEnabled(false);
+                        btnAlterarStatus.setEnabled(false);
+                        break;
+                    case 3:
+                        statusText = "Cancelado";
+                        btnRecusarPedido.setEnabled(false);
+                        btnAlterarStatus.setEnabled(false);
+                        break;
+                }
                 if (observacaoUsuario.equals("")) {
                     txtObs.setText("Sem observações");
                 }else{
                     txtObs.setText(observacaoUsuario);
                 }
-                txtStatusPedido.setText(status);
+                txtStatusPedido.setText(statusText);
                 txtTotal.setText(total);
                 txtLocalEntrega.setText(localEntrega);
                 txtDataEntrega.setText(dataEntrega);
                 txtDataRealizacao.setText (dataRealizacao);
+                txtFormaPagamento.setText(formaPagamento);
+                btnAlterarStatus.setText(textoBotao);
                 informacoesUsuario();
                 InformacoesBolo();
             }
@@ -144,6 +174,12 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
 
             }
         });
+    }
+    public void alterarStatusPedido(View view){
+        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("pedidos").child(idPedido);
+
+        pedido.setStatus(1);
+        firebase.setValue(pedido);
     }
     public void goToItem(View view){
         Intent i = new Intent(this, activity_detalhes_item.class);
