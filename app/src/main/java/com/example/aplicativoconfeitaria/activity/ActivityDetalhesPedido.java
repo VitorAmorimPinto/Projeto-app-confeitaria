@@ -1,8 +1,10 @@
 package com.example.aplicativoconfeitaria.activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -107,7 +109,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                     txtObs.setText(observacaoUsuario);
                 }
                 txtStatusPedido.setText(statusText);
-                txtTotal.setText(total);
+                txtTotal.setText("R$ " + total);
                 txtLocalEntrega.setText(localEntrega);
                 txtDataEntrega.setText(dataEntrega);
                 txtDataRealizacao.setText (dataRealizacao);
@@ -157,10 +159,10 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
 
                 txtTituloBoloPedido.setText(tituloBolo);
                 txtDescricao.setText(descricaoBolo);
-                txtPreco.setText(precoBolo);
+                txtPreco.setText("R$ "+precoBolo);
 
                 if(url != null){
-                    Glide.with(ActivityDetalhesPedido.this)
+                    Glide.with(getApplicationContext())
                             .load(url)
                             .into(imgBoloPedido);
                 }else{
@@ -176,10 +178,50 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
         });
     }
     public void alterarStatusPedido(View view){
+        String[] estadosPedidido = {"aceitar", "finalizar"};
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("pedidos").child(idPedido);
+        AlertDialog.Builder alert = new AlertDialog.Builder(ActivityDetalhesPedido.this);
+        alert.setTitle(" Pedido");
+        alert.setMessage("Deseja realmente "+estadosPedidido[status] +" esse pedido?");
+        alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (status){
+                    case 0:
+                        pedido.setStatus(1);
 
-        pedido.setStatus(1);
-        firebase.setValue(pedido);
+                        break;
+                    case 1:
+                        pedido.setStatus(2);
+                        break;
+                }
+                firebase.setValue(pedido);
+                dialog.dismiss();
+
+                AlertDialog.Builder alerta = new AlertDialog.Builder(ActivityDetalhesPedido.this);
+                alerta.setTitle("Mensagem");
+                alerta.setMessage("Status do Pedido atualizado");
+                alerta.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
+                alerta.show();
+            }
+
+        });
+        alert.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        alert.show();
     }
     public void goToItem(View view){
         Intent i = new Intent(this, activity_detalhes_item.class);
