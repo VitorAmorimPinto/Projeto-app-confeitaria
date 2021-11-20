@@ -102,7 +102,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
                     android:text="Método de pagamento:"
-                    android:textColor="#252525"
+                    android:textColor="#6F6F6F"
                     android:textSize="16sp" />
 
                 <Spinner
@@ -141,29 +141,53 @@
                     android:textColor="#252525"
                     android:textSize="18sp" />
 
+                <RadioGroup
+                    android:id="@+id/radioGroupOpcaoEntrega"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp">
+
+                    <RadioButton
+                        android:id="@+id/radioButtonRetirarConfeitaria"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Retirar na confeitaria"
+                        android:textSize="16sp"
+                        app:buttonTint="#E4696D" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonReceberEmCasa"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Receber em casa"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        app:buttonTint="#E4696D" />
+                </RadioGroup>
+
                 <TextView
-                    android:id="@+id/textViewRuaNumeroFinalizarPedido"
+                    android:id="@+id/textViewTituloLocalFinalizarPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:text="Rua tal, nº 5"
-                    android:textColor="#252525"
+                    android:text="Local de entrega:"
+                    android:textColor="#6F6F6F"
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textViewBairroCidadeFinalizarPedido"
+                    android:id="@+id/textViewLocalDeEntregaFinalizarPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="15dp"
-                    android:text="Bairro Qualquer, Cariacica"
+                    android:layout_marginBottom="10dp"
+                    android:text="Rua tal, nº 5"
                     android:textColor="#252525"
                     android:textSize="16sp" />
 
@@ -176,7 +200,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
                     android:text="Data de entrega:"
-                    android:textColor="#252525"
+                    android:textColor="#6F6F6F"
                     android:textSize="16sp" />
 
                 <TextView
@@ -202,7 +226,10 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"
                     android:onClick="escolherData"
-                    android:text="Escolher Data" />
+                    android:text="Escolher Data"
+                    app:icon="@android:drawable/ic_menu_today"
+                    app:iconPadding="5dp"
+                    app:iconTint="@color/white" />
 
                 <TextView
                     android:id="@+id/textViewHorarioEntregaFinalizarPedido"
@@ -213,7 +240,7 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
                     android:text="Horário de entrega:"
-                    android:textColor="#252525"
+                    android:textColor="#6F6F6F"
                     android:textSize="16sp" />
 
                 <Spinner

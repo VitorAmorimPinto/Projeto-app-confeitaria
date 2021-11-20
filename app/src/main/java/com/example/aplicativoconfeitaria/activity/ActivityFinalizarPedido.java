@@ -18,6 +18,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,8 @@ import com.example.aplicativoconfeitaria.R;
 import com.example.aplicativoconfeitaria.auxiliar.Base64Custom;
 import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
 import com.example.aplicativoconfeitaria.model.Bolo;
+import com.example.aplicativoconfeitaria.model.Confeitaria;
+import com.example.aplicativoconfeitaria.model.Endereco;
 import com.example.aplicativoconfeitaria.model.Pedido;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -34,18 +38,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Random;
 
 public class ActivityFinalizarPedido extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
-    private TextView tvNomeBolo, tvDescricaoBolo, tvPrecoBolo, tvDataEntrega, tvRuaNumero, tvBairroCidade;
+    private TextView tvNomeBolo, tvDescricaoBolo, tvPrecoBolo, tvDataEntrega, tvLocalDeEntrega;
     private EditText edtObservacoes;
-    private String nomeBolo, descricaoBolo, ingredientesBolo, precoBolo, pedidoId, horarioEntrega, emailUsuario, idUsuario, metodoPagamento;
+    private String nomeBolo, descricaoBolo, ingredientesBolo, precoBolo, pedidoId, horarioEntrega, emailUsuario, idUsuario, metodoPagamento, enderecoEntregaUsuario, enderecoEntregaConfeitaria;
     private ImageView ivImagemBolo;
     private Button btnFinalizarPedido;
     private Spinner spnHoraEntrega, spnMetodoPagamento;
@@ -54,6 +56,8 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
     private Bolo bolo;
     private Pedido pedido;
     private SimpleDateFormat dateFormat;
+    private RadioButton rbReceberEmCasa, rbRetirarConfeitaria;
+    private RadioGroup rgOpcaoEntrega;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,11 +68,14 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
         tvDescricaoBolo = findViewById(R.id.textViewDescricaoBoloFinalizarPedido);
         tvPrecoBolo = findViewById(R.id.textViewPrecoFinalizarPedido);
         tvDataEntrega = findViewById(R.id.textViewDataEntregaFinalizarPedido);
-        tvRuaNumero = findViewById(R.id.textViewRuaNumeroFinalizarPedido);
-        tvBairroCidade = findViewById(R.id.textViewBairroCidadeFinalizarPedido);
+        tvLocalDeEntrega = findViewById(R.id.textViewLocalDeEntregaFinalizarPedido);
         edtObservacoes = findViewById(R.id.editTextTextMultiLineObservacoesFinalizarPedido);
         ivImagemBolo = findViewById(R.id.imageViewFinalizarPedido);
         btnFinalizarPedido = findViewById(R.id.buttonFinalizarPedidoUsuario);
+        rbReceberEmCasa = findViewById(R.id.radioButtonReceberEmCasa);
+        rbRetirarConfeitaria = findViewById(R.id.radioButtonRetirarConfeitaria);
+        rgOpcaoEntrega = findViewById(R.id.radioGroupOpcaoEntrega);
+
         spnHoraEntrega = findViewById(R.id.spinnerHorarioEntregaFinalizarPedidio);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.horarios, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -88,6 +95,8 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
         Bundle dados = getIntent().getExtras();
         bolo = (Bolo) dados.getSerializable("objeto");
         preencheDados(bolo);
+        recuperarEnderecos();
+        radioButton();
     }
 
     public void cadastraPedido(View view){
@@ -98,7 +107,7 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
             String dataPedidoString = dateFormat.format(dataPedido);
             String idBoloPedido = Base64Custom.codificarBase64(bolo.getNome());
             String valorTotalPedido = tvPrecoBolo.getText().toString();
-            String localEntregaPedido = tvRuaNumero.getText().toString() + " / " + tvBairroCidade.getText().toString();
+            String localEntregaPedido = tvLocalDeEntrega.getText().toString();
             String observacaoPedido = edtObservacoes.getText().toString();
             String dataHoraEntregaPedido = tvDataEntrega.getText().toString() + " " + horarioEntrega;
 
@@ -196,6 +205,62 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
     public void goToPrincipal(){
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+    }
+
+    public void recuperarEnderecos() {
+        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("enderecos");
+
+        firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    String t = data.getKey();
+                    if (t.equals(idUsuario)) {
+                        Endereco dados = data.getValue(Endereco.class);
+                        enderecoEntregaUsuario = dados.getLogradouro() + ", nº " + dados.getNumero() + " / " + dados.getBairro() + ", " + dados.getLocalidade();
+                        rbReceberEmCasa.setVisibility(View.VISIBLE);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("confeitaria");
+
+        firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                        Confeitaria dados = data.getValue(Confeitaria.class);
+                        enderecoEntregaConfeitaria = dados.getEndereco();
+                        tvLocalDeEntrega.setText(enderecoEntregaConfeitaria);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    public void radioButton(){
+        rgOpcaoEntrega.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(i == R.id.radioButtonRetirarConfeitaria){
+                    tvLocalDeEntrega.setText(enderecoEntregaConfeitaria);
+                }else if (i == R.id.radioButtonReceberEmCasa){
+                    tvLocalDeEntrega.setText(enderecoEntregaUsuario);
+                }
+            }
+        });
     }
 
     @Override
