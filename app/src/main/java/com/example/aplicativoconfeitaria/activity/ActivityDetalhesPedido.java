@@ -3,6 +3,7 @@ package com.example.aplicativoconfeitaria.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -44,6 +45,8 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detalhes_pedido);
 
+
+
         txtStatusPedido = findViewById(R.id.txtStatusPedido);
         txtFormaPagamento = findViewById(R.id.txtFormaPagamento);
         txtTotal = findViewById(R.id.txtTotal);
@@ -58,6 +61,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
         txtDataRealizacao = findViewById(R.id.txtDataRealizacao);
         btnAlterarStatus = findViewById(R.id.btnAlterarStatus);
         btnRecusarPedido = findViewById(R.id.btnRecusarPedido);
+
 
         Bundle dados = getIntent().getExtras();
 
@@ -86,21 +90,25 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                     case 0:
                         statusText = "Novo";
                         textoBotao = "Aceitar Pedido";
+                        txtStatusPedido.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.status_novo));
                         break;
                     case 1:
                         statusText = "Em andamento";
                         textoBotao = "Finalizar Pedido";
-                        btnRecusarPedido.setEnabled(false);
+                        txtStatusPedido.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.status_em_andamento));
+
                         break;
                     case 2:
                         statusText = "Finalizado";
-                        btnRecusarPedido.setEnabled(false);
-                        btnAlterarStatus.setEnabled(false);
+                        txtStatusPedido.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.status_finalizado));
+                        btnRecusarPedido.setVisibility(View.INVISIBLE);
+                        btnAlterarStatus.setVisibility(View.INVISIBLE);
                         break;
                     case 3:
                         statusText = "Cancelado";
-                        btnRecusarPedido.setEnabled(false);
-                        btnAlterarStatus.setEnabled(false);
+                        txtStatusPedido.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.status_cancelado));
+                        btnRecusarPedido.setVisibility(View.INVISIBLE);
+                        btnAlterarStatus.setVisibility(View.INVISIBLE);
                         break;
                 }
                 if (observacaoUsuario.equals("")) {
@@ -201,6 +209,45 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                 AlertDialog.Builder alerta = new AlertDialog.Builder(ActivityDetalhesPedido.this);
                 alerta.setTitle("Mensagem");
                 alerta.setMessage("Status do Pedido atualizado");
+                alerta.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
+                alerta.show();
+            }
+
+        });
+        alert.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        alert.show();
+    }
+    public void cancelarPedido(View view){
+        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("pedidos").child(idPedido);
+        AlertDialog.Builder alert = new AlertDialog.Builder(ActivityDetalhesPedido.this);
+        alert.setTitle(" Pedido");
+        alert.setMessage("Deseja realmente cancelar esse pedido?");
+        alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                pedido.setStatus(3);
+
+                firebase.setValue(pedido);
+                dialog.dismiss();
+
+                AlertDialog.Builder alerta = new AlertDialog.Builder(ActivityDetalhesPedido.this);
+                alerta.setTitle("Mensagem");
+                alerta.setMessage("Pedido cancelado");
                 alerta.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
                     @Override
