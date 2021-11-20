@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,8 +30,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DecimalFormat;
 
 public class ActivityDetalhesPedido extends AppCompatActivity {
-    public String statusText,total,observacaoUsuario,localEntrega,dataEntrega,nomeUser,tituloBolo,descricaoBolo,precoBolo,dataRealizacao,formaPagamento,textoBotao;
+    public String statusText,total,observacaoUsuario,localEntrega,dataEntrega,nomeUser,tituloBolo,descricaoBolo,precoBolo,dataRealizacao,formaPagamento,textoBotao,observacaoConfeiteiro;
     public TextView txtStatusPedido,txtFormaPagamento,txtTotal,txtObs,txtLocalEntrega,txtDataEntrega,txtNomeUser,txtTituloBoloPedido,txtDescricao,txtPreco,txtDataRealizacao;
+    public EditText txtObservacaoConfeiteiro;
     public String idUser,idBolo;
     public ImageView imgBoloPedido;
     public Bolo boloObj;
@@ -61,7 +63,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
         txtDataRealizacao = findViewById(R.id.txtDataRealizacao);
         btnAlterarStatus = findViewById(R.id.btnAlterarStatus);
         btnRecusarPedido = findViewById(R.id.btnRecusarPedido);
-
+        txtObservacaoConfeiteiro = findViewById(R.id.txtObservacaoConfeiteiro);
 
         Bundle dados = getIntent().getExtras();
 
@@ -85,7 +87,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                 dataEntrega = pedido.getDataEntrega();
                 dataRealizacao = pedido.getDataRealizacao();
                 formaPagamento = pedido.getMetodoPagamento();
-
+                observacaoConfeiteiro = pedido.getObservacaoConfeiteiro();
                 switch (status){
                     case 0:
                         statusText = "Novo";
@@ -123,6 +125,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                 txtDataRealizacao.setText (dataRealizacao);
                 txtFormaPagamento.setText(formaPagamento);
                 btnAlterarStatus.setText(textoBotao);
+                txtObservacaoConfeiteiro.setText(observacaoConfeiteiro);
                 informacoesUsuario();
                 InformacoesBolo();
             }
@@ -197,12 +200,12 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                 switch (status){
                     case 0:
                         pedido.setStatus(1);
-
                         break;
                     case 1:
                         pedido.setStatus(2);
                         break;
                 }
+                pedido.setObservacaoConfeiteiro(txtObservacaoConfeiteiro.getText().toString());
                 firebase.setValue(pedido);
                 dialog.dismiss();
 
@@ -241,6 +244,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 pedido.setStatus(3);
+                pedido.setObservacaoConfeiteiro(txtObservacaoConfeiteiro.getText().toString());
 
                 firebase.setValue(pedido);
                 dialog.dismiss();
