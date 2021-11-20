@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -34,7 +35,7 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
     private List<Pedido> pedidos;
     private Context context;
     private DatabaseReference firebaseref = ConfiguracaoFirebase.getFirebaseDataBase();
-
+    private String statusText;
 
     public PedidosAdminAdapter(List<Pedido> listaPedidos, Context c) {
         this.pedidos = listaPedidos;
@@ -96,6 +97,26 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
             intent.putExtra("idPedido", pedido.getId());
             context.startActivity(intent);
         });
+        switch (pedido.getStatus()){
+            case 0:
+                statusText = "Novo";
+                holder.statusPedido.setBackground(ContextCompat.getDrawable(context, R.drawable.status_novo));
+                break;
+            case 1:
+                statusText = "Em andamento";
+                holder.statusPedido.setBackground(ContextCompat.getDrawable(context, R.drawable.status_em_andamento));
+
+                break;
+            case 2:
+                statusText = "Finalizado";
+                holder.statusPedido.setBackground(ContextCompat.getDrawable(context, R.drawable.status_finalizado));
+                break;
+            case 3:
+                statusText = "Cancelado";
+                holder.statusPedido.setBackground(ContextCompat.getDrawable(context, R.drawable.status_cancelado));
+                break;
+        }
+        holder.statusPedido.setText(statusText);
         holder.horaEntrega.setText(pedido.getDataEntrega());
         holder.localEntrega.setText(pedido.getLocalEntrega());
 
@@ -108,10 +129,11 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
 
     public class ViewHolderPedidosAdmin extends RecyclerView.ViewHolder{
         ImageView foto;
-        TextView nomeBolo, nomeCliente, localEntrega, horaEntrega;
+        TextView nomeBolo, nomeCliente, localEntrega, horaEntrega,statusPedido;
         LinearLayout parentLayout;
         public ViewHolderPedidosAdmin(@NonNull View itemView) {
             super(itemView);
+            statusPedido = itemView.findViewById(R.id.textViewStatusPedidoAdmin);
             foto = itemView.findViewById(R.id.imageViewBoloPedidosAdmin);
             nomeBolo = itemView.findViewById(R.id.textViewNomeBoloPedidosAdmin);
             nomeCliente = itemView.findViewById(R.id.textViewNomeClientePedidosAdmin);
