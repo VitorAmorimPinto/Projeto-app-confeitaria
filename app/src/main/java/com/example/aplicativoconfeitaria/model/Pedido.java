@@ -3,7 +3,7 @@ package com.example.aplicativoconfeitaria.model;
 import java.util.Date;
 
 public class Pedido {
-    private String id, idUsuario, idBolo, localEntrega, observacao, dataEntrega, dataRealizacao, metodoPagamento;
+    private String id, idUsuario, idBolo, localEntrega, observacao, dataEntrega, dataRealizacao, metodoPagamento,observacaoConfeiteiro;
     private Integer status;
     private Double valorTotal;
 
@@ -88,5 +88,13 @@ public class Pedido {
 
     public void setMetodoPagamento(String metodoPagamento) {
         this.metodoPagamento = metodoPagamento;
+    }
+
+    public String getObservacaoConfeiteiro() {
+        return observacaoConfeiteiro;
+    }
+
+    public void setObservacaoConfeiteiro(String observacaoConfeiteiro) {
+        this.observacaoConfeiteiro = observacaoConfeiteiro;
     }
 }

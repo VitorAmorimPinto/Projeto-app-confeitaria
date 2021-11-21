@@ -10,6 +10,10 @@
     <color name="darker_grey">#AAAAAA</color>
     <color name="btn_login">#E35B5B</color>
     <color name="btn_cad">#FFCECE</color>
+    <color name="status_novo">#307ccf</color>
+    <color name="status_em_andamento">#ead325</color>
+    <color name="status_finalizado">#0E8813</color>
+    <color name="status_cancelado">#e00b0b</color>
 
 
 </resources>
