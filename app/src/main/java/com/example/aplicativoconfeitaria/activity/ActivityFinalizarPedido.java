@@ -123,6 +123,7 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
             pedido.setDataEntrega(dataHoraEntregaPedido);
             pedido.setLocalEntrega(localEntregaPedido);
             pedido.setObservacao(observacaoPedido);
+            pedido.setObservacaoConfeiteiro("");
             pedido.setStatus(0);
 
             pedidosReference.push().setValue(pedido);

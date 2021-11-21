@@ -56,15 +56,19 @@
 
                 <TextView
 
-                    android:layout_width="match_parent"
+                    android:id="@+id/txtStatusPedidoUser"
+                    android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
-                    android:textSize="16sp"
-                    />
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                     />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -80,6 +84,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/txtFormaPagamentoUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -102,13 +107,14 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/txtDataRealizacaoUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="5dp"/>
+                    android:layout_marginBottom="5dp" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -124,6 +130,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/txtTotalUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -146,6 +153,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/txtObsUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -165,7 +173,9 @@
                     android:textColor="#252525"
                     android:textSize="16sp"
                     android:textStyle="bold" />
+
                 <TextView
+                    android:id="@+id/txtObsConfeiteiroUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -211,7 +221,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtLocalEntrega"
+                    android:id="@+id/txtLocalEntregaUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -234,7 +244,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtDataEntrega"
+                    android:id="@+id/txtDataEntregaUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -282,7 +292,7 @@
                     android:padding="5dp">
 
                     <ImageView
-                        android:id="@+id/imgBoloPedido"
+                        android:id="@+id/imgBoloPedidoUser"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         app:srcCompat="@drawable/boloqq" />
@@ -295,7 +305,7 @@
                         android:padding="5dp">
 
                         <TextView
-                            android:id="@+id/txtTituloBoloPedido"
+                            android:id="@+id/txtTituloBoloPedidoUser"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
@@ -304,7 +314,7 @@
                             android:textColor="@color/black" />
 
                         <TextView
-                            android:id="@+id/txtDescricao"
+                            android:id="@+id/txtDescricaoUser"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
@@ -312,7 +322,7 @@
                             android:text="Descição" />
 
                         <TextView
-                            android:id="@+id/txtPreco"
+                            android:id="@+id/txtPrecoUser"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
@@ -329,9 +339,11 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btnCancelarPedidoUser"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
+                    android:onClick="cancelarPedido"
                     android:text="Cancelar pedido"
                     app:backgroundTint="#8E8E8E" />
             </LinearLayout>

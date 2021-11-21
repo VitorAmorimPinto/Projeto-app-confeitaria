@@ -98,7 +98,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                         statusText = "Em andamento";
                         textoBotao = "Finalizar Pedido";
                         txtStatusPedido.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.status_em_andamento));
-
+                        btnRecusarPedido.setText("Cancelar Pedido");
                         break;
                     case 2:
                         statusText = "Finalizado";
