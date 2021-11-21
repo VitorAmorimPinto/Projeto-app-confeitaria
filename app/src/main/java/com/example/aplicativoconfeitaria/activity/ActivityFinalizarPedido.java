@@ -43,7 +43,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class ActivityFinalizarPedido extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class ActivityFinalizarPedido extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private TextView tvNomeBolo, tvDescricaoBolo, tvPrecoBolo, tvDataEntrega, tvLocalDeEntrega;
     private EditText edtObservacoes;
@@ -96,11 +96,12 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
         bolo = (Bolo) dados.getSerializable("objeto");
         preencheDados(bolo);
         recuperarEnderecos();
+
         radioButton();
     }
 
-    public void cadastraPedido(View view){
-        if(!tvDataEntrega.getText().toString().isEmpty()) {
+    public void cadastraPedido(View view) {
+        if (!tvDataEntrega.getText().toString().isEmpty()) {
 
             Date dataPedido = Calendar.getInstance().getTime();
             dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
@@ -116,7 +117,7 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
 
             pedido.setIdBolo(idBoloPedido);
             pedido.setIdUsuario(idUsuario);
-            pedido.setValorTotal(Double.parseDouble(valorTotalPedido.replace(",",".")));
+            pedido.setValorTotal(Double.parseDouble(valorTotalPedido.replace(",", ".")));
             pedido.setMetodoPagamento(metodoPagamento);
             pedido.setDataRealizacao(dataPedidoString);
             pedido.setDataEntrega(dataHoraEntregaPedido);
@@ -139,7 +140,7 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
 
             dialog.create();
             dialog.show();
-        }else {
+        } else {
             Toast.makeText(ActivityFinalizarPedido.this,
                     "Escolha a data de entrega para prosseguir",
                     Toast.LENGTH_SHORT).show();
@@ -147,7 +148,7 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
 
     }
 
-    public void preencheDados(Bolo boloParametro){
+    public void preencheDados(Bolo boloParametro) {
         DecimalFormat decimalFormat = new DecimalFormat("0.##");
 
         nomeBolo = boloParametro.getNome();
@@ -160,16 +161,16 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
         tvDescricaoBolo.setText(descricaoBolo);
         tvPrecoBolo.setText(precoBolo);
 
-        if(url != null){
+        if (url != null) {
             Glide.with(ActivityFinalizarPedido.this)
                     .load(url)
                     .into(ivImagemBolo);
-        }else{
+        } else {
             ivImagemBolo.setImageResource(R.drawable.imagem_default);
         }
     }
 
-    public void escolherData(View view){
+    public void escolherData(View view) {
         Calendar cal = Calendar.getInstance();
         int dia = cal.get(Calendar.DAY_OF_MONTH);
         int mes = cal.get(Calendar.MONTH);
@@ -185,7 +186,7 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
         dialog.show();
     }
 
-    DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener(){
+    DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
 
         @Override
         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
@@ -196,13 +197,13 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
         }
     };
 
-    public void goToDetalhesItem(View view){
-        Intent i = new Intent(this, MainActivity.class);
+    public void goToDetalhesItem(View view) {
+        Intent i = new Intent(this, ActivityPrincipal.class);
         startActivity(i);
     }
 
-    public void goToPrincipal(){
-        Intent i = new Intent(this, MainActivity.class);
+    public void goToPrincipal() {
+        Intent i = new Intent(this, ActivityPrincipal.class);
         startActivity(i);
     }
 
@@ -235,9 +236,9 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot data : snapshot.getChildren()) {
-                        Confeitaria dados = data.getValue(Confeitaria.class);
-                        enderecoEntregaConfeitaria = dados.getEndereco();
-                        tvLocalDeEntrega.setText(enderecoEntregaConfeitaria);
+                    Confeitaria dados = data.getValue(Confeitaria.class);
+                    enderecoEntregaConfeitaria = dados.getEndereco();
+                    tvLocalDeEntrega.setText(enderecoEntregaConfeitaria);
                 }
 
             }
@@ -249,13 +250,13 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
         });
     }
 
-    public void radioButton(){
+    public void radioButton() {
         rgOpcaoEntrega.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                if(i == R.id.radioButtonRetirarConfeitaria){
+                if (i == R.id.radioButtonRetirarConfeitaria) {
                     tvLocalDeEntrega.setText(enderecoEntregaConfeitaria);
-                }else if (i == R.id.radioButtonReceberEmCasa){
+                } else if (i == R.id.radioButtonReceberEmCasa) {
                     tvLocalDeEntrega.setText(enderecoEntregaUsuario);
                 }
             }
@@ -264,7 +265,7 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        switch(adapterView.getId()){
+        switch (adapterView.getId()) {
             case R.id.spinnerHorarioEntregaFinalizarPedidio:
                 String horario = adapterView.getItemAtPosition(i).toString();
                 horarioEntrega = horario;

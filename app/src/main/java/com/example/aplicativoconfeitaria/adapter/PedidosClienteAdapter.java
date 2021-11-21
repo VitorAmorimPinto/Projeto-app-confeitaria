@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -30,6 +31,7 @@ public class PedidosClienteAdapter extends RecyclerView.Adapter<PedidosClienteAd
     private List<Pedido> pedidos;
     private Context context;
     private DatabaseReference firebaseref = ConfiguracaoFirebase.getFirebaseDataBase();
+    private String statusText;
 
 
     public PedidosClienteAdapter(List<Pedido> listaPedidos, Context c) {
@@ -69,6 +71,27 @@ public class PedidosClienteAdapter extends RecyclerView.Adapter<PedidosClienteAd
             }
         });
 
+        switch (pedido.getStatus()){
+            case 0:
+                statusText = "Novo";
+                holder.statusPedido.setBackground(ContextCompat.getDrawable(context, R.drawable.status_novo));
+                break;
+            case 1:
+                statusText = "Em andamento";
+                holder.statusPedido.setBackground(ContextCompat.getDrawable(context, R.drawable.status_em_andamento));
+
+                break;
+            case 2:
+                statusText = "Finalizado";
+                holder.statusPedido.setBackground(ContextCompat.getDrawable(context, R.drawable.status_finalizado));
+                break;
+            case 3:
+                statusText = "Cancelado";
+                holder.statusPedido.setBackground(ContextCompat.getDrawable(context, R.drawable.status_cancelado));
+                break;
+        }
+        holder.statusPedido.setText(statusText);
+
         //Define os demais holders
         holder.horaEntrega.setText(pedido.getDataEntrega());
         holder.horaRealizacao.setText(pedido.getDataRealizacao());
@@ -82,7 +105,7 @@ public class PedidosClienteAdapter extends RecyclerView.Adapter<PedidosClienteAd
 
     public class ViewHolderPedidosCliente extends RecyclerView.ViewHolder{
         ImageView foto;
-        TextView nomeBolo, horaEntrega, horaRealizacao;
+        TextView nomeBolo, horaEntrega, horaRealizacao, statusPedido;
         LinearLayout parentLayout;
         public ViewHolderPedidosCliente(@NonNull View itemView) {
             super(itemView);
@@ -91,6 +114,7 @@ public class PedidosClienteAdapter extends RecyclerView.Adapter<PedidosClienteAd
             horaRealizacao = itemView.findViewById(R.id.textViewDataRealizacaoPedidosCliente);
             horaEntrega = itemView.findViewById(R.id.textViewEntregaPedidosCliente);
             parentLayout = itemView.findViewById(R.id.linearLayoutPedidosCliente);
+            statusPedido = itemView.findViewById(R.id.textViewStatusPedidoCliente);
         }
     }
 }

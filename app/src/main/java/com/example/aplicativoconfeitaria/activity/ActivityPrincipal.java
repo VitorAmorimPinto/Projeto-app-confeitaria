@@ -79,11 +79,16 @@ public class ActivityPrincipal extends AppCompatActivity {
                             selectedFragment = new BolosFragment();
                             break;
                         case R.id.ic_pedidos:
-                            if(ehAdmin){
-                                selectedFragment = new fragment_pedidos_admin();
+                            logado = UsuarioLogado();
+                            if(logado){
+                                if(ehAdmin){
+                                    selectedFragment = new fragment_pedidos_admin();
 
+                                }else{
+                                    selectedFragment = new FragmentMeusPedidos();
+                                }
                             }else{
-                                selectedFragment = new FragmentMeusPedidos();
+                                selectedFragment = new LoginFragment();
                             }
                             break;
                         case R.id.ic_perfil:
