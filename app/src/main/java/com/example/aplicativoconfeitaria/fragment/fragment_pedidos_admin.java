@@ -54,7 +54,6 @@ public class fragment_pedidos_admin extends Fragment {
         recyclerView.setLayoutManager( layoutManager );
         recyclerView.setHasFixedSize( true );
         recyclerView.setAdapter( adapter );
-        recuperarPedidos();
         return view;
     }
 
@@ -65,11 +64,19 @@ public class fragment_pedidos_admin extends Fragment {
         pedidosRef.removeEventListener( valueEventListenerPedidos );
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        listaPedidos.clear();
+        recuperarPedidos();
+    }
+
     public void recuperarPedidos(){
 
         valueEventListenerPedidos = pedidosFiltro.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaPedidos.clear();
 
                 for ( DataSnapshot dados: dataSnapshot.getChildren() ){
 
