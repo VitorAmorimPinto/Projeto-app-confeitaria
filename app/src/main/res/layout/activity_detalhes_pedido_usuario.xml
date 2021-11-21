@@ -55,7 +55,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtStatusPedido"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -80,14 +80,12 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtFormaPagamento"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:text="Dinheiro"
                     android:textSize="16sp" />
 
                 <TextView
@@ -104,7 +102,6 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtDataRealizacao"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -114,7 +111,6 @@
                     android:layout_marginBottom="5dp"/>
 
                 <TextView
-                    android:id="@+id/textView12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -128,7 +124,6 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtTotal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -138,7 +133,6 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/textView14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -146,13 +140,32 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Observação:"
+                    android:text="Observação do Usuário:"
                     android:textColor="#252525"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtObs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Observação do Confeiteiro"
+                    android:textColor="#252525"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -309,6 +322,18 @@
                     </LinearLayout>
                 </LinearLayout>
 
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:text="Cancelar pedido"
+                    app:backgroundTint="#8E8E8E" />
             </LinearLayout>
         </LinearLayout>
 
