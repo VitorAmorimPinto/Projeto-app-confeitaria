@@ -20,6 +20,7 @@ import com.example.aplicativoconfeitaria.model.Pedido;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class fragment_pedidos_admin extends Fragment {
     private ArrayList<Pedido> listaPedidos = new ArrayList<>();
     private DatabaseReference pedidosRef;
     private ValueEventListener valueEventListenerPedidos;
-
+    private Query pedidosFiltro;
 
 
     public fragment_pedidos_admin() {
@@ -46,14 +47,13 @@ public class fragment_pedidos_admin extends Fragment {
 
         recyclerView = view.findViewById(R.id.recyclerViewListaPedidosAdmin);
         pedidosRef = ConfiguracaoFirebase.getFirebaseDataBase().child("pedidos");
-
+        pedidosFiltro = pedidosRef.orderByChild("status").startAt(0);
         adapter = new PedidosAdminAdapter( listaPedidos, getActivity() );
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( getActivity() );
         recyclerView.setLayoutManager( layoutManager );
         recyclerView.setHasFixedSize( true );
         recyclerView.setAdapter( adapter );
-        recuperarPedidos();
         return view;
     }
 
@@ -64,15 +64,24 @@ public class fragment_pedidos_admin extends Fragment {
         pedidosRef.removeEventListener( valueEventListenerPedidos );
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        listaPedidos.clear();
+        recuperarPedidos();
+    }
+
     public void recuperarPedidos(){
 
-        valueEventListenerPedidos = pedidosRef.addValueEventListener(new ValueEventListener() {
+        valueEventListenerPedidos = pedidosFiltro.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaPedidos.clear();
 
                 for ( DataSnapshot dados: dataSnapshot.getChildren() ){
 
                     Pedido pedido = dados.getValue( Pedido.class );
+                    pedido.setId(dados.getKey());
                     listaPedidos.add ( pedido );
 
                 }

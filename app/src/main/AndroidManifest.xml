@@ -4,13 +4,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
-    <uses-feature android:name="android.hardware.camera"
-                  android:required="true"
-        />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -19,18 +18,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AplicativoConfeitaria">
-
-
-        <activity android:name=".activity.EnderecoActivity"></activity>
+        <activity android:name=".activity.ActivityDetalhesPedidoUsuario"></activity>
+        <activity android:name=".activity.ActivityDetalhesPedido" />
+        <activity android:name=".activity.EnderecoActivity" />
         <activity android:name=".activity.MinhaContaActivity" />
-
-
-        <activity android:name=".activity.ActivityFinalizarPedido"/>
-
+        <activity android:name=".activity.ActivityFinalizarPedido" />
         <activity
             android:name=".activity.CadastroBoloActivity"
             android:exported="true" />
-
         <activity android:name=".activity.CadastroUsuarioActivity" />
         <activity android:name=".activity.activity_perfil" />
         <activity android:name=".activity.activity_cadastro" />
