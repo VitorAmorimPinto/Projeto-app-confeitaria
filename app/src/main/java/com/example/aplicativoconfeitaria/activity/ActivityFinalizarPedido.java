@@ -111,7 +111,6 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
             String observacaoPedido = edtObservacoes.getText().toString();
             String dataHoraEntregaPedido = tvDataEntrega.getText().toString() + " " + horarioEntrega;
 
-            //Verifica se o nome do bolo já existe no banco
             DatabaseReference pedidosReference = dbReference.child("pedidos");
             pedido = new Pedido();
 
