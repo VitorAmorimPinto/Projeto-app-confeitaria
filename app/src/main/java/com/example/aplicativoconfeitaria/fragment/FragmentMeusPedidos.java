@@ -88,6 +88,8 @@ public class FragmentMeusPedidos extends Fragment {
                 for ( DataSnapshot dados: dataSnapshot.getChildren() ){
 
                     Pedido pedido = dados.getValue( Pedido.class );
+                    pedido.setId(dados.getKey());
+
                     if(pedido.getIdUsuario().equals(idUsuario)){
                         listaPedidos.add(pedido);
                     }

@@ -1,6 +1,7 @@
 package com.example.aplicativoconfeitaria.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.aplicativoconfeitaria.R;
+import com.example.aplicativoconfeitaria.activity.ActivityDetalhesPedido;
+import com.example.aplicativoconfeitaria.activity.ActivityDetalhesPedidoUsuario;
 import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
 import com.example.aplicativoconfeitaria.model.Bolo;
 import com.example.aplicativoconfeitaria.model.Pedido;
@@ -93,6 +96,11 @@ public class PedidosClienteAdapter extends RecyclerView.Adapter<PedidosClienteAd
         holder.statusPedido.setText(statusText);
 
         //Define os demais holders
+        holder.parentLayout.setOnClickListener((view) -> {
+            Intent intent = new Intent(context, ActivityDetalhesPedidoUsuario.class);
+            intent.putExtra("idPedido", pedido.getId());
+            context.startActivity(intent);
+        });
         holder.horaEntrega.setText(pedido.getDataEntrega());
         holder.horaRealizacao.setText(pedido.getDataRealizacao());
 

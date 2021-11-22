@@ -351,11 +351,14 @@
                     android:orientation="horizontal"
                     android:padding="5dp">
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/imgBoloPedido"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        app:srcCompat="@drawable/boloqq" />
+                        android:src="@drawable/boloqq"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="@color/btn_cad"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
