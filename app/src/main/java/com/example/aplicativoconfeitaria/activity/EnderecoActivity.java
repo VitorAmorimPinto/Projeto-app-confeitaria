@@ -20,6 +20,8 @@ import com.example.aplicativoconfeitaria.R;
 import com.example.aplicativoconfeitaria.api.CEPService;
 import com.example.aplicativoconfeitaria.auxiliar.Base64Custom;
 import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
+import com.example.aplicativoconfeitaria.model.Bolo;
+import com.example.aplicativoconfeitaria.model.Confeitaria;
 import com.example.aplicativoconfeitaria.model.Endereco;
 import com.example.aplicativoconfeitaria.model.Usuario;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,9 +42,10 @@ public class EnderecoActivity extends AppCompatActivity {
     Button button3;
     EditText edtCep,edtRua,edtBairro,edtCidade,edtNumero,edtComplemento;
     private FirebaseAuth autenticacao;
-    private String idUsuario;
+    private String idUsuario,idPesquisa;
     Endereco endereco;
-
+    private Boolean ehAdmin = false;
+    Confeitaria confeitaria;
     private Retrofit retrofit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +95,7 @@ public class EnderecoActivity extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot data : snapshot.getChildren()) {
                         String t = data.getKey();
-                        if (t.equals(idUsuario)) {
+                        if (t.equals(idPesquisa)) {
                             //do ur stuff
                             Endereco dados = data.getValue(Endereco.class);
                             edtCep.setText(dados.getCep());
@@ -135,9 +138,61 @@ public class EnderecoActivity extends AppCompatActivity {
             }
         });
     }
-    public void pegarUsuario() {
+    public void pegarUsuario(){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-         idUsuario = Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail());
+        idUsuario = Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail());
+        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("usuarios").child(idUsuario);
+
+        firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Usuario dadosUsuario = snapshot.getValue(Usuario.class);
+                Integer nivel;
+                nivel = dadosUsuario.getNivel();
+                if (nivel == 10){
+                    ehAdmin = true;
+                    buscarIdConfeitaria();
+                }else{
+                    idPesquisa = idUsuario;
+                    recuperarEndereco();
+
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void buscarIdConfeitaria(){
+
+        DatabaseReference   firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("confeitaria");
+
+        firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    confeitaria = data.getValue(Confeitaria.class);
+                    idPesquisa = data.getKey();
+
+                    if(idPesquisa != null){
+                        recuperarEndereco();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
 
     }
     public void cadEndereco(){
@@ -155,9 +210,13 @@ public class EnderecoActivity extends AppCompatActivity {
             endereco.setBairro(bairro);
             endereco.setLocalidade(cidade);
             endereco.setCep(cep);
-            endereco.setIdUsuario(idUsuario);
+            endereco.setIdUsuario(idPesquisa);
             endereco.setComplemento(complemento);
             endereco.setNumero(numero);
+            if(ehAdmin){
+            String enderecoConfeitaria = logradouro + ", nº " + numero + " / " + bairro + ", " +cidade;
+            salvarEnderecoConfeitaria(enderecoConfeitaria);
+            }
            result = endereco.salvarEndereco();
            if (result){
                mensagem = "Endereço salvo com sucesso";
@@ -182,6 +241,12 @@ public class EnderecoActivity extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
         }
     }
+    public void salvarEnderecoConfeitaria(String endereco){
+        DatabaseReference   firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("confeitaria").child(idPesquisa);
+        confeitaria.setEndereco(endereco);
+        firebase.setValue(confeitaria);
+
+    }
     public void verificarUsuarioLogado(){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
@@ -201,7 +266,6 @@ public class EnderecoActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         verificarUsuarioLogado();
-        recuperarEndereco();
 
     }
 }
