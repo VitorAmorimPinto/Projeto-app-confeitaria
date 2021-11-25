@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.example.aplicativoconfeitaria.R;
 import com.example.aplicativoconfeitaria.activity.ActivityPrincipal;
 import com.example.aplicativoconfeitaria.activity.CadastroBoloActivity;
-import com.example.aplicativoconfeitaria.activity.EnderecoActivity;
+import com.example.aplicativoconfeitaria.activity.NovoEnderecoActivity;
 import com.example.aplicativoconfeitaria.activity.activity_login;
 import com.example.aplicativoconfeitaria.adapter.MinhaContaAdapter;
 import com.example.aplicativoconfeitaria.auxiliar.Base64Custom;
@@ -154,7 +154,7 @@ public class FragmentPerfil extends Fragment {
 //                startActivity(new Intent(this, activity_login.class));
                   break;
               case 1 :
-                  startActivity(new Intent(this.context, EnderecoActivity.class));
+                  startActivity(new Intent(this.context, NovoEnderecoActivity.class));
                   break;
               case 2 :
                   startActivity(new Intent(this.context, CadastroBoloActivity.class));
@@ -178,7 +178,7 @@ public class FragmentPerfil extends Fragment {
 //                startActivity(new Intent(this, activity_login.class));
                   break;
               case 1 :
-                  startActivity(new Intent(this.context, EnderecoActivity.class));
+                  startActivity(new Intent(this.context, NovoEnderecoActivity.class));
                   break;
               case 2 :
                   this.deslogarUsuario();

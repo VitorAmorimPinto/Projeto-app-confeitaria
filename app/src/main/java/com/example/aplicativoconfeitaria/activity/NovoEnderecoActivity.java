@@ -9,18 +9,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aplicativoconfeitaria.R;
 import com.example.aplicativoconfeitaria.api.CEPService;
 import com.example.aplicativoconfeitaria.auxiliar.Base64Custom;
 import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
-import com.example.aplicativoconfeitaria.model.Bolo;
 import com.example.aplicativoconfeitaria.model.Confeitaria;
 import com.example.aplicativoconfeitaria.model.Endereco;
 import com.example.aplicativoconfeitaria.model.Usuario;
@@ -30,15 +27,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONObject;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class EnderecoActivity extends AppCompatActivity {
+public class NovoEnderecoActivity extends AppCompatActivity {
     Button button3;
     EditText edtCep,edtRua,edtBairro,edtCidade,edtNumero,edtComplemento;
     private FirebaseAuth autenticacao;
@@ -50,7 +45,7 @@ public class EnderecoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_endereco);
+        setContentView(R.layout.activity_novo_endereco);
         button3 = findViewById(R.id.button3);
         edtCep = findViewById((R.id.edtCep));
         edtRua = findViewById((R.id.edtRua));
@@ -84,34 +79,33 @@ public class EnderecoActivity extends AppCompatActivity {
                 cadEndereco();
             }
         });
-
     }
     private void recuperarEndereco(){
 
-            DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("enderecos");
+        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("enderecos");
 
-            firebase.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot data : snapshot.getChildren()) {
-                        String t = data.getKey();
-                        if (t.equals(idPesquisa)) {
-                            //do ur stuff
-                            Endereco dados = data.getValue(Endereco.class);
-                            edtCep.setText(dados.getCep());
-                            edtNumero.setText(dados.getNumero());
-                            edtComplemento.setText(dados.getComplemento());
-                            break;
-                        }
+        firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    String t = data.getKey();
+                    if (t.equals(idPesquisa)) {
+                        //do ur stuff
+                        Endereco dados = data.getValue(Endereco.class);
+                        edtCep.setText(dados.getCep());
+                        edtNumero.setText(dados.getNumero());
+                        edtComplemento.setText(dados.getComplemento());
+                        break;
                     }
-
                 }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+            }
 
-                }
-            });
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
 
@@ -214,16 +208,16 @@ public class EnderecoActivity extends AppCompatActivity {
             endereco.setComplemento(complemento);
             endereco.setNumero(numero);
             if(ehAdmin){
-            String enderecoConfeitaria = logradouro + ", nº " + numero + " / " + bairro + ", " +cidade;
-            salvarEnderecoConfeitaria(enderecoConfeitaria);
+                String enderecoConfeitaria = logradouro + ", nº " + numero + " / " + bairro + ", " +cidade;
+                salvarEnderecoConfeitaria(enderecoConfeitaria);
             }
-           result = endereco.salvarEndereco();
-           if (result){
-               mensagem = "Endereço salvo com sucesso";
-           }else{
-               mensagem = "Erro ao salvar endereço";
-           }
-            AlertDialog.Builder alert = new AlertDialog.Builder(EnderecoActivity.this);
+            result = endereco.salvarEndereco();
+            if (result){
+                mensagem = "Endereço salvo com sucesso";
+            }else{
+                mensagem = "Erro ao salvar endereço";
+            }
+            AlertDialog.Builder alert = new AlertDialog.Builder(NovoEnderecoActivity.this);
             alert.setTitle("Mensagem");
             alert.setMessage(mensagem);
             alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -236,7 +230,7 @@ public class EnderecoActivity extends AppCompatActivity {
             });
             alert.show();
         }else{
-            Toast.makeText(EnderecoActivity.this,
+            Toast.makeText(NovoEnderecoActivity.this,
                     "Preencha todos os campos corretamente!",
                     Toast.LENGTH_SHORT).show();
         }
