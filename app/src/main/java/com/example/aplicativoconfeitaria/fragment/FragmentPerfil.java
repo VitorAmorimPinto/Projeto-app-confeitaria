@@ -43,7 +43,7 @@ public class FragmentPerfil extends Fragment {
     private FirebaseAuth autenticacao;
     private Usuario usuario;
     public String nome,email;
-    public TextView textViewNome, textViewEmail;
+    public TextView txtNomeUsuario, txtEmailUsuario;
     private Context context;
     private Boolean ehAdmin = false;
 
@@ -92,6 +92,8 @@ public class FragmentPerfil extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_perfil, container, false);
+        txtNomeUsuario =  v.findViewById(R.id.txtNomeUsuario);
+        txtEmailUsuario =  v.findViewById(R.id.txtEmailUsuario);
         listOpcoes = v.findViewById(R.id.listOp);
         verificarUsuarioLogado();
 
@@ -158,10 +160,6 @@ public class FragmentPerfil extends Fragment {
 
                   break;
               case 3 :
-//                  this.deslogarUsuario();
-
-                  break;
-              case 4 :
                   this.deslogarUsuario();
 
                   break;
@@ -241,6 +239,8 @@ public class FragmentPerfil extends Fragment {
                 if (nivel == 10){
                     ehAdmin = true;
                 }
+                txtNomeUsuario.setText(nome);
+                txtEmailUsuario.setText(email);
                 preecherAdapter();
 
             }
