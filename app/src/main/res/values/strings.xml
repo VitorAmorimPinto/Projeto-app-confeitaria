@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Aplicativo Confeitaria</string>
+    <string name="app_name">Beijo Doce</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -57,6 +57,14 @@
         <item>17:00</item>
         <item>17:30</item>
         <item>18:00</item>
+    </string-array>
+
+    <string-array name="pagamento">
+        <item>Dinheiro</item>
+        <item>Cartão - Débito</item>
+        <item>Cartão - Crédito</item>
+        <item>Pix</item>
+        <item>Picpay</item>
     </string-array>
 
 </resources>

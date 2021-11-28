@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.example.aplicativoconfeitaria.R;
 import com.example.aplicativoconfeitaria.activity.ActivityPrincipal;
 import com.example.aplicativoconfeitaria.activity.CadastroBoloActivity;
-import com.example.aplicativoconfeitaria.activity.EnderecoActivity;
+import com.example.aplicativoconfeitaria.activity.NovoEnderecoActivity;
 import com.example.aplicativoconfeitaria.activity.activity_login;
 import com.example.aplicativoconfeitaria.adapter.MinhaContaAdapter;
 import com.example.aplicativoconfeitaria.auxiliar.Base64Custom;
@@ -43,7 +43,7 @@ public class FragmentPerfil extends Fragment {
     private FirebaseAuth autenticacao;
     private Usuario usuario;
     public String nome,email;
-    public TextView textViewNome, textViewEmail;
+    public TextView txtNomeUsuario, txtEmailUsuario;
     private Context context;
     private Boolean ehAdmin = false;
 
@@ -92,6 +92,8 @@ public class FragmentPerfil extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_perfil, container, false);
+        txtNomeUsuario =  v.findViewById(R.id.txtNomeUsuario);
+        txtEmailUsuario =  v.findViewById(R.id.txtEmailUsuario);
         listOpcoes = v.findViewById(R.id.listOp);
         verificarUsuarioLogado();
 
@@ -107,13 +109,10 @@ public class FragmentPerfil extends Fragment {
                     "Altere informações da confeitaria", R.drawable.ic_baseline_person_24);
             itens.add(i);
             i = new ItensMenu("Endereço da Confeitaria",
-                    "Altere suas informações de localidade", R.drawable.ic_baseline_location_on_24);
+                    "Altere suas informações de localidade da Confeitaria", R.drawable.ic_baseline_location_on_24);
             itens.add(i);
             i = new ItensMenu("Cadastro de bolos",
                     "Cadastre seus bolos", R.drawable.ic_baseline_cake_24);
-            itens.add(i);
-            i = new ItensMenu("Edição de bolos",
-                    "Edite seus bolos", R.drawable.ic_baseline_edit_24);
             itens.add(i);
         }else{
             i = new ItensMenu("Dados pessoais",
@@ -154,17 +153,13 @@ public class FragmentPerfil extends Fragment {
 //                startActivity(new Intent(this, activity_login.class));
                   break;
               case 1 :
-                  startActivity(new Intent(this.context, EnderecoActivity.class));
+                  startActivity(new Intent(this.context, NovoEnderecoActivity.class));
                   break;
               case 2 :
                   startActivity(new Intent(this.context, CadastroBoloActivity.class));
 
                   break;
               case 3 :
-//                  this.deslogarUsuario();
-
-                  break;
-              case 4 :
                   this.deslogarUsuario();
 
                   break;
@@ -178,7 +173,7 @@ public class FragmentPerfil extends Fragment {
 //                startActivity(new Intent(this, activity_login.class));
                   break;
               case 1 :
-                  startActivity(new Intent(this.context, EnderecoActivity.class));
+                  startActivity(new Intent(this.context, NovoEnderecoActivity.class));
                   break;
               case 2 :
                   this.deslogarUsuario();
@@ -244,6 +239,8 @@ public class FragmentPerfil extends Fragment {
                 if (nivel == 10){
                     ehAdmin = true;
                 }
+                txtNomeUsuario.setText(nome);
+                txtEmailUsuario.setText(email);
                 preecherAdapter();
 
             }

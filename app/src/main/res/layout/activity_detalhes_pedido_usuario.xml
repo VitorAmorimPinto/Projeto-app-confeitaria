@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FBFBFB"
-    tools:context=".activity.ActivityFinalizarPedido">
-
+    tools:context=".activity.ActivityDetalhesPedidoUsuario">
     <ScrollView
         android:layout_width="394dp"
         android:layout_height="709dp"
@@ -32,7 +30,6 @@
                 android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/textViewItemPedidoFinalizarPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -40,27 +37,11 @@
                     android:backgroundTint="#ffeaea"
                     android:gravity="center"
                     android:paddingLeft="5dp"
-                    android:text="Item do pedido"
+                    android:text="Informações do pedido"
                     android:textColor="#252525"
                     android:textSize="18sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imageViewFinalizarPedido"
-                        android:layout_width="wrap_content"
-                        android:layout_height="184dp"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="5dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/imagem_default" />
-                </LinearLayout>
-
                 <TextView
-                    android:id="@+id/textViewNomeBoloFinalizarPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -68,56 +49,143 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
+                    android:text="Status do pedido:"
                     android:textColor="#252525"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textViewDescricaoBoloFinalizarPedido"
-                    android:layout_width="match_parent"
+
+                    android:id="@+id/txtStatusPedidoUser"
+                    android:layout_width="95dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/textViewPrecoFinalizarPedido"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:textColor="@color/holo_green_light"
-                    android:textSize="16sp"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
                     android:textStyle="bold"
+                    android:gravity="center"
                      />
 
                 <TextView
-                    android:id="@+id/textViewMetodoPagamentoFinalizarPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:text="Método de pagamento:"
-                    android:textColor="#6F6F6F"
+                    android:layout_marginBottom="5dp"
+                    android:text="Forma de Pagamento:"
+                    android:textColor="#252525"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtFormaPagamentoUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:textSize="16sp" />
 
-                <Spinner
-                    android:id="@+id/spinnerMetodoPagamentoFinalizarPedidio"
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
-                    android:entries="@array/pagamento"
-                    android:spinnerMode="dropdown" />
+                    android:text="Data de Realização"
+                    android:textColor="#252525"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtDataRealizacaoUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Total:"
+                    android:textColor="#252525"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtTotalUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/holo_green_light"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:text="Observação do Usuário:"
+                    android:textColor="#252525"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtObsUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Observação do Confeiteiro"
+                    android:textColor="#252525"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtObsConfeiteiroUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -131,7 +199,6 @@
                 android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/textViewDetalhesEntregaFinalizarPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -143,122 +210,55 @@
                     android:textColor="#252525"
                     android:textSize="18sp" />
 
-                <RadioGroup
-                    android:id="@+id/radioGroupOpcaoEntrega"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp">
-
-                    <RadioButton
-                        android:id="@+id/radioButtonRetirarConfeitaria"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="Retirar na confeitaria"
-                        android:textSize="16sp"
-                        app:buttonTint="#E4696D" />
-
-                    <RadioButton
-                        android:id="@+id/radioButtonReceberEmCasa"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Receber em casa"
-                        android:textSize="16sp"
-                        android:visibility="gone"
-                        app:buttonTint="#E4696D" />
-                </RadioGroup>
-
                 <TextView
-                    android:id="@+id/textViewTituloLocalFinalizarPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:text="Local de entrega:"
-                    android:textColor="#6F6F6F"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/textViewLocalDeEntregaFinalizarPedido"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Rua tal, nº 5"
+                    android:layout_marginBottom="5dp"
+                    android:text="Local de Entrega:"
                     android:textColor="#252525"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textViewTituloDataFinalizarPedido"
+                    android:id="@+id/txtLocalEntregaUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
                     android:text="Data de entrega:"
-                    android:textColor="#6F6F6F"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/textViewDataEntregaFinalizarPedido"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:gravity="center"
                     android:textColor="#252525"
-                    android:textSize="16sp" />
-
-                <Button
-                    android:id="@+id/buttonEscolherDataFinalizarPedido"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:onClick="escolherData"
-                    android:text="Escolher Data"
-                    app:icon="@android:drawable/ic_menu_today"
-                    app:iconPadding="5dp"
-                    app:iconTint="@color/white" />
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/textViewHorarioEntregaFinalizarPedido"
+                    android:id="@+id/txtDataEntregaUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:text="Horário de entrega:"
-                    android:textColor="#6F6F6F"
-                    android:textSize="16sp" />
-
-                <Spinner
-                    android:id="@+id/spinnerHorarioEntregaFinalizarPedidio"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
-                    android:entries="@array/horarios"
-                    android:spinnerMode="dropdown" />
+                    android:gravity="start"
+                    android:textSize="16sp" />
 
             </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -267,7 +267,7 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="10dp"
                 android:background="#FFFFFF"
                 android:elevation="4dp"
                 android:orientation="vertical"
@@ -275,7 +275,6 @@
 
 
                 <TextView
-                    android:id="@+id/textViewObservacoesFinalizarPedido"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -283,64 +282,78 @@
                     android:backgroundTint="#ffeaea"
                     android:gravity="center"
                     android:paddingLeft="5dp"
-                    android:text="Observações"
+                    android:text="Item do Pedido"
                     android:textColor="#252525"
                     android:textSize="18sp" />
 
-                <EditText
-                    android:id="@+id/editTextTextMultiLineObservacoesFinalizarPedido"
+                <LinearLayout
+                    android:id="@+id/linearLayoutListaBolos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:ems="10"
-                    android:gravity="start|top"
-                    android:inputType="textMultiLine" />
-            </LinearLayout>
+                    android:onClick="goToItem"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="5dp"
-                android:background="#FFFFFF"
-                android:elevation="4dp"
-                android:orientation="vertical"
-                android:padding="5dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/buttonCancelarPedidoUsuario"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:onClick="goToDetalhesItem"
-                        android:text="Cancelar pedido"
-                        app:backgroundTint="#8E8E8E" />
-
-                    <Button
-                        android:id="@+id/buttonFinalizarPedidoUsuario"
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/imgBoloPedidoUser"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:src="@drawable/boloqq"
+                        app:civ_border_width="2dp"
+                        app:civ_border_color="@color/btn_cad"/>
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="5dp"
-                        android:onClick="cadastraPedido"
-                        android:text="Finalizar pedido"
-                        app:backgroundTint="#E4696D" />
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical"
+                        android:padding="5dp">
 
+                        <TextView
+                            android:id="@+id/txtTituloBoloPedidoUser"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Título"
+                            android:textColor="@color/black" />
+
+                        <TextView
+                            android:id="@+id/txtDescricaoUser"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:text="Descição" />
+
+                        <TextView
+                            android:id="@+id/txtPrecoUser"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:text="Preço"
+                            android:textColor="@color/holo_green_light"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
+                <Button
+                    android:id="@+id/btnCancelarPedidoUser"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:onClick="cancelarPedido"
+                    android:text="Cancelar pedido"
+                    app:backgroundTint="#8E8E8E" />
+            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>

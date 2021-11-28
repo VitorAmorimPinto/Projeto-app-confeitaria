@@ -2,6 +2,7 @@ package com.example.aplicativoconfeitaria.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
@@ -28,10 +29,11 @@ public class ActivityPrincipal extends AppCompatActivity {
     private FirebaseAuth autenticacao;
     private Boolean ehAdmin = false;
 
-    @Overridev
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_menu);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
@@ -79,11 +81,16 @@ public class ActivityPrincipal extends AppCompatActivity {
                             selectedFragment = new BolosFragment();
                             break;
                         case R.id.ic_pedidos:
-                            if(ehAdmin){
-                                selectedFragment = new fragment_pedidos_admin();
+                            logado = UsuarioLogado();
+                            if(logado){
+                                if(ehAdmin){
+                                    selectedFragment = new fragment_pedidos_admin();
 
+                                }else{
+                                    selectedFragment = new FragmentMeusPedidos();
+                                }
                             }else{
-                                selectedFragment = new FragmentMeusPedidos();
+                                selectedFragment = new LoginFragment();
                             }
                             break;
                         case R.id.ic_perfil:

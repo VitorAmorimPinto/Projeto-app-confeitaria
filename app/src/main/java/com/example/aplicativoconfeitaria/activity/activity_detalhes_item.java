@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.aplicativoconfeitaria.R;
 import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
 import com.example.aplicativoconfeitaria.model.Bolo;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +31,8 @@ public class activity_detalhes_item extends AppCompatActivity {
     public ImageView ivImagemBolo;
     private DatabaseReference firebaseref = ConfiguracaoFirebase.getFirebaseDataBase();
     public Bolo bolo;
+    public Button btnComprar;
+    private FirebaseAuth autenticacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,9 +44,14 @@ public class activity_detalhes_item extends AppCompatActivity {
         tvDescricaoBolo = findViewById(R.id.textViewDescricaoDetalheItem);
         tvIngedientesBolo = findViewById(R.id.textViewIngredientesDetalheItem);
         ivImagemBolo = findViewById(R.id.imageViewImagemDetalheItem);
+        btnComprar = findViewById(R.id.buttonComprarBoloDetalhesItem);
 
         Bundle dados = getIntent().getExtras();
         bolo = (Bolo) dados.getSerializable("objetoBolo");
+
+        if(!UsuarioLogado()){
+            btnComprar.setVisibility(View.GONE);
+        }
 
         recuperarBolo();
     }
@@ -75,5 +84,19 @@ public class activity_detalhes_item extends AppCompatActivity {
         Intent i = new Intent(this, ActivityFinalizarPedido.class);
         i.putExtra("objeto", bolo);
         startActivity(i);
+    }
+
+    public Boolean UsuarioLogado(){
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+
+        if( autenticacao.getCurrentUser() == null ){
+
+            return false;
+
+        }else{
+
+            return true;
+        }
+
     }
 }

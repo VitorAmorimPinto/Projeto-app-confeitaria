@@ -92,6 +92,8 @@ public class Bolo implements Serializable {
         this.preco = preco;
     }
 
+
+
     public String getNomePesquisa() { return nomePesquisa; }
     public void setNomePesquisa(String nomePesquisa) { this.nomePesquisa = nomePesquisa.toUpperCase(); }
 }
