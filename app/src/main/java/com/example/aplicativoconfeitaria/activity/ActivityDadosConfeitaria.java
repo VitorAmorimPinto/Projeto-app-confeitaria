@@ -1,9 +1,12 @@
 package com.example.aplicativoconfeitaria.activity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -21,6 +24,7 @@ public class ActivityDadosConfeitaria extends AppCompatActivity {
     TextView txtEnderecoConfeitaria;
     String nome,telefone,endereco;
     Confeitaria confeitaria;
+    String idConfeitaria;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,7 @@ public class ActivityDadosConfeitaria extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot data : snapshot.getChildren()) {
                     confeitaria = data.getValue(Confeitaria.class);
+                    idConfeitaria = data.getKey();
                     nome = confeitaria.getNome();
                     telefone = confeitaria.getTelefone();
                     endereco = confeitaria.getEndereco();
@@ -54,6 +59,37 @@ public class ActivityDadosConfeitaria extends AppCompatActivity {
 
             }
         });
+
+    }
+    public void atualizarDadosConfeitaria(View view){
+        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("confeitaria").child(idConfeitaria);
+        String nome = edtNomeConfeitaria.getText().toString();
+        String telefone = editTextTelefone.getText().toString();
+        String msg = "";
+        confeitaria.setNome(nome);
+        confeitaria.setTelefone(telefone);
+        try {
+            firebase.setValue(confeitaria);
+             msg = "Dados atualizados com sucesso";
+
+        }catch (Exception ex){
+            msg = "Erro ao atualizar";
+
+        }
+        new AlertDialog.Builder(this)
+                .setMessage(msg)
+                .setTitle("Mensagem")
+                .setPositiveButton("Ok", null)
+                .show();
+    }
+    public void goToEndereco(View view){
+        startActivity(new Intent(this, NovoEnderecoActivity.class));
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
     }
 }
