@@ -12,7 +12,7 @@ import com.google.firebase.database.Exclude;
 import com.google.firebase.database.ValueEventListener;
 
 public class Usuario {
-    private String idUsuario,nome,email,senha;
+    private String idUsuario,nome,email,senha,telefone;
     private Integer nivel;
 
     public Usuario() {
@@ -69,5 +69,13 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 }

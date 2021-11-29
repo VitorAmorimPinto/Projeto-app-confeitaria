@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.aplicativoconfeitaria.R;
 import com.example.aplicativoconfeitaria.activity.ActivityDadosConfeitaria;
+import com.example.aplicativoconfeitaria.activity.ActivityDadosUsuario;
 import com.example.aplicativoconfeitaria.activity.ActivityPrincipal;
 import com.example.aplicativoconfeitaria.activity.CadastroBoloActivity;
 import com.example.aplicativoconfeitaria.activity.NovoEnderecoActivity;
@@ -171,7 +172,7 @@ public class FragmentPerfil extends Fragment {
       }else{
           switch (i){
               case 0 :
-//                startActivity(new Intent(this, activity_login.class));
+                startActivity(new Intent(this.context, ActivityDadosUsuario.class));
                   break;
               case 1 :
                   startActivity(new Intent(this.context, NovoEnderecoActivity.class));

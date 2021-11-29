@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.ActivityDadosConfeitaria">
+    tools:context=".activity.ActivityDadosUsuario">
     <ScrollView
         android:layout_width="394dp"
         android:layout_height="709dp"
@@ -37,7 +37,7 @@
                     android:backgroundTint="#ffeaea"
                     android:gravity="center"
                     android:paddingLeft="5dp"
-                    android:text="informações da Confeitaria"
+                    android:text="informações de Usuário"
                     android:textColor="#252525"
                     android:textSize="18sp" />
 
@@ -49,13 +49,13 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
-                    android:text="Nome Confeitaria:"
+                    android:text="Nome:"
                     android:textColor="#252525"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/edtNomeConfeitaria"
+                    android:id="@+id/edtNomeUsuario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -64,7 +64,7 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
                     android:ems="10"
-                    android:inputType="textPersonName"/>
+                    android:inputType="textPersonName" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -80,7 +80,7 @@
                     android:textStyle="bold" />
 
                 <EditText
-                    android:id="@+id/editTextTelefone"
+                    android:id="@+id/editTextTelefoneUsuario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -104,7 +104,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/txtEnderecoConfeitaria"
+                    android:id="@+id/txtEnderecoUsuario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
@@ -128,11 +128,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
-                    android:onClick="atualizarDadosConfeitaria"
+                    android:onClick="atualizarDadosUsuario"
                     android:text="Salvar"
                     app:backgroundTint="#E4696D" />
             </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -73,7 +73,7 @@ public class ActivityDadosConfeitaria extends AppCompatActivity {
              msg = "Dados atualizados com sucesso";
 
         }catch (Exception ex){
-            msg = "Erro ao atualizar";
+            msg = "Erro ao atualizar, favor tente mais tarde";
 
         }
         new AlertDialog.Builder(this)
