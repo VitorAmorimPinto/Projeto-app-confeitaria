@@ -3,6 +3,7 @@ package com.example.aplicativoconfeitaria.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -70,6 +71,8 @@ public class CadastroBoloActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_bolo);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         txtNomeBolo = findViewById(R.id.edtNomeBolo);
         txtPreco = findViewById(R.id.edtPreco);
         txtIngredientes = findViewById(R.id.edtIngredientes);
