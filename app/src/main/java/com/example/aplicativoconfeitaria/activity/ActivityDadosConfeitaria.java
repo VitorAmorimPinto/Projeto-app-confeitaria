@@ -62,19 +62,18 @@ public class ActivityDadosConfeitaria extends AppCompatActivity {
 
     }
     public void atualizarDadosConfeitaria(View view){
-        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("confeitaria").child(idConfeitaria);
         String nome = edtNomeConfeitaria.getText().toString();
         String telefone = editTextTelefone.getText().toString();
         String msg = "";
         confeitaria.setNome(nome);
         confeitaria.setTelefone(telefone);
-        try {
-            firebase.setValue(confeitaria);
+        Boolean res = confeitaria.salvarConfeitaria(idConfeitaria);
+
+        if(res) {
              msg = "Dados atualizados com sucesso";
 
-        }catch (Exception ex){
+        }else{
             msg = "Erro ao atualizar, favor tente mais tarde";
-
         }
         new AlertDialog.Builder(this)
                 .setMessage(msg)

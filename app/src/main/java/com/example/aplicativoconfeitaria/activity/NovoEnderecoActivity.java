@@ -151,8 +151,6 @@ public class NovoEnderecoActivity extends AppCompatActivity {
                     recuperarEndereco();
 
                 }
-
-
             }
 
             @Override
@@ -184,10 +182,6 @@ public class NovoEnderecoActivity extends AppCompatActivity {
 
             }
         });
-
-
-
-
     }
     public void cadEndereco(){
         String logradouro = edtRua.getText().toString();
@@ -209,7 +203,8 @@ public class NovoEnderecoActivity extends AppCompatActivity {
             endereco.setNumero(numero);
             if(ehAdmin){
                 String enderecoConfeitaria = logradouro + ", nº " + numero + " / " + bairro + ", " +cidade;
-                salvarEnderecoConfeitaria(enderecoConfeitaria);
+                confeitaria.setEndereco(enderecoConfeitaria);
+                confeitaria.salvarEnderecoConfeitaria(idPesquisa);
             }
             result = endereco.salvarEndereco();
             if (result){
@@ -234,12 +229,6 @@ public class NovoEnderecoActivity extends AppCompatActivity {
                     "Preencha todos os campos corretamente!",
                     Toast.LENGTH_SHORT).show();
         }
-    }
-    public void salvarEnderecoConfeitaria(String endereco){
-        DatabaseReference   firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("confeitaria").child(idPesquisa);
-        confeitaria.setEndereco(endereco);
-        firebase.setValue(confeitaria);
-
     }
     public void verificarUsuarioLogado(){
         autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();

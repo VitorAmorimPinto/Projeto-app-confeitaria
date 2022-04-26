@@ -26,6 +26,7 @@ public class Endereco {
             return false;
         }
     }
+
     @Exclude
     public String getIdUsuario() {
         return idUsuario;
