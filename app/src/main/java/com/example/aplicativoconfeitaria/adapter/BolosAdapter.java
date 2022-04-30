@@ -44,7 +44,7 @@ public class BolosAdapter extends RecyclerView.Adapter <BolosAdapter.MyViewHolde
 
         holder.nome.setText( bolo.getNome());
         holder.descricao.setText( bolo.getDescricao() );
-        holder.preco.setText( bolo.getPreco().toString() );
+        holder.preco.setText( "R$ "+bolo.getPreco().toString() );
 
         if ( bolo.getFoto() != null){
             Uri uri = Uri.parse( bolo.getFoto() );

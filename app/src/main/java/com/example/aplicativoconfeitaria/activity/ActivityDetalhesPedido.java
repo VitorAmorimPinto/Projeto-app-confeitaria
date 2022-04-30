@@ -30,8 +30,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DecimalFormat;
 
 public class ActivityDetalhesPedido extends AppCompatActivity {
-    public String statusText,total,observacaoUsuario,localEntrega,dataEntrega,nomeUser,tituloBolo,descricaoBolo,precoBolo,dataRealizacao,formaPagamento,textoBotao,observacaoConfeiteiro;
-    public TextView txtStatusPedido,txtFormaPagamento,txtTotal,txtObs,txtLocalEntrega,txtDataEntrega,txtNomeUser,txtTituloBoloPedido,txtDescricao,txtPreco,txtDataRealizacao;
+    public String statusText,total,observacaoUsuario,localEntrega,dataEntrega,nomeUser,tituloBolo,descricaoBolo,precoBolo,dataRealizacao,formaPagamento,textoBotao,observacaoConfeiteiro,telefone;
+    public TextView txtStatusPedido,txtFormaPagamento,txtTotal,txtObs,txtLocalEntrega,txtDataEntrega,txtNomeUser,txtTituloBoloPedido,txtDescricao,txtPreco,txtDataRealizacao,txtTelefone;
     public EditText txtObservacaoConfeiteiro;
     public String idUser,idBolo;
     public ImageView imgBoloPedido;
@@ -64,7 +64,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
         btnAlterarStatus = findViewById(R.id.btnAlterarStatus);
         btnRecusarPedido = findViewById(R.id.btnRecusarPedido);
         txtObservacaoConfeiteiro = findViewById(R.id.txtObservacaoConfeiteiro);
-
+        txtTelefone = findViewById(R.id.txtTelefone);
         Bundle dados = getIntent().getExtras();
 
         idPedido = (String) dados.getSerializable("idPedido");
@@ -144,8 +144,11 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Usuario u = snapshot.getValue(Usuario.class);
                 nomeUser = u.getNome();
+                telefone = u.getTelefone();
+
 
                 txtNomeUser.setText(nomeUser);
+                txtTelefone.setText(telefone);
             }
 
             @Override

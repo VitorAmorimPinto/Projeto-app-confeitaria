@@ -48,6 +48,10 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Preço"
-            android:textColor="@color/black" />
+            android:textColor="@color/holo_green_light"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <include layout="@layout/divisor" />
+
     </LinearLayout>
 </LinearLayout>
