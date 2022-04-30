@@ -127,7 +127,7 @@ public class MinhaContaActivity extends AppCompatActivity {
 //                startActivity(new Intent(this, activity_login.class));
                 break;
             case 1 :
-                startActivity(new Intent(this, EnderecoActivity.class));
+                startActivity(new Intent(this, NovoEnderecoActivity.class));
                 break;
             case 2 :
                 this.deslogarUsuario();

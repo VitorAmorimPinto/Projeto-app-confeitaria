@@ -107,7 +107,7 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
             dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             String dataPedidoString = dateFormat.format(dataPedido);
             String idBoloPedido = Base64Custom.codificarBase64(bolo.getNome());
-            String valorTotalPedido = tvPrecoBolo.getText().toString();
+            String valorTotalPedido = precoBolo;
             String localEntregaPedido = tvLocalDeEntrega.getText().toString();
             String observacaoPedido = edtObservacoes.getText().toString();
             String dataHoraEntregaPedido = tvDataEntrega.getText().toString() + " " + horarioEntrega;
@@ -160,7 +160,7 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
 
         tvNomeBolo.setText(nomeBolo);
         tvDescricaoBolo.setText(descricaoBolo);
-        tvPrecoBolo.setText(precoBolo);
+        tvPrecoBolo.setText("R$ "+precoBolo);
 
         if (url != null) {
             Glide.with(ActivityFinalizarPedido.this)

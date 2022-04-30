@@ -137,7 +137,10 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textColor="@color/holo_green_light"
+                    android:textStyle="bold"
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -330,7 +333,9 @@
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:text="Preço"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/holo_green_light"
+                            android:textStyle="bold"
+                            android:textSize="16sp"/>
                     </LinearLayout>
                 </LinearLayout>
 

@@ -73,7 +73,6 @@ public class BolosFragment extends Fragment {
         recyclerViewListaBolos.setHasFixedSize( true );
         recyclerViewListaBolos.setAdapter( adapter );
 
-        recuperarBolos();
 
         return view;
     }
@@ -90,6 +89,7 @@ public class BolosFragment extends Fragment {
         valueEventListenerBolos = bolosRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaBolos.clear();
 
                 for ( DataSnapshot dados: dataSnapshot.getChildren() ){
 
@@ -140,6 +140,13 @@ public class BolosFragment extends Fragment {
         else {
             recuperarBolos();
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        listaBolos.clear();
+        recuperarBolos();
     }
 
 }

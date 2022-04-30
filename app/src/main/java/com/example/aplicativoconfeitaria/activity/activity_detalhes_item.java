@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.aplicativoconfeitaria.R;
@@ -49,9 +50,7 @@ public class activity_detalhes_item extends AppCompatActivity {
         Bundle dados = getIntent().getExtras();
         bolo = (Bolo) dados.getSerializable("objetoBolo");
 
-        if(!UsuarioLogado()){
-            btnComprar.setVisibility(View.GONE);
-        }
+
 
         recuperarBolo();
     }
@@ -81,9 +80,16 @@ public class activity_detalhes_item extends AppCompatActivity {
     }
 
     public void goToFinalizarPedido(View view){
-        Intent i = new Intent(this, ActivityFinalizarPedido.class);
-        i.putExtra("objeto", bolo);
-        startActivity(i);
+        if(!UsuarioLogado()){
+            Toast.makeText(this,
+                    "Faça o login para continuar",
+                    Toast.LENGTH_SHORT).show();
+        }else{
+            Intent i = new Intent(this, ActivityFinalizarPedido.class);
+            i.putExtra("objeto", bolo);
+            startActivity(i);
+        }
+
     }
 
     public Boolean UsuarioLogado(){
