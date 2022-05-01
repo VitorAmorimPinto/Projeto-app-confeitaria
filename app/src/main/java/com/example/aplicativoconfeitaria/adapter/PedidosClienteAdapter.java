@@ -92,6 +92,10 @@ public class PedidosClienteAdapter extends RecyclerView.Adapter<PedidosClienteAd
                 statusText = "Cancelado";
                 holder.statusPedido.setBackground(ContextCompat.getDrawable(context, R.drawable.status_cancelado));
                 break;
+            case 4:
+                statusText = "Recusado";
+                holder.statusPedido.setBackground(ContextCompat.getDrawable(context, R.drawable.status_recusado));
+                break;
         }
         holder.statusPedido.setText(statusText);
 

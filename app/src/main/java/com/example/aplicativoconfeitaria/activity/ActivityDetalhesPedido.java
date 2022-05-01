@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -109,6 +108,12 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                     case 3:
                         statusText = "Cancelado";
                         txtStatusPedido.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.status_cancelado));
+                        btnRecusarPedido.setVisibility(View.INVISIBLE);
+                        btnAlterarStatus.setVisibility(View.INVISIBLE);
+                        break;
+                    case 4:
+                        statusText = "Recusado";
+                        txtStatusPedido.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.status_recusado));
                         btnRecusarPedido.setVisibility(View.INVISIBLE);
                         btnAlterarStatus.setVisibility(View.INVISIBLE);
                         break;
@@ -241,32 +246,63 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("pedidos").child(idPedido);
         AlertDialog.Builder alert = new AlertDialog.Builder(ActivityDetalhesPedido.this);
         alert.setTitle(" Pedido");
-        alert.setMessage("Deseja realmente cancelar esse pedido?");
-        alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-                pedido.setStatus(3);
-                pedido.setObservacaoConfeiteiro(txtObservacaoConfeiteiro.getText().toString());
+        if(pedido.getStatus().equals(0)){
+            alert.setMessage("Deseja realmente recusar esse pedido?");
+            alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-                firebase.setValue(pedido);
-                dialog.dismiss();
+                    pedido.setStatus(4);
+                    pedido.setObservacaoConfeiteiro(txtObservacaoConfeiteiro.getText().toString());
 
-                AlertDialog.Builder alerta = new AlertDialog.Builder(ActivityDetalhesPedido.this);
-                alerta.setTitle("Mensagem");
-                alerta.setMessage("Pedido cancelado");
-                alerta.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    firebase.setValue(pedido);
+                    dialog.dismiss();
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        finish();
-                    }
-                });
-                alerta.show();
-            }
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(ActivityDetalhesPedido.this);
+                    alerta.setTitle("Mensagem");
+                    alerta.setMessage("Pedido recusado");
+                    alerta.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
-        });
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    });
+                    alerta.show();
+                }
+
+            });
+        }else{
+            alert.setMessage("Deseja realmente cancelar esse pedido?");
+            alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    pedido.setStatus(3);
+                    pedido.setObservacaoConfeiteiro(txtObservacaoConfeiteiro.getText().toString());
+
+                    firebase.setValue(pedido);
+                    dialog.dismiss();
+
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(ActivityDetalhesPedido.this);
+                    alerta.setTitle("Mensagem");
+                    alerta.setMessage("Pedido cancelado");
+                    alerta.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    });
+                    alerta.show();
+                }
+
+            });
+        }
+
         alert.setNegativeButton("Não", new DialogInterface.OnClickListener() {
 
             @Override
@@ -277,6 +313,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
 
         alert.show();
     }
+
     public void goToItem(View view){
         Intent i = new Intent(this, activity_detalhes_item.class);
         i.putExtra("objetoBolo", boloObj);
