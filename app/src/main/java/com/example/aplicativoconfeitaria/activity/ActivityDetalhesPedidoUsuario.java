@@ -99,6 +99,15 @@ public class ActivityDetalhesPedidoUsuario extends AppCompatActivity {
                         txtStatusPedidoUser.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.status_cancelado));
                         btnCancelarPedidoUser.setVisibility(View.INVISIBLE);
                         break;
+                    case 4:
+                        statusText = "Recusado";
+                        txtStatusPedidoUser.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.status_recusado));
+                        btnCancelarPedidoUser.setVisibility(View.INVISIBLE);
+                        break;
+                    case 5:
+                        statusText = "Atrasado";
+                        txtStatusPedidoUser.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.status_atrasado));
+                        break;
                 }
                 if (observacaoUsuario.equals("")) {
                     txtObsUser.setText("Sem observações");
