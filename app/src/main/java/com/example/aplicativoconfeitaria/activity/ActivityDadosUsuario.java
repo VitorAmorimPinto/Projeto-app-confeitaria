@@ -89,18 +89,17 @@ public class ActivityDadosUsuario extends AppCompatActivity {
         });
     }
     public void atualizarDadosUsuario(View view){
-        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("usuarios").child(idUsuario);
         String msg = "";
         String nome = edtNomeUsuario.getText().toString();
         String  telefone = editTextTelefoneUsuario.getText().toString();
+        dadosUsuario.setIdUsuario(idUsuario);
         dadosUsuario.setNome(nome);
         dadosUsuario.setTelefone(telefone);
 
-        try {
-            firebase.setValue(dadosUsuario);
+        if(dadosUsuario.atualizarDadosUsuario()){
             msg = "Dados atualizados com sucesso";
 
-        }catch (Exception ex){
+        }else{
             msg = "Erro ao atualizar, favor tente mais tarde";
 
         }

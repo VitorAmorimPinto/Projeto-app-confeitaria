@@ -268,17 +268,15 @@ public class CadastroBoloActivity extends AppCompatActivity {
     //Cadastra os bolos no banco de dados
     public void cadastrarBolo(String url){
         String mensagem = "";
-        try {
+        bolo.setFoto(url);
+        //Adicionando objetos no banco de dados
+
+        if (bolo.salvarBolo(identificaBolo)) {
             // Converte o nome do bolo para base 64
 //             pegaBolo = txtNomeBolo.getText().toString();
 //             identificaBolo = Base64Custom.codificarBase64(pegaBolo);
-             bolo.setFoto(url);
-            //Adicionando objetos no banco de dados
-            DatabaseReference bolos = referencia.child("bolos");
-            bolos.child(identificaBolo).setValue(bolo);
-
             mensagem = "Bolo cadastrado com sucesso!";
-        }catch (Exception ex){
+        }else{
             mensagem = "Erro ao cadastrar bolo Tente novamente mais tarde.";
         }
         new AlertDialog.Builder(this)

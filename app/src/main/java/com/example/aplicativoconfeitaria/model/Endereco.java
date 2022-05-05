@@ -16,16 +16,6 @@ public class Endereco {
 
     public Endereco() {
     }
-    public Boolean salvarEndereco(){
-        try {
-
-            DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase();
-            firebase.child("enderecos").child(this.idUsuario).setValue(this);
-            return true;
-        }catch (Exception ex){
-            return false;
-        }
-    }
 
     @Exclude
     public String getIdUsuario() {
@@ -90,6 +80,16 @@ public class Endereco {
 
     public void setComplemento(String complemento) {
         this.complemento = complemento;
+    }
+
+    public Boolean salvarEndereco(){
+        try {
+            DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase();
+            firebase.child("enderecos").child(this.idUsuario).setValue(this);
+            return true;
+        }catch (Exception ex){
+            return false;
+        }
     }
 
     @Override

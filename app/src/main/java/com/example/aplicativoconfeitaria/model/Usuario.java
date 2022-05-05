@@ -24,10 +24,6 @@ public class Usuario {
         this.email = email;
         this.senha = senha;
     }
-    public void salvarUser(){
-        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase();
-        firebase.child("usuarios").child(this.idUsuario).setValue(this);
-    }
 
     public Integer getNivel() {
         return nivel;
@@ -78,4 +74,22 @@ public class Usuario {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+    public void salvarUser(){
+        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase();
+        firebase.child("usuarios").child(this.idUsuario).setValue(this);
+    }
+
+    public Boolean atualizarDadosUsuario(){
+        try{
+            DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("usuarios").child(this.idUsuario);
+            firebase.setValue(this);
+            return true;
+
+        }catch (Exception ex){
+
+            return false;
+        }
+    }
+
 }

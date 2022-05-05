@@ -19,19 +19,6 @@ public class Bolo implements Serializable {
     public Bolo() {
     }
 
-    public void atualizar(){
-
-        DatabaseReference database = ConfiguracaoFirebase.getFirebaseDataBase();
-
-        DatabaseReference boloRef = database.child("bolos")
-                .child( idBolo);
-
-        Map<String, Object> valoresbolo = converterParaMap();
-
-        boloRef.updateChildren( valoresbolo );
-
-    }
-
     @Exclude
     public Map<String, Object> converterParaMap(){
 
@@ -92,7 +79,28 @@ public class Bolo implements Serializable {
         this.preco = preco;
     }
 
+    public void atualizar(){
 
+        DatabaseReference database = ConfiguracaoFirebase.getFirebaseDataBase();
+
+        DatabaseReference boloRef = database.child("bolos")
+                .child( idBolo);
+
+        Map<String, Object> valoresbolo = converterParaMap();
+
+        boloRef.updateChildren( valoresbolo );
+
+    }
+    public Boolean salvarBolo(String identificaBolo){
+        try {
+            DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase();
+            firebase.child("bolos").child(identificaBolo).setValue(this);
+            return true;
+
+        }catch (Exception ex){
+            return false;
+        }
+    }
 
     public String getNomePesquisa() { return nomePesquisa; }
     public void setNomePesquisa(String nomePesquisa) { this.nomePesquisa = nomePesquisa.toUpperCase(); }

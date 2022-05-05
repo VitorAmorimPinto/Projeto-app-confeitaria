@@ -14,25 +14,7 @@ public class Confeitaria {
         this.nome = nome;
         this.telefone = telefone;
     }
-    public Boolean salvarEnderecoConfeitaria(String idPesquisa){
-        try {
-            DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("confeitaria").child(idPesquisa);
-            firebase.setValue(this);
-            return true;
-        }catch (Exception ex){
-            return false;
-        }
-    }
-    public Boolean salvarConfeitaria(String idConfeitaria){
-        try{
-            DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("confeitaria").child(idConfeitaria);
-            firebase.setValue(this);
 
-            return true;
-        }catch (Exception ex){
-            return false;
-        }
-    }
 
     public String getEndereco() {
         return endereco;
@@ -57,4 +39,26 @@ public class Confeitaria {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
+
+    public Boolean salvarEnderecoConfeitaria(String idPesquisa){
+        try {
+            DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("confeitaria").child(idPesquisa);
+            firebase.setValue(this);
+            return true;
+        }catch (Exception ex){
+            return false;
+        }
+    }
+
+    public Boolean salvarConfeitaria(String idConfeitaria){
+        try{
+            DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("confeitaria").child(idConfeitaria);
+            firebase.setValue(this);
+
+            return true;
+        }catch (Exception ex){
+            return false;
+        }
+    }
+
 }
