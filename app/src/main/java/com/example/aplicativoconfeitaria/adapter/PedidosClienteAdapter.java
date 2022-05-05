@@ -84,7 +84,7 @@ public class PedidosClienteAdapter extends RecyclerView.Adapter<PedidosClienteAd
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        if(new Date().after(dataEntegaPedido) && (pedido.getStatus().equals(0) || pedido.getStatus().equals(1))){
+        if(new Date().after(dataEntegaPedido) && pedido.getStatus().equals(1)){
             pedido.setStatus(5);
             pedidoref.setValue(pedido);
         }

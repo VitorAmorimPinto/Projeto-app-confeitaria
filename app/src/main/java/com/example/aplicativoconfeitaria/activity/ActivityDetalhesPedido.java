@@ -119,6 +119,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                         break;
                     case 5:
                         statusText = "Atrasado";
+                        textoBotao = "Finalizar Pedido";
                         txtStatusPedido.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.status_atrasado));
                         break;
                 }
@@ -201,11 +202,14 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
         });
     }
     public void alterarStatusPedido(View view){
-        String[] estadosPedidido = {"aceitar", "finalizar"};
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("pedidos").child(idPedido);
         AlertDialog.Builder alert = new AlertDialog.Builder(ActivityDetalhesPedido.this);
         alert.setTitle(" Pedido");
-        alert.setMessage("Deseja realmente "+estadosPedidido[status] +" esse pedido?");
+        if(status == 1){
+            alert.setMessage("Deseja realmente aceitar esse pedido?");
+        }else{
+            alert.setMessage("Deseja realmente finalizar esse pedido?");
+        }
         alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -214,6 +218,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                         pedido.setStatus(1);
                         break;
                     case 1:
+                    case 5:
                         pedido.setStatus(2);
                         break;
                 }
