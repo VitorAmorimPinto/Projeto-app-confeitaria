@@ -117,6 +117,10 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                         btnRecusarPedido.setVisibility(View.INVISIBLE);
                         btnAlterarStatus.setVisibility(View.INVISIBLE);
                         break;
+                    case 5:
+                        statusText = "Atrasado";
+                        txtStatusPedido.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.status_atrasado));
+                        break;
                 }
                 if (observacaoUsuario.equals("")) {
                     txtObs.setText("Sem observações");

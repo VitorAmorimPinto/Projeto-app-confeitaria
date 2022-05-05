@@ -26,8 +26,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.type.DateTime;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapter.ViewHolderPedidosAdmin>{
@@ -54,6 +58,7 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
         Pedido pedido = pedidos.get( position );
         DatabaseReference boloref = firebaseref.child("bolos").child(pedido.getIdBolo());
         DatabaseReference usuarioref = firebaseref.child("usuarios").child(pedido.getIdUsuario());
+        DatabaseReference pedidoref = firebaseref.child("pedidos").child(pedido.getId());
 
         //Define os holders dos dados do bolo
         boloref.addValueEventListener(new ValueEventListener() {
@@ -90,6 +95,16 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
             }
         });
 
+        Date dataEntegaPedido= null;
+        try {
+            dataEntegaPedido = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(pedido.getDataEntrega());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if(new Date().after(dataEntegaPedido) && (pedido.getStatus().equals(0) || pedido.getStatus().equals(1))){
+            pedido.setStatus(5);
+            pedidoref.setValue(pedido);
+        }
 
         //Define os demais holders
         holder.parentLayout.setOnClickListener((view) -> {
@@ -118,6 +133,10 @@ public class PedidosAdminAdapter extends RecyclerView.Adapter<PedidosAdminAdapte
             case 4:
                 statusText = "Recusado";
                 holder.statusPedido.setBackground(ContextCompat.getDrawable(context, R.drawable.status_recusado));
+                break;
+            case 5:
+                statusText = "Atrasado";
+                holder.statusPedido.setBackground(ContextCompat.getDrawable(context, R.drawable.status_atrasado));
                 break;
         }
         holder.statusPedido.setText(statusText);
