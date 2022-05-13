@@ -11,6 +11,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Locale;
+
 public class Usuario {
     private String idUsuario,nome,email,senha,telefone;
     private Integer nivel;
@@ -59,7 +61,7 @@ public class Usuario {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toLowerCase();
     }
 
     @Exclude
