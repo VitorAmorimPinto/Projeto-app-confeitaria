@@ -1,11 +1,19 @@
 package com.example.aplicativoconfeitaria.model;
 
+import androidx.annotation.NonNull;
+
+import com.example.aplicativoconfeitaria.auxiliar.Base64Custom;
 import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.ValueEventListener;
 
 public class Usuario {
-    private String idUsuario,nome,email,senha;
+    private String idUsuario,nome,email,senha,telefone;
+    private Integer nivel;
 
     public Usuario() {
     }
@@ -19,6 +27,14 @@ public class Usuario {
     public void salvarUser(){
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase();
         firebase.child("usuarios").child(this.idUsuario).setValue(this);
+    }
+
+    public Integer getNivel() {
+        return nivel;
+    }
+
+    public void setNivel(Integer nivel) {
+        this.nivel = nivel;
     }
 
     @Exclude
@@ -53,5 +69,13 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 }

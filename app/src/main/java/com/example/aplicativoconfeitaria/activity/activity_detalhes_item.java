@@ -3,15 +3,20 @@ package com.example.aplicativoconfeitaria.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.aplicativoconfeitaria.R;
 import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
 import com.example.aplicativoconfeitaria.model.Bolo;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +31,9 @@ public class activity_detalhes_item extends AppCompatActivity {
     public String nomeBolo, descricaoBolo, ingredientesBolo, precoBolo;
     public ImageView ivImagemBolo;
     private DatabaseReference firebaseref = ConfiguracaoFirebase.getFirebaseDataBase();
+    public Bolo bolo;
+    public Button btnComprar;
+    private FirebaseAuth autenticacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,43 +45,64 @@ public class activity_detalhes_item extends AppCompatActivity {
         tvDescricaoBolo = findViewById(R.id.textViewDescricaoDetalheItem);
         tvIngedientesBolo = findViewById(R.id.textViewIngredientesDetalheItem);
         ivImagemBolo = findViewById(R.id.imageViewImagemDetalheItem);
+        btnComprar = findViewById(R.id.buttonComprarBoloDetalhesItem);
+
+        Bundle dados = getIntent().getExtras();
+        bolo = (Bolo) dados.getSerializable("objetoBolo");
+
+
 
         recuperarBolo();
     }
 
+
     public void recuperarBolo(){
-        DatabaseReference boloref = firebaseref.child("bolos").child("U2VudGlkbw==");
+        DecimalFormat decimalFormat = new DecimalFormat("0.##");
 
-        boloref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Bolo bolo = snapshot.getValue(Bolo.class);
-                DecimalFormat decimalFormat = new DecimalFormat("0.##");
+        nomeBolo = bolo.getNome();
+        descricaoBolo = bolo.getDescricao();
+        ingredientesBolo = bolo.getIngredientes();
+        precoBolo = decimalFormat.format(bolo.getPreco());
+        Uri url = Uri.parse(bolo.getFoto());
 
-                nomeBolo = bolo.getNome();
-                descricaoBolo = bolo.getDescricao();
-                ingredientesBolo = bolo.getIngredientes();
-                precoBolo = decimalFormat.format(bolo.getPreco());
-                Uri url = Uri.parse(bolo.getFoto());
+        tvNomeBolo.setText(nomeBolo);
+        tvPrecoBolo.setText("R$ " + precoBolo);
+        tvDescricaoBolo.setText(descricaoBolo);
+        tvIngedientesBolo.setText(ingredientesBolo);
 
-                tvNomeBolo.setText(nomeBolo);
-                tvPrecoBolo.setText("R$ " + precoBolo);
-                tvDescricaoBolo.setText(descricaoBolo);
-                tvIngedientesBolo.setText(ingredientesBolo);
+        if(url != null){
+            Glide.with(activity_detalhes_item.this)
+                    .load(url)
+                    .into(ivImagemBolo);
+        }else{
+            ivImagemBolo.setImageResource(R.drawable.imagem_default);
+        }
+    }
 
-                if(url != null){
-                    Glide.with(activity_detalhes_item.this)
-                            .load(url)
-                            .into(ivImagemBolo);
-                }else{
-                    ivImagemBolo.setImageResource(R.drawable.bolinho_fofinho);
-                }
-            }
+    public void goToFinalizarPedido(View view){
+        if(!UsuarioLogado()){
+            Toast.makeText(this,
+                    "Faça o login para continuar",
+                    Toast.LENGTH_SHORT).show();
+        }else{
+            Intent i = new Intent(this, ActivityFinalizarPedido.class);
+            i.putExtra("objeto", bolo);
+            startActivity(i);
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+    }
 
-            }
-        });
+    public Boolean UsuarioLogado(){
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+
+        if( autenticacao.getCurrentUser() == null ){
+
+            return false;
+
+        }else{
+
+            return true;
+        }
+
     }
 }

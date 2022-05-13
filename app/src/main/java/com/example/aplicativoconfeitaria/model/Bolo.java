@@ -1,5 +1,6 @@
 package com.example.aplicativoconfeitaria.model;
 
+import java.io.Serializable;
 import com.example.aplicativoconfeitaria.activity.CadastroBoloActivity;
 import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
 import com.google.firebase.database.DatabaseReference;
@@ -9,16 +10,14 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-public class Bolo {
+public class Bolo implements Serializable {
     private String nome, descricao, ingredientes, foto;
     private Double preco;
     private String idBolo;
     private String nomePesquisa;
 
-
     public Bolo() {
     }
-
 
     public void atualizar(){
 
@@ -46,6 +45,7 @@ public class Bolo {
         return boloMap;
 
     }
+
     @Exclude
     public String getIdBolo() {
         return idBolo;
@@ -91,6 +91,8 @@ public class Bolo {
     public void setPreco(Double preco) {
         this.preco = preco;
     }
+
+
 
     public String getNomePesquisa() { return nomePesquisa; }
     public void setNomePesquisa(String nomePesquisa) { this.nomePesquisa = nomePesquisa.toUpperCase(); }

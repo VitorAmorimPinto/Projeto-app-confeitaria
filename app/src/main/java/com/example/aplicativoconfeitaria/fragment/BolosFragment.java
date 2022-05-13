@@ -1,4 +1,4 @@
-package com.example.aplicativoconfeitaria.activity;
+package com.example.aplicativoconfeitaria.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -73,14 +73,10 @@ public class BolosFragment extends Fragment {
         recyclerViewListaBolos.setHasFixedSize( true );
         recyclerViewListaBolos.setAdapter( adapter );
 
+
         return view;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        recuperarBolos();
-    }
 
     @Override
     public void onStop() {
@@ -93,6 +89,7 @@ public class BolosFragment extends Fragment {
         valueEventListenerBolos = bolosRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaBolos.clear();
 
                 for ( DataSnapshot dados: dataSnapshot.getChildren() ){
 
@@ -143,6 +140,13 @@ public class BolosFragment extends Fragment {
         else {
             recuperarBolos();
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        listaBolos.clear();
+        recuperarBolos();
     }
 
 }

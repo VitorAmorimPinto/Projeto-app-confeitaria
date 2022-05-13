@@ -3,14 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentMeusPedidos">
+    tools:context=".fragment.FragmentMeusPedidos">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewListaPedidosCliente"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Meus pedidos" />
+        android:layout_margin="10dp" />
 
 </FrameLayout>

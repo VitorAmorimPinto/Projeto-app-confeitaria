@@ -21,10 +21,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEntrar" />
+        app:layout_constraintTop_toBottomOf="@+id/btnEntrarFrag" />
 
     <EditText
-        android:id="@+id/edtLogin"
+        android:id="@+id/edtLoginFrag"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -37,13 +37,13 @@
         android:ems="10"
         android:hint="@string/place_login"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/edtSenhaLog"
+        app:layout_constraintBottom_toTopOf="@+id/edtSenhaLogFrag"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewNomePerfil" />
 
     <EditText
-        android:id="@+id/edtSenhaLog"
+        android:id="@+id/edtSenhaLogFrag"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -56,10 +56,10 @@
         android:ems="10"
         android:hint="@string/place_pass"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/btnEntrar"
+        app:layout_constraintBottom_toTopOf="@+id/btnEntrarFrag"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/edtLoginFrag" />
 
     <TextView
         android:id="@+id/textViewNomePerfil"
@@ -70,12 +70,12 @@
         android:layout_marginBottom="55dp"
         android:text="Acesse sua conta"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/edtLogin"
+        app:layout_constraintBottom_toTopOf="@+id/edtLoginFrag"
         app:layout_constraintStart_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/imageView6" />
 
     <Button
-        android:id="@+id/btnEntrar"
+        android:id="@+id/btnEntrarFrag"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -88,7 +88,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtSenhaLog" />
+        app:layout_constraintTop_toBottomOf="@+id/edtSenhaLogFrag" />
 
     <ImageView
         android:id="@+id/imageView6"
