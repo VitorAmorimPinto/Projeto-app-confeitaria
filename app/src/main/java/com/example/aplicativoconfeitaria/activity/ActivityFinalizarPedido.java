@@ -39,6 +39,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -100,47 +101,56 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
         radioButton();
     }
 
-    public void cadastraPedido(View view) {
+    public void cadastraPedido(View view) throws ParseException {
         if (!tvDataEntrega.getText().toString().isEmpty()) {
 
             Date dataPedido = Calendar.getInstance().getTime();
-            dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            String dataPedidoString = dateFormat.format(dataPedido);
-            String idBoloPedido = Base64Custom.codificarBase64(bolo.getNome());
-            String valorTotalPedido = precoBolo;
-            String localEntregaPedido = tvLocalDeEntrega.getText().toString();
-            String observacaoPedido = edtObservacoes.getText().toString();
             String dataHoraEntregaPedido = tvDataEntrega.getText().toString() + " " + horarioEntrega;
+            SimpleDateFormat formatter1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+            Date dataEntregaCompara = formatter1.parse(dataHoraEntregaPedido);
+            if (dataEntregaCompara.compareTo(dataPedido) < 0) {
+                Toast.makeText(ActivityFinalizarPedido.this,
+                        "Perdão, mas não possuimos um DeLorean para fazer entregas no passado. " + dataEntregaCompara.compareTo(dataPedido),
+                        Toast.LENGTH_SHORT).show();
+            } else{
+                dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+                String dataPedidoString = dateFormat.format(dataPedido);
+                String idBoloPedido = Base64Custom.codificarBase64(bolo.getNome());
+                String valorTotalPedido = precoBolo;
+                String localEntregaPedido = tvLocalDeEntrega.getText().toString();
+                String observacaoPedido = edtObservacoes.getText().toString();
 
-            DatabaseReference pedidosReference = dbReference.child("pedidos");
-            pedido = new Pedido();
 
-            pedido.setIdBolo(idBoloPedido);
-            pedido.setIdUsuario(idUsuario);
-            pedido.setValorTotal(Double.parseDouble(valorTotalPedido.replace(",", ".")));
-            pedido.setMetodoPagamento(metodoPagamento);
-            pedido.setDataRealizacao(dataPedidoString);
-            pedido.setDataEntrega(dataHoraEntregaPedido);
-            pedido.setLocalEntrega(localEntregaPedido);
-            pedido.setObservacao(observacaoPedido);
-            pedido.setObservacaoConfeiteiro("");
-            pedido.setStatus(0);
+                DatabaseReference pedidosReference = dbReference.child("pedidos");
+                pedido = new Pedido();
 
-            pedidosReference.push().setValue(pedido);
+                pedido.setIdBolo(idBoloPedido);
+                pedido.setIdUsuario(idUsuario);
+                pedido.setValorTotal(Double.parseDouble(valorTotalPedido.replace(",", ".")));
+                pedido.setMetodoPagamento(metodoPagamento);
+                pedido.setDataRealizacao(dataPedidoString);
+                pedido.setDataEntrega(dataHoraEntregaPedido);
+                pedido.setLocalEntrega(localEntregaPedido);
+                pedido.setObservacao(observacaoPedido);
+                pedido.setObservacaoConfeiteiro("");
+                pedido.setStatus(0);
 
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setTitle("Sucesso");
-            dialog.setMessage("Seu pedido foi enviado para a confeitaria!");
+                pedidosReference.push().setValue(pedido);
 
-            dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    goToPrincipal();
-                }
-            });
+                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+                dialog.setTitle("Sucesso");
+                dialog.setMessage("Seu pedido foi enviado para a confeitaria!");
 
-            dialog.create();
-            dialog.show();
+                dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        goToPrincipal();
+                    }
+                });
+
+                dialog.create();
+                dialog.show();
+            }
         } else {
             Toast.makeText(ActivityFinalizarPedido.this,
                     "Escolha a data de entrega para prosseguir",
