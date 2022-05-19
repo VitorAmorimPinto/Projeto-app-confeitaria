@@ -19,11 +19,17 @@
                 android:layout_width="395dp"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/imageView19"
+                <com.synnapps.carouselview.CarouselView
+                    android:id="@+id/carouselView"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
-                    app:srcCompat="@drawable/banner" />
+                    app:fillColor="@color/btn_login"
+                    app:pageColor="#00000000"
+                    app:radius="6dp"
+                    app:slideInterval="10000"
+                    app:strokeColor="#FF777777"
+                    app:strokeWidth="1dp"/>
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView

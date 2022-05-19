@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageListener;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -36,6 +39,10 @@ public class BolosFragment extends Fragment {
 
     public BolosFragment(){
     }
+
+
+    int[] sampleImages = {R.drawable.banner, R.drawable.confeiteiro, R.drawable.placeholder };
+    CarouselView carouselView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,10 +80,19 @@ public class BolosFragment extends Fragment {
         recyclerViewListaBolos.setHasFixedSize( true );
         recyclerViewListaBolos.setAdapter( adapter );
 
-
+        //Configura o carousel view
+         carouselView =  view.findViewById(R.id.carouselView);
+        carouselView.setPageCount(sampleImages.length);
+        carouselView.setImageListener(imageListener);
         return view;
     }
+    ImageListener imageListener = new ImageListener() {
 
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+            imageView.setImageResource(sampleImages[position]);
+        }
+    };
 
     @Override
     public void onStop() {
