@@ -27,6 +27,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class PedidosClienteAdapter extends RecyclerView.Adapter<PedidosClienteAdapter.ViewHolderPedidosCliente>{
@@ -53,6 +56,7 @@ public class PedidosClienteAdapter extends RecyclerView.Adapter<PedidosClienteAd
     public void onBindViewHolder(@NonNull PedidosClienteAdapter.ViewHolderPedidosCliente holder, int position) {
         Pedido pedido = pedidos.get( position );
         DatabaseReference boloref = firebaseref.child("bolos").child(pedido.getIdBolo());
+        DatabaseReference pedidoref = firebaseref.child("pedidos").child(pedido.getId());
 
         //Define os holders dos dados do bolo
         boloref.addValueEventListener(new ValueEventListener() {
@@ -74,6 +78,17 @@ public class PedidosClienteAdapter extends RecyclerView.Adapter<PedidosClienteAd
             }
         });
 
+        Date dataEntegaPedido= null;
+        try {
+            dataEntegaPedido = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(pedido.getDataEntrega());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if(new Date().after(dataEntegaPedido) && pedido.getStatus().equals(1)){
+            pedido.setStatus(5);
+            pedidoref.setValue(pedido);
+        }
+
         switch (pedido.getStatus()){
             case 0:
                 statusText = "Novo";
@@ -91,6 +106,14 @@ public class PedidosClienteAdapter extends RecyclerView.Adapter<PedidosClienteAd
             case 3:
                 statusText = "Cancelado";
                 holder.statusPedido.setBackground(ContextCompat.getDrawable(context, R.drawable.status_cancelado));
+                break;
+            case 4:
+                statusText = "Recusado";
+                holder.statusPedido.setBackground(ContextCompat.getDrawable(context, R.drawable.status_recusado));
+                break;
+            case 5:
+                statusText = "Atrasado";
+                holder.statusPedido.setBackground(ContextCompat.getDrawable(context, R.drawable.status_atrasado));
                 break;
         }
         holder.statusPedido.setText(statusText);

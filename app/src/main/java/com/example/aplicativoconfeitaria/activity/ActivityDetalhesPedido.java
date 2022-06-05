@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -112,6 +111,17 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                         btnRecusarPedido.setVisibility(View.INVISIBLE);
                         btnAlterarStatus.setVisibility(View.INVISIBLE);
                         break;
+                    case 4:
+                        statusText = "Recusado";
+                        txtStatusPedido.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.status_recusado));
+                        btnRecusarPedido.setVisibility(View.INVISIBLE);
+                        btnAlterarStatus.setVisibility(View.INVISIBLE);
+                        break;
+                    case 5:
+                        statusText = "Atrasado";
+                        textoBotao = "Finalizar Pedido";
+                        txtStatusPedido.setBackground(ContextCompat.getDrawable(getApplicationContext(), R.drawable.status_atrasado));
+                        break;
                 }
                 if (observacaoUsuario.equals("")) {
                     txtObs.setText("Sem observações");
@@ -192,11 +202,14 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
         });
     }
     public void alterarStatusPedido(View view){
-        String[] estadosPedidido = {"aceitar", "finalizar"};
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("pedidos").child(idPedido);
         AlertDialog.Builder alert = new AlertDialog.Builder(ActivityDetalhesPedido.this);
         alert.setTitle(" Pedido");
-        alert.setMessage("Deseja realmente "+estadosPedidido[status] +" esse pedido?");
+        if(status == 1){
+            alert.setMessage("Deseja realmente aceitar esse pedido?");
+        }else{
+            alert.setMessage("Deseja realmente finalizar esse pedido?");
+        }
         alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -205,6 +218,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                         pedido.setStatus(1);
                         break;
                     case 1:
+                    case 5:
                         pedido.setStatus(2);
                         break;
                 }
@@ -241,32 +255,63 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("pedidos").child(idPedido);
         AlertDialog.Builder alert = new AlertDialog.Builder(ActivityDetalhesPedido.this);
         alert.setTitle(" Pedido");
-        alert.setMessage("Deseja realmente cancelar esse pedido?");
-        alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-                pedido.setStatus(3);
-                pedido.setObservacaoConfeiteiro(txtObservacaoConfeiteiro.getText().toString());
+        if(pedido.getStatus().equals(0)){
+            alert.setMessage("Deseja realmente recusar esse pedido?");
+            alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
 
-                firebase.setValue(pedido);
-                dialog.dismiss();
+                    pedido.setStatus(4);
+                    pedido.setObservacaoConfeiteiro(txtObservacaoConfeiteiro.getText().toString());
 
-                AlertDialog.Builder alerta = new AlertDialog.Builder(ActivityDetalhesPedido.this);
-                alerta.setTitle("Mensagem");
-                alerta.setMessage("Pedido cancelado");
-                alerta.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    firebase.setValue(pedido);
+                    dialog.dismiss();
 
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        finish();
-                    }
-                });
-                alerta.show();
-            }
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(ActivityDetalhesPedido.this);
+                    alerta.setTitle("Mensagem");
+                    alerta.setMessage("Pedido recusado");
+                    alerta.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
 
-        });
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    });
+                    alerta.show();
+                }
+
+            });
+        }else{
+            alert.setMessage("Deseja realmente cancelar esse pedido?");
+            alert.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    pedido.setStatus(3);
+                    pedido.setObservacaoConfeiteiro(txtObservacaoConfeiteiro.getText().toString());
+
+                    firebase.setValue(pedido);
+                    dialog.dismiss();
+
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(ActivityDetalhesPedido.this);
+                    alerta.setTitle("Mensagem");
+                    alerta.setMessage("Pedido cancelado");
+                    alerta.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    });
+                    alerta.show();
+                }
+
+            });
+        }
+
         alert.setNegativeButton("Não", new DialogInterface.OnClickListener() {
 
             @Override
@@ -277,6 +322,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
 
         alert.show();
     }
+
     public void goToItem(View view){
         Intent i = new Intent(this, activity_detalhes_item.class);
         i.putExtra("objetoBolo", boloObj);
