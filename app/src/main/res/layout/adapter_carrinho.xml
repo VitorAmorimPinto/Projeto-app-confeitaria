@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linearLayoutBolosCarrinho"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/imageViewBoloPedidoCarrinho"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/boloqq"
+        app:civ_border_width="2dp"
+        app:civ_border_color="@color/btn_cad"
+        />
+
+    <LinearLayout
+        android:layout_width="175dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/textTituloBoloCarrinho"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Título"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textPrecoItemCarrinho"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Preço" />
+
+        <include layout="@layout/divisor" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/RemoverItemCarrinho"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_weight="4"
+                android:onClick="diminuirQuantidadeItem"
+                android:text="-" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_weight="4">
+
+                <TextView
+                    android:id="@+id/textQuantidadeItemCarrinho"
+                    android:layout_width="45dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <Button
+                android:id="@+id/AdicionarItemCarrinho"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_weight="4"
+                android:text="+" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

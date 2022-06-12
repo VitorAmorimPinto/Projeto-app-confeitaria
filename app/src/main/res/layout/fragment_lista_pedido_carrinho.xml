@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="#FFFFFF"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/textViewItemPedidoFinalizarPedidoCarrinho"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/cantos_redondos"
+                    android:backgroundTint="#ffeaea"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:text="Itens do pedido"
+                    android:textColor="#252525"
+                    android:textSize="18sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewListaItensCarrinho"
+                    android:layout_width="362dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingRight="15dp"
+                    android:scrollbars="vertical" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textValorPagamentoCarrinho"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Total do pedido:"
+                    android:background="@drawable/cantos_redondos"
+                    android:backgroundTint="#ffeaea"
+                    android:textColor="#252525"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="7dp"
+                android:background="#FFFFFF"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/buttonContinuarComprandoItemCarrinho"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:text="Continuar comprando"
+                        app:backgroundTint="#E4696D"
+                        app:icon="@drawable/icon_carrinho_menu"
+                        app:iconPadding="5dp"
+                        app:iconTint="@color/white" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textViewMetodoPagamentoFinalizarPedidoCarrinho"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Forma de Pagamento:"
+                    android:background="@drawable/cantos_redondos"
+                    android:backgroundTint="#ffeaea"
+                    android:textColor="#252525"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinnerMetodoPagamentoFinalizarPedidioCarrinho"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:entries="@array/pagamento"
+                    android:spinnerMode="dropdown" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:background="#FFFFFF"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/textViewDetalhesEntregaFinalizarPedidoCarrinho"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/cantos_redondos"
+                    android:backgroundTint="#ffeaea"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:text="Detalhes da entrega"
+                    android:textColor="#252525"
+                    android:textSize="18sp" />
+
+                <RadioGroup
+                    android:id="@+id/radioGroupOpcaoEntregaCarrinho"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp">
+
+                    <RadioButton
+                        android:id="@+id/radioButtonRetirarConfeitariaCarrinho"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="Retirar na confeitaria"
+                        android:textSize="16sp"
+                        app:buttonTint="#E4696D" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonReceberEmCasaCarrinho"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Receber em casa"
+                        android:textSize="16sp"
+                        android:visibility="gone"
+                        app:buttonTint="#E4696D" />
+
+                    <TextView
+                        android:id="@+id/textViewTituloLocalFinalizarPedidoCarrinho"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="Local de entrega:"
+                        android:textColor="#6F6F6F"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textViewLocalDeEntregaFinalizarPedidoCarrinho"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="Rua tal, nº 5"
+                        android:textColor="#252525"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textViewTituloDataFinalizarPedidoCarrinho"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="Data de entrega:"
+                        android:textColor="#6F6F6F"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/textViewDataEntregaFinalizarPedidoCarrinho"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:gravity="center"
+                        android:textColor="#252525"
+                        android:textSize="16sp" />
+
+                    <Button
+                        android:id="@+id/buttonEscolherDataFinalizarPedidoCarrinho"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:onClick="escolherData"
+                        android:text="Escolher Data"
+                        app:icon="@android:drawable/ic_menu_today"
+                        app:iconPadding="5dp"
+                        app:iconTint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/textViewHorarioEntregaFinalizarPedidoCarrinho"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:text="Horário de entrega:"
+                        android:textColor="#6F6F6F"
+                        android:textSize="16sp" />
+
+                    <Spinner
+                        android:id="@+id/spinnerHorarioEntregaFinalizarPedidioCarrinho"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:entries="@array/horarios"
+                        android:spinnerMode="dropdown" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="#FFFFFF"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+
+                <TextView
+                    android:id="@+id/textViewObservacoesFinalizarPedidoCarrinho"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/cantos_redondos"
+                    android:backgroundTint="#ffeaea"
+                    android:gravity="center"
+                    android:paddingLeft="5dp"
+                    android:text="Observações"
+                    android:textColor="#252525"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/editTextTextMultiLineObservacoesFinalizarPedidoCarrinho"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:inputType="textMultiLine"
+                    android:minHeight="48dp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="#FFFFFF"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/buttonCancelarPedidoUsuarioCarrinho"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:onClick="goToDetalhesItem"
+                        android:text="Cancelar pedido"
+                        app:backgroundTint="#8E8E8E" />
+
+                    <Button
+                        android:id="@+id/buttonFinalizarPedidoUsuarioCarrinho"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="5dp"
+                        android:onClick="cadastraPedido"
+                        android:text="Finalizar pedido"
+                        app:backgroundTint="#E4696D" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

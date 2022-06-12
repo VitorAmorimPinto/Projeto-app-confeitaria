@@ -81,7 +81,7 @@ public class BolosFragment extends Fragment {
         recyclerViewListaBolos.setAdapter( adapter );
 
         //Configura o carousel view
-         carouselView =  view.findViewById(R.id.carouselView);
+        carouselView =  view.findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
         return view;

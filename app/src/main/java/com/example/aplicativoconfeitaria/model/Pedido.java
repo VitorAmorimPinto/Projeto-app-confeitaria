@@ -1,13 +1,22 @@
 package com.example.aplicativoconfeitaria.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Pedido {
     private String id, idUsuario, idBolo, localEntrega, observacao, dataEntrega, dataRealizacao, metodoPagamento,observacaoConfeiteiro;
     private Integer status;
     private Double valorTotal;
-
+    private List<ItemPedido> itens;
     public Pedido() {
+    }
+
+    public List<ItemPedido> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemPedido> itens) {
+        this.itens = itens;
     }
 
     public String getDataRealizacao() {

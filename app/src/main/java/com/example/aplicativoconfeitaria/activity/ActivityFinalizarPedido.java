@@ -31,6 +31,7 @@ import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
 import com.example.aplicativoconfeitaria.model.Bolo;
 import com.example.aplicativoconfeitaria.model.Confeitaria;
 import com.example.aplicativoconfeitaria.model.Endereco;
+import com.example.aplicativoconfeitaria.model.ItemPedido;
 import com.example.aplicativoconfeitaria.model.Pedido;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -41,8 +42,10 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class ActivityFinalizarPedido extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -59,7 +62,9 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
     private SimpleDateFormat dateFormat;
     private RadioButton rbReceberEmCasa, rbRetirarConfeitaria;
     private RadioGroup rgOpcaoEntrega;
-
+    private List<ItemPedido> itensCarrinho = new ArrayList<>();
+    private Pedido pedidoRecuperado;
+    private String statusPedido;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,7 +102,7 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
         bolo = (Bolo) dados.getSerializable("objeto");
         preencheDados(bolo);
         recuperarEnderecos();
-
+        inserePedido(bolo);
         radioButton();
     }
 
@@ -160,6 +165,7 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
     }
 
     public void preencheDados(Bolo boloParametro) {
+
         DecimalFormat decimalFormat = new DecimalFormat("0.##");
 
         nomeBolo = boloParametro.getNome();
@@ -180,7 +186,51 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
             ivImagemBolo.setImageResource(R.drawable.imagem_default);
         }
     }
+    public void inserePedido(Bolo boloParametro) {
+        recuperarPedido();
+        DatabaseReference pedidosReference = dbReference.child("pedidos").child(statusPedido);
+        String idItemBolo = Base64Custom.codificarBase64(boloParametro.getNome());
+        ItemPedido itemPedido = new ItemPedido();
+        itemPedido.setIdBolo(idItemBolo);
+        itemPedido.setNomeBolo(boloParametro.getNome());
+        itemPedido.setQuantidade(1);
+        itemPedido.setPreco(bolo.getPreco());
+        itemPedido.setFoto(boloParametro.getFoto());
+        itensCarrinho.add( itemPedido);
 
+        if( pedidoRecuperado == null ){
+            pedidoRecuperado = new Pedido();
+        }
+
+            pedidoRecuperado.setItens( itensCarrinho );
+            pedidoRecuperado.setIdUsuario(idUsuario);
+            pedidoRecuperado.setStatus(6);
+            pedidoRecuperado.setDataEntrega("");
+            pedidoRecuperado.setDataRealizacao("");
+            pedidoRecuperado.setIdBolo("");
+            pedidoRecuperado.setMetodoPagamento("");
+            pedidosReference.setValue(pedidoRecuperado);
+
+    }
+    private void recuperarPedido() {
+        statusPedido = "-N4L2Gc8yHiH-zSf5QZ2";
+        DatabaseReference pedidoRef = dbReference
+                .child("pedidos")
+                .child(statusPedido);
+
+        pedidoRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                pedidoRecuperado = snapshot.getValue(Pedido.class);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     public void escolherData(View view) {
         Calendar cal = Calendar.getInstance();
         int dia = cal.get(Calendar.DAY_OF_MONTH);
