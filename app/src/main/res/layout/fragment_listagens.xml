@@ -26,7 +26,7 @@
                     app:fillColor="@color/btn_login"
                     app:pageColor="#00000000"
                     app:radius="6dp"
-                    app:slideInterval="10000"
+                    app:slideInterval="4000"
                     app:strokeColor="#FF777777"
                     app:strokeWidth="1dp"/>
 

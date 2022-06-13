@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import com.example.aplicativoconfeitaria.auxiliar.Base64Custom;
 import com.example.aplicativoconfeitaria.fragment.BolosFragment;
+import com.example.aplicativoconfeitaria.fragment.CarrinhoFragment;
 import com.example.aplicativoconfeitaria.fragment.FragmentCarrinho;
 import com.example.aplicativoconfeitaria.fragment.FragmentMeusPedidos;
 import com.example.aplicativoconfeitaria.fragment.FragmentPerfil;
@@ -100,6 +101,10 @@ public class ActivityPrincipal extends AppCompatActivity {
                            }else{
                                selectedFragment = new LoginFragment();
                            }
+                           break;
+                        case R.id.ic_carrinho:
+                            selectedFragment = new CarrinhoFragment();
+
                         default:
                             break;
 

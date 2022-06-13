@@ -8,6 +8,10 @@
         android:icon="@drawable/icon_pedidos_menu"
         android:title="Meus Pedidos"/>
 
+    <item android:id="@+id/ic_carrinho"
+        android:icon="@drawable/icon_carrinho_menu"
+        android:title="Carrinho"/>
+
     <item android:id="@+id/ic_perfil"
         android:icon="@drawable/icon_perfil_menu"
         android:title="Perfil"/>

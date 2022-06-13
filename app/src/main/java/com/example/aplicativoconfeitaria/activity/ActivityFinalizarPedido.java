@@ -102,7 +102,8 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
         bolo = (Bolo) dados.getSerializable("objeto");
         preencheDados(bolo);
         recuperarEnderecos();
-        inserePedido(bolo);
+        this.teste();
+//        inserePedido(bolo);
         radioButton();
     }
 
@@ -186,16 +187,16 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
             ivImagemBolo.setImageResource(R.drawable.imagem_default);
         }
     }
-    public void inserePedido(Bolo boloParametro) {
-        recuperarPedido();
-        DatabaseReference pedidosReference = dbReference.child("pedidos").child(statusPedido);
-        String idItemBolo = Base64Custom.codificarBase64(boloParametro.getNome());
+    public void inserePedido(View view) {
+//        recuperarPedido();
+        DatabaseReference pedidosReference = dbReference.child("pedidos").child("-N4L2Gc8yHiH-zSf5QZ2");
+        String idItemBolo = Base64Custom.codificarBase64(bolo.getNome());
         ItemPedido itemPedido = new ItemPedido();
         itemPedido.setIdBolo(idItemBolo);
-        itemPedido.setNomeBolo(boloParametro.getNome());
+        itemPedido.setNomeBolo(bolo.getNome());
         itemPedido.setQuantidade(1);
         itemPedido.setPreco(bolo.getPreco());
-        itemPedido.setFoto(boloParametro.getFoto());
+        itemPedido.setFoto(bolo.getFoto());
         itensCarrinho.add( itemPedido);
 
         if( pedidoRecuperado == null ){
@@ -214,15 +215,31 @@ public class ActivityFinalizarPedido extends AppCompatActivity implements Adapte
     }
     private void recuperarPedido() {
         statusPedido = "-N4L2Gc8yHiH-zSf5QZ2";
-        DatabaseReference pedidoRef = dbReference
+        DatabaseReference pedidoRef = ConfiguracaoFirebase.getFirebaseDataBase()
                 .child("pedidos")
-                .child(statusPedido);
+                .child("-N4L2Gc8yHiH-zSf5QZ2");
 
+        final String[] teste = {""};
         pedidoRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 pedidoRecuperado = snapshot.getValue(Pedido.class);
+                teste[0] = pedidoRecuperado.getIdBolo();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void teste(){
+        DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("pedidos").child("-N4L2Gc8yHiH-zSf5QZ2");
+        firebase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                pedidoRecuperado = snapshot.getValue(Pedido.class);
+                itensCarrinho = pedidoRecuperado.getItens();
             }
 
             @Override

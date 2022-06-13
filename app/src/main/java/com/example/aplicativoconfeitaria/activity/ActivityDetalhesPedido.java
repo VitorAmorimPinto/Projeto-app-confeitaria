@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,8 +19,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.aplicativoconfeitaria.R;
+import com.example.aplicativoconfeitaria.adapter.BolosAdapter;
 import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
 import com.example.aplicativoconfeitaria.model.Bolo;
+import com.example.aplicativoconfeitaria.model.ItemPedido;
 import com.example.aplicativoconfeitaria.model.Pedido;
 import com.example.aplicativoconfeitaria.model.Usuario;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +31,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityDetalhesPedido extends AppCompatActivity {
     public String statusText,total,observacaoUsuario,localEntrega,dataEntrega,nomeUser,tituloBolo,descricaoBolo,precoBolo,dataRealizacao,formaPagamento,textoBotao,observacaoConfeiteiro,telefone;
@@ -39,7 +45,9 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
     public String idPedido;
     public Integer status;
     public Button btnAlterarStatus,btnRecusarPedido;
-
+    private BolosAdapter adapter;
+    private RecyclerView recyclerViewDetalheItensPedidoAdmin;
+    private List<ItemPedido> itensPedido = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +55,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
         setContentView(R.layout.activity_detalhes_pedido);
 
 
-
+        recyclerViewDetalheItensPedidoAdmin = findViewById(R.id.recyclerViewDetalheItensPedidoAdmin);
         txtStatusPedido = findViewById(R.id.txtStatusPedido);
         txtFormaPagamento = findViewById(R.id.txtFormaPagamento);
         txtTotal = findViewById(R.id.txtTotal);
@@ -55,10 +63,6 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
         txtLocalEntrega = findViewById(R.id.txtLocalEntrega);
         txtDataEntrega = findViewById(R.id.txtDataEntrega);
         txtNomeUser = findViewById(R.id.txtNomeUser);
-        txtTituloBoloPedido = findViewById(R.id.txtTituloBoloPedido);
-        txtDescricao = findViewById(R.id.txtDescricao);
-        txtPreco = findViewById(R.id.txtPreco);
-        imgBoloPedido = findViewById(R.id.imgBoloPedido);
         txtDataRealizacao = findViewById(R.id.txtDataRealizacao);
         btnAlterarStatus = findViewById(R.id.btnAlterarStatus);
         btnRecusarPedido = findViewById(R.id.btnRecusarPedido);
@@ -70,6 +74,26 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
 
         informacoesPedido();
     }
+
+    public void carregar(){
+
+        adapter = new BolosAdapter(convertBolo(),this);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( this );
+        recyclerViewDetalheItensPedidoAdmin.setLayoutManager( layoutManager );
+        recyclerViewDetalheItensPedidoAdmin.setHasFixedSize( true );
+        recyclerViewDetalheItensPedidoAdmin.setAdapter( adapter );
+    }
+    public List<Bolo> convertBolo(){
+        List<Bolo> itensBolo = new ArrayList<>();
+        for(Integer i = 0; i < itensPedido.size(); i++){
+            ItemPedido it = itensPedido.get(i);
+            Bolo b = new Bolo(it.getNomeBolo(), it.getFoto(),it.getPreco(),it.getIdBolo(),it.getDescricao());
+            itensBolo.add(b);
+        }
+        return itensBolo;
+    }
+
     public void informacoesPedido(){
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("pedidos").child(idPedido);
 
@@ -86,6 +110,7 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                 dataEntrega = pedido.getDataEntrega();
                 dataRealizacao = pedido.getDataRealizacao();
                 formaPagamento = pedido.getMetodoPagamento();
+                itensPedido = pedido.getItens();
                 observacaoConfeiteiro = pedido.getObservacaoConfeiteiro();
                 switch (status){
                     case 0:
@@ -137,7 +162,8 @@ public class ActivityDetalhesPedido extends AppCompatActivity {
                 btnAlterarStatus.setText(textoBotao);
                 txtObservacaoConfeiteiro.setText(observacaoConfeiteiro);
                 informacoesUsuario();
-                InformacoesBolo();
+//                InformacoesBolo();
+                carregar();
             }
 
             @Override

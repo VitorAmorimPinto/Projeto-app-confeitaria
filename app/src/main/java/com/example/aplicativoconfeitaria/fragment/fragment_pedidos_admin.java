@@ -82,8 +82,9 @@ public class fragment_pedidos_admin extends Fragment {
 
                     Pedido pedido = dados.getValue( Pedido.class );
                     pedido.setId(dados.getKey());
-                    listaPedidos.add ( pedido );
-
+                    if(pedido.getStatus() != 6) {
+                        listaPedidos.add(pedido);
+                    }
                 }
 
                 adapter.notifyDataSetChanged();

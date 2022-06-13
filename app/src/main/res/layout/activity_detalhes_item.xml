@@ -147,9 +147,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
-                    android:onClick="goToFinalizarPedido"
-                    android:text="Comprar"
-                    app:backgroundTint="#E4696D" />
+                    android:onClick="addCar"
+                    android:text="Adicionar ao Carrinho"
+                    app:backgroundTint="#E4696D"
+                    app:icon="@drawable/icon_carrinho_menu"
+                    app:iconPadding="5dp"
+                    app:iconTint="@color/white" />
+
             </LinearLayout>
 
         </LinearLayout>

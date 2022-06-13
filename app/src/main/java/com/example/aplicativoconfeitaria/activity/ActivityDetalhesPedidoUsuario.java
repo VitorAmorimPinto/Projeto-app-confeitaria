@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,8 +18,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.aplicativoconfeitaria.R;
+import com.example.aplicativoconfeitaria.adapter.BolosAdapter;
+import com.example.aplicativoconfeitaria.adapter.CarrinhoAdapter;
 import com.example.aplicativoconfeitaria.configfirebase.ConfiguracaoFirebase;
 import com.example.aplicativoconfeitaria.model.Bolo;
+import com.example.aplicativoconfeitaria.model.ItemPedido;
 import com.example.aplicativoconfeitaria.model.Pedido;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,6 +30,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityDetalhesPedidoUsuario extends AppCompatActivity {
     public String statusText,total,observacaoUsuario,localEntrega,dataEntrega,tituloBolo,descricaoBolo,precoBolo,dataRealizacao,formaPagamento,observacaoConfeiteiro;
@@ -38,6 +45,9 @@ public class ActivityDetalhesPedidoUsuario extends AppCompatActivity {
     public Integer status;
     public Button btnCancelarPedidoUser;
     public Bolo boloObj;
+    private List<ItemPedido> itensPedido = new ArrayList<>();
+    private RecyclerView recyclerViewDetalheItensPedido;
+    private BolosAdapter adapter;
 
 
     @Override
@@ -51,17 +61,31 @@ public class ActivityDetalhesPedidoUsuario extends AppCompatActivity {
         txtObsUser = findViewById(R.id.txtObsUser);
         txtObsConfeiteiroUser = findViewById(R.id.txtObsConfeiteiroUser);
         txtLocalEntregaUser = findViewById(R.id.txtLocalEntregaUser);
-        txtTituloBoloPedidoUser = findViewById(R.id.txtTituloBoloPedidoUser);
-        txtDescricaoUser = findViewById(R.id.txtDescricaoUser);
-        txtPrecoUser = findViewById(R.id.txtPrecoUser);
         txtDataEntregaUser = findViewById(R.id.txtDataEntregaUser);
         imgBoloPedidoUser = findViewById(R.id.imgBoloPedidoUser);
         btnCancelarPedidoUser = findViewById(R.id.btnCancelarPedidoUser);
+        recyclerViewDetalheItensPedido = findViewById(R.id.recyclerViewDetalheItensPedido);
         Bundle dados = getIntent().getExtras();
+
+//        adapter = new BolosAdapter(convertBolo(),this);
+//
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( this );
+//        recyclerViewDetalheItensPedido.setLayoutManager( layoutManager );
+//        recyclerViewDetalheItensPedido.setHasFixedSize( true );
+//        recyclerViewDetalheItensPedido.setAdapter( adapter );
 
         idPedido = (String) dados.getSerializable("idPedido");
 
         informacoesPedido();
+    }
+    public void carregar(){
+
+        adapter = new BolosAdapter(convertBolo(),this);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager( this );
+        recyclerViewDetalheItensPedido.setLayoutManager( layoutManager );
+        recyclerViewDetalheItensPedido.setHasFixedSize( true );
+        recyclerViewDetalheItensPedido.setAdapter( adapter );
     }
     public void informacoesPedido(){
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("pedidos").child(idPedido);
@@ -80,6 +104,7 @@ public class ActivityDetalhesPedidoUsuario extends AppCompatActivity {
                 dataRealizacao = pedido.getDataRealizacao();
                 formaPagamento = pedido.getMetodoPagamento();
                 observacaoConfeiteiro = pedido.getObservacaoConfeiteiro();
+                itensPedido = pedido.getItens();
                 switch (status){
                     case 0:
                         statusText = "Novo";
@@ -127,7 +152,8 @@ public class ActivityDetalhesPedidoUsuario extends AppCompatActivity {
                 txtDataEntregaUser.setText(dataEntrega);
                 txtDataRealizacaoUser.setText (dataRealizacao);
                 txtFormaPagamentoUser.setText(formaPagamento);
-                InformacoesBolo();
+//                InformacoesBolo();
+                carregar();
             }
 
             @Override
@@ -135,6 +161,15 @@ public class ActivityDetalhesPedidoUsuario extends AppCompatActivity {
 
             }
         });
+    }
+    public List<Bolo> convertBolo(){
+        List<Bolo> itensBolo = new ArrayList<>();
+        for(Integer i = 0; i < itensPedido.size(); i++){
+            ItemPedido it = itensPedido.get(i);
+            Bolo b = new Bolo(it.getNomeBolo(), it.getFoto(),it.getPreco(),it.getIdBolo(),it.getDescricao());
+            itensBolo.add(b);
+        }
+        return itensBolo;
     }
     public void InformacoesBolo(){
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDataBase().child("bolos").child(idBolo);
@@ -212,5 +247,10 @@ public class ActivityDetalhesPedidoUsuario extends AppCompatActivity {
         Intent i = new Intent(this, activity_detalhes_item.class);
         i.putExtra("objetoBolo", boloObj);
         startActivity(i);
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        informacoesPedido();
     }
 }

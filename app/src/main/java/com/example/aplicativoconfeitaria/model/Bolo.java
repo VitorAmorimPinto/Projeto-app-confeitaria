@@ -19,6 +19,14 @@ public class Bolo implements Serializable {
     public Bolo() {
     }
 
+    public Bolo(String nome, String foto, Double preco, String idBolo, String descricao) {
+        this.nome = nome;
+        this.foto = foto;
+        this.preco = preco;
+        this.idBolo = idBolo;
+        this.descricao = descricao;
+    }
+
     public void atualizar(){
 
         DatabaseReference database = ConfiguracaoFirebase.getFirebaseDataBase();

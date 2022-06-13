@@ -68,7 +68,7 @@
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:gravity="center"
-                     />
+                    />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -282,62 +282,21 @@
                     android:backgroundTint="#ffeaea"
                     android:gravity="center"
                     android:paddingLeft="5dp"
-                    android:text="Item do Pedido"
+                    android:text="Itens do Pedido"
                     android:textColor="#252525"
                     android:textSize="18sp" />
 
-                <LinearLayout
-                    android:id="@+id/linearLayoutListaBolos"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewDetalheItensPedido"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:onClick="goToItem"
-                    android:orientation="horizontal"
-                    android:padding="5dp">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/imgBoloPedidoUser"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:src="@drawable/boloqq"
-                        app:civ_border_width="2dp"
-                        app:civ_border_color="@color/btn_cad"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical"
-                        android:padding="5dp">
-
-                        <TextView
-                            android:id="@+id/txtTituloBoloPedidoUser"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:text="Título"
-                            android:textColor="@color/black" />
-
-                        <TextView
-                            android:id="@+id/txtDescricaoUser"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="end"
-                            android:maxLines="2"
-                            android:text="Descição" />
-
-                        <TextView
-                            android:id="@+id/txtPrecoUser"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="end"
-                            android:maxLines="1"
-                            android:text="Preço"
-                            android:textColor="@color/holo_green_light"
-                            android:textStyle="bold"
-                            android:textSize="16sp"/>
-                    </LinearLayout>
-                </LinearLayout>
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingTop="15dp"
+                    android:paddingRight="15dp"
+                    android:scrollbars="vertical" />
 
             </LinearLayout>
             <LinearLayout
@@ -348,11 +307,12 @@
                 <Button
                     android:id="@+id/btnCancelarPedidoUser"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:onClick="cancelarPedido"
                     android:text="Cancelar pedido"
                     app:backgroundTint="#8E8E8E" />
+
             </LinearLayout>
         </LinearLayout>
 

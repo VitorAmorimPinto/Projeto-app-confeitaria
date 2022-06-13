@@ -3,9 +3,19 @@ package com.example.aplicativoconfeitaria.model;
 public class ItemPedido {
     private String idBolo;
     private String nomeBolo;
+    private String descricao;
     private int quantidade;
     private Double preco;
     private String foto;
+
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
 
     public String getFoto() {
         return foto;

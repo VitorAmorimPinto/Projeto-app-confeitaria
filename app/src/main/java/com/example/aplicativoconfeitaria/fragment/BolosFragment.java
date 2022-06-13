@@ -41,7 +41,7 @@ public class BolosFragment extends Fragment {
     }
 
 
-    int[] sampleImages = {R.drawable.banner, R.drawable.confeiteiro, R.drawable.placeholder };
+    int[] sampleImages = {R.drawable.banner, R.drawable.bolo_banner, R.drawable.bolo_banner2 };
     CarouselView carouselView;
 
     @Override
@@ -86,6 +86,7 @@ public class BolosFragment extends Fragment {
         carouselView.setImageListener(imageListener);
         return view;
     }
+
     ImageListener imageListener = new ImageListener() {
 
         @Override

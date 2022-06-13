@@ -90,7 +90,7 @@ public class FragmentMeusPedidos extends Fragment {
                     Pedido pedido = dados.getValue( Pedido.class );
                     pedido.setId(dados.getKey());
 
-                    if(pedido.getIdUsuario().equals(idUsuario)){
+                    if(pedido.getStatus() != 6 && pedido.getIdUsuario().equals(idUsuario)){
                         listaPedidos.add(pedido);
                     }
 

@@ -9,15 +9,13 @@
     android:padding="5dp">
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/imageViewBoloPedidoCarrinho"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/boloqq"
-        app:civ_border_width="2dp"
         app:civ_border_color="@color/btn_cad"
-        />
+        app:civ_border_width="2dp" />
 
     <LinearLayout
         android:layout_width="175dp"
@@ -54,13 +52,23 @@
             android:gravity="center_horizontal|center_vertical"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/RemoverItemCarrinho"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+            <!--            <Button-->
+            <!--                android:id="@+id/RemoverItemCarrinho"-->
+            <!--                android:layout_width="48dp"-->
+            <!--                android:layout_height="48dp"-->
+            <!--                android:layout_weight="4"-->
+            <!--                android:onClick="diminuirQuantidadeItem"-->
+            <!--                android:text="-" />-->
+            <TextView
+                android:id="@+id/menos"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
                 android:layout_weight="4"
-                android:onClick="diminuirQuantidadeItem"
-                android:text="-" />
+                android:background="#E4696D"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="#ffff"
+                android:textSize="20sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="45dp"
@@ -86,12 +94,22 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
-                android:id="@+id/AdicionarItemCarrinho"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+            <TextView
+                android:id="@+id/menos"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
                 android:layout_weight="4"
-                android:text="+" />
+                android:background="#E4696D"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="#ffff"
+                android:textSize="20sp" />
+<!--            <Button-->
+<!--                android:id="@+id/AdicionarItemCarrinho"-->
+<!--                android:layout_width="48dp"-->
+<!--                android:layout_height="48dp"-->
+<!--                android:layout_weight="4"-->
+<!--                android:text="+" />-->
         </LinearLayout>
     </LinearLayout>
 

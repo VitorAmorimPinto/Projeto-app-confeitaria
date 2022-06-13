@@ -64,11 +64,24 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:text="Total do pedido:"
                     android:background="@drawable/cantos_redondos"
                     android:backgroundTint="#ffeaea"
+                    android:text="Total do pedido: "
                     android:textColor="#252525"
                     android:textSize="18sp" />
+                <TextView
+                    android:id="@+id/textViewTotalDoPedido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="R$ 82,95"
+                    android:textColor="@color/holo_green_light"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -204,7 +217,7 @@
                         android:layout_marginEnd="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="Rua tal, nº 5"
+                        android:text="Rua Alfredo Chaves, nº 5"
                         android:textColor="#252525"
                         android:textSize="16sp" />
 
@@ -234,7 +247,7 @@
                         android:textSize="16sp" />
 
                     <Button
-                        android:id="@+id/buttonEscolherDataFinalizarPedidoCarrinho"
+                        android:id="@+id/buttonEscolherDataFragment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
